@@ -6,7 +6,5 @@ class Crab extends movableObject {
     constructor() {
         super();
     }
-    loadCrabImage(path) {
-        this.loadImage(path);
-    }
+    
 }

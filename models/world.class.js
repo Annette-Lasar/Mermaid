@@ -1,8 +1,8 @@
 class World {
   character = new Character();
 
-  yellowCrab = new Crab();
-  redCrab = new Crab();
+  yellowCrab = new yellowCrabFish('../img/Fish_crab_jellyfish_shark/PNG/Crab_2/Crab_idle_2_000.png');
+  redCrab = new redCrabFish('../img/Fish_crab_jellyfish_shark/PNG/Crab_1/Crab_move_1_000.png');
   butterflyFish = new Fish();
   clownFish = new Fish();
   blowFish = new Fish();
@@ -31,11 +31,9 @@ class World {
     this.draw();
   }
 
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-     /* console.log('Character:', this.character);
-    console.log('Yellow Crab:', this.yellowCrab);
-    console.log('Red Crab:', this.redCrab); */
 
     this.ctx.drawImage(
       this.character.img,
@@ -46,7 +44,7 @@ class World {
     );
 
 
-  /*   this.enemies.forEach(enemy => {
+    this.enemies.forEach(enemy => {
       this.ctx.drawImage(
         enemy.img,
         enemy.x,
@@ -54,7 +52,7 @@ class World {
         enemy.width,
         enemy.height
       );
-    }); */
+    });
 
     let self = this;
     requestAnimationFrame(function () {
