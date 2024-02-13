@@ -1,11 +1,8 @@
-class seaUrchinFish extends movableObject {
-    // aspect ratio: 0.9 (311 x 318) (width x height)
+class JellyfishPink extends Jellyfish {
+    // aspect ratio: 1.49 (143 x 255) (width x height)
     constructor(imagePath, originalWidth, originalHeight) {
         super();
         this.loadImage(imagePath);
         this.setDimensions(50, originalWidth, originalHeight);
-    }
-    eat() {
-        console.log('Is eating');
     }
 }

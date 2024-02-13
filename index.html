@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mermaid</title>
+    <link rel="icon" type="image/svg" href="./icons/aqualine_icon.svg" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./img/App Icons/Underwater world_1024x1024_1.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="./img/App Icons/Underwater world_1024x1024_1.png" sizes="180x180">
+    <link rel="stylesheet" href="./css/reset_stylesheet.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./models/movable_object.class.js" defer></script>
+    <script src="./models/character.class.js" defer></script>
+    <script src="./models/crab.class.js" defer></script>
+    <script src="./models/yellowCrabFish.class.js" defer></script>
+    <script src="./models/redCrabFish.class.js" defer></script>
+    <script src="./models/fish.class.js" defer></script>
+    <script src="./models/butterflyfish.class.js" defer></script>
+    <script src="./models/clownfish.class.js" defer></script>
+    <script src="./models/blowfish.class.js" defer></script>
+    <script src="./models/lionfish.class.js" defer></script>
+    <script src="./models/jellyfish.class.js" defer></script>
+    <script src="./models/jellyfish_blue.class.js" defer></script>
+    <script src="./models/jellyfish_pink.class.js" defer></script>
+    <script src="./models/jellyfish_purple.class.js" defer></script>
+    <script src="./models/sea_urchin.class.js" defer></script>
+    <script src="./models/shark.class.js" defer></script>
+    <script src="./models/world.class.js" defer></script>
+    <script src="./javascript/data.js" defer></script>
+    <script src="./javascript/game.js" defer></script>
+  </head>
+  <body onload="init()">
+    <div class="page">
+      <div class="playing-area-wrapper">
+        <div class="headline">
+          <h1 class="gradient-text">Mermaid</h1>
+            <p>
+              A girl fights <br />
+              the big fish
+            </p>
+        </div>
+        <canvas id="canvas" width="720" height="480"></canvas>
+      </div>
+      <div class="message">
+        Please turn your device to landscape orientation.
+      </div>
+    </div>
+  </body>
+</html>

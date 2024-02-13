@@ -1,14 +1,40 @@
 class World {
-  character = new Character();
+  character = new Character(
+    `../img/Mermaid/PNG/${mermaidType}/idle_000.png`,
+    665,
+    1028
+  );
 
-  yellowCrab = new yellowCrabFish('../img/Fish_crab_jellyfish_shark/PNG/Crab_2/Crab_idle_2_000.png');
-  redCrab = new redCrabFish('../img/Fish_crab_jellyfish_shark/PNG/Crab_1/Crab_move_1_000.png');
-  butterflyFish = new Fish();
-  clownFish = new Fish();
-  blowFish = new Fish();
-  lionFish = new Fish();
-  jellyFish = new Jellyfish();
-  seaUrchin = new seaUrchinFish();
+  yellowCrab = new yellowCrabFish(
+    '../img/Fish_crab_jellyfish_shark/PNG/Crab_yellow/Crab_yellow_move_000.png',
+    408,
+    197
+  );
+  redCrab = new redCrabFish(
+    '../img/Fish_crab_jellyfish_shark/PNG/Crab_red/Crab_red_idle_000.png',
+    594,
+    280
+  );
+  butterflyFish = new Butterflyfish('../img/Fish_crab_jellyfish_shark/PNG/Butterflyfish/Butterflyfish_move_000.png', 236, 193);
+  clownFish = new Clownfish('../img/Fish_crab_jellyfish_shark/PNG/Clownfish/Clownfish_move_000.png', 231, 135);
+  blowFish = new Blowfish('../img/Fish_crab_jellyfish_shark/PNG/Blowfish/Blowfish_move_000.png', 208, 111);
+  lionFish = new Lionfish('../img/Fish_crab_jellyfish_shark/PNG/Lionfish/Lionfish_move_000.png', 423, 336);
+  jellyFishBlue = new JellyfishBlue(
+    '../img/Fish_crab_jellyfish_shark/PNG/Jellyfish_blue/Jellyfish_blue_move_000.png',
+    130,
+    87
+  );
+  jellyFishPink = new JellyfishBlue(
+    '../img/Fish_crab_jellyfish_shark/PNG/Jellyfish_pink/Jellyfish_pink_move_000.png',
+    143,
+    255
+  );
+  jellyFishPurple = new JellyfishBlue(
+    '../img/Fish_crab_jellyfish_shark/PNG/Jellyfish_purple/Jellyfish_purple_move_000.png',
+    196,
+    294
+  );
+  seaUrchin = new seaUrchinFish('../img/Fish_crab_jellyfish_shark/PNG/Sea_urchin/Sea_urchin_idle_000.png', 311, 318);
   shark = new Shark();
 
   enemies = [
@@ -18,9 +44,10 @@ class World {
     this.clownFish,
     this.blowFish,
     this.lionFish,
-    this.jellyFish,
+    this.jellyFishBlue,
+    this.jellyFishPink,
+    this.jellyFishPurple,
     this.seaUrchin,
-    this.shark,
   ];
   canvas;
   ctx;
@@ -30,7 +57,6 @@ class World {
     this.canvas = canvas;
     this.draw();
   }
-
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -43,8 +69,7 @@ class World {
       this.character.height
     );
 
-
-    this.enemies.forEach(enemy => {
+    this.enemies.forEach((enemy) => {
       this.ctx.drawImage(
         enemy.img,
         enemy.x,

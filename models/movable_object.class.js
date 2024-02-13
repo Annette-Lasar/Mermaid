@@ -3,6 +3,17 @@ class movableObject {
     y = 300;
     img;
     
+    constructor() {
+        this.width = 0;
+        this.height = 0;
+    }
+
+    setDimensions(width, originalWidth, originalHeight) {
+        this.width = width;
+        this.height = this.width * (originalHeight / originalWidth);
+    }
+   
+    
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;

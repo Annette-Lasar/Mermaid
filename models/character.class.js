@@ -1,18 +1,15 @@
 class Character extends movableObject {
-    width = 100;
-    height = this.width * (1028 / 665);
-    
+    // aspect ratio: 1.25 (665 x 1028) (width x height)
+  constructor(imagePath, originalWidth, originalHeight) {
+    super();
+    super.loadImage(imagePath);
+    this.setDimensions(100, originalWidth, originalHeight);
+  }
 
-    constructor() {
-        super().loadImage(`../img/Mermaid/PNG/${mermaidType}/idle_000.png`);
-    }
-
-    moveUp() {
-        console.log('Moving up');
-    }
-    moveDown() {
-        console.log('Moving down');
-    }
+  moveUp() {
+    console.log('Moving up');
+  }
+  moveDown() {
+    console.log('Moving down');
+  }
 }
-
-
