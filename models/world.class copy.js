@@ -1,7 +1,10 @@
 class World {
   character = new Character(
-    `../img/Mermaid/PNG/${mermaidType}/idle_000.png`, 665, 1028);
-
+    `../img/Mermaid/PNG/${mermaidType}/idle_000.png`,
+    665,
+    1028
+  );
+  
   crabEnemies = [];
   backgrounds = [];
   canvas;
@@ -10,15 +13,15 @@ class World {
   constructor(canvas) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
-    this.backgrounds = createBackground(canvas, 1);
-    /* this.crabEnemies = createCrabEnemies(4, 3); */
+    /* this.backgrounds = createBackground(canvas, 1); */
+    this.crabEnemies = createCrabEnemies(4, 3);
     this.draw();
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.backgrounds.forEach((background1) => {
+ /*    this.backgrounds.forEach((background1) => {
       this.ctx.drawImage(
         background1.img,
         background1.x,
@@ -26,8 +29,8 @@ class World {
         background1.width,
         background1.height
       );
-    });
- 
+    }); */
+
     this.ctx.drawImage(
       this.character.img,
       this.character.x,
@@ -36,7 +39,7 @@ class World {
       this.character.height
     );
 
-    /* this.crabEnemies.forEach((enemy) => {
+    this.crabEnemies.forEach((enemy) => {
       this.ctx.drawImage(
         enemy.img,
         enemy.x,
@@ -44,7 +47,7 @@ class World {
         enemy.width,
         enemy.height
       );
-    }); */
+    });
 
     let self = this;
     requestAnimationFrame(function () {
@@ -53,7 +56,7 @@ class World {
   }
 }
 
-function createBackground(canvas, backgroundNumber) {
+/* function createBackground(canvas, backgroundNumber) {
   const backgroundComponents = [];
   for (let i = 0; i < backgroundImagesPathBack.length; i++) {
     const backgroundImagePathBack = backgroundImagesPathBack[i];
@@ -68,7 +71,7 @@ function createBackground(canvas, backgroundNumber) {
     backgroundComponents.push(background);
   }
   return backgroundComponents;
-}
+} */
 
 /* function createBackground(canvas) {
   const backgroundComponents = [];
@@ -86,7 +89,7 @@ function createBackground(canvas, backgroundNumber) {
   return backgroundComponents;
 } */
 
-/* function createCrabEnemies(numYellowCrabs, numRedCrabs) {
+function createCrabEnemies(numYellowCrabs, numRedCrabs) {
   const enemies = [];
   for (let i = 0; i < numYellowCrabs; i++) {
     let yellowCrab = new yellowCrabFish(
@@ -105,4 +108,4 @@ function createBackground(canvas, backgroundNumber) {
     enemies.push(redCrab);
   }
   return enemies;
-} */
+}

@@ -1,27 +1,28 @@
 class movableObject {
-    x = 120;
-    y = 300;
-    img;
-    
-    constructor() {
-        this.width = 0;
-        this.height = 0;
-    }
+  x = 20;
+  y = 340;
+  img;
 
-    setDimensions(width, originalWidth, originalHeight) {
+  constructor() {
+    this.width = 0;
+    this.height = 0;
+  }
+
+  setDimensions(width, originalWidth, originalHeight) {
         this.width = width;
         this.height = this.width * (originalHeight / originalWidth);
     }
-   
-    
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-    moveRight() {
-        console.log('Moving right');
-    }
-    moveLeft() {
-        console.log('Moving left');
-    }
+
+  loadImage(path) {
+    this.img = new Image();
+    this.img.src = path;
+  }
+
+  moveRight() {
+    console.log('Moving right');
+  }
+
+  moveLeft() {
+    console.log('Moving left');
+  }
 }
