@@ -3,11 +3,11 @@ class yellowCrabFish extends Crab {
   width = 100;
   height = this.width * (197 / 408);
 
-  constructor(imgPath, originalWidth, originalHeight) {
+  constructor(imgPath, originalWidth, originalHeight, canvasWidth) {
     super();
-    this.x = 200 + Math.random() * 500;
-    this.y = Math.random() * (canvas.height - this.height - 100) - 100;
+    this.x = canvasWidth / 3 + Math.random() * canvasWidth * 2 / 3;
+    this.y = Math.random() * (canvas.height / 3);
     this.loadImage(imgPath);
-    this.setDimensions(100, originalWidth, originalHeight);
+    this.setDimensions(canvasWidth / 10, originalWidth, originalHeight);
   }
 }

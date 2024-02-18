@@ -1,6 +1,6 @@
 class movableObject {
   x = 20;
-  y = 340;
+  y = 380;
   img;
 
   constructor() {

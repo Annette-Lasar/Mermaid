@@ -1,5 +1,6 @@
 let mermaidType = 'Mermaid_1';
 let canvas;
+console.log(canvas);
 let world;
 
 const backgroundImagesPathFront = './img/Game_backgrounds/PNG/game_background_';
