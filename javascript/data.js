@@ -1,6 +1,8 @@
 let mermaidType = 1;
 let canvas;
 let world;
+const MAX_CRAB_ENEMIES = 15;
+const CANVAS_HEIGHT = 480;
 
 const originalBackgroundWidth = 1920;
 const originalBackgroundHeight = 1080;

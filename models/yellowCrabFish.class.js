@@ -1,7 +1,8 @@
 class yellowCrabFish extends Crab {
-  constructor(imgPath) {
-    super(imgPath, yellowCrabData.move_width, yellowCrabData.move_height);
-    
+  id = '';
+  constructor(imgPath, speed, id) {
+    super(imgPath, yellowCrabData.move_width, yellowCrabData.move_height, speed);
+    this.id = id;
   }
 }
 

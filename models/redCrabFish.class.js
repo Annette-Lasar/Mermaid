@@ -1,5 +1,7 @@
 class redCrabFish extends Crab {
-  constructor(imgPath) {
-    super(imgPath, redCrabData.idle_width, redCrabData.idle_height);
+  id = '';
+  constructor(imgPath, speed, id) {
+    super(imgPath, redCrabData.idle_width, redCrabData.idle_height, speed);
+    this.id = id;
   }
 }
