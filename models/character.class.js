@@ -1,9 +1,9 @@
 class Character extends movableObject {
     // aspect ratio: 1.25 (665 x 1028) (width x height)
-  constructor(imagePath, originalWidth, originalHeight, canvasWidth) {
+  constructor(imagePath, originalWidth, originalHeight) { 
     super();
     super.loadImage(imagePath);
-    this.setDimensions(canvasWidth / 10, originalWidth, originalHeight);
+    this.setDimensions(80, originalWidth, originalHeight); 
   }
 
   moveUp() {

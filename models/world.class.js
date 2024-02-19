@@ -1,7 +1,4 @@
 class World {
-  /*  character = new Character(
-    `../img/Mermaid/PNG/${mermaidType}/idle_000.png`, 665, 1028);
- */
   character;
   crabEnemies = [];
   backgrounds = [];
@@ -11,7 +8,6 @@ class World {
   constructor(canvas) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
-    updateCanvasSize(canvas);
     this.backgrounds = createBackground(canvas, 1);
     this.character = createCharacter(canvas);
     this.crabEnemies = createCrabEnemies(canvas, 4, 3);
@@ -21,56 +17,27 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.backgrounds.forEach((background) => {
-      this.ctx.drawImage(
-        background.img,
-        background.x,
-        background.y,
-        background.width,
-        background.height
-      );
-    });
-
-    this.ctx.drawImage(
-      this.character.img,
-      this.character.x,
-      this.character.y,
-      this.character.width,
-      this.character.height
-    );
-
-    this.crabEnemies.forEach((enemy) => {
-      this.ctx.drawImage(
-        enemy.img,
-        enemy.x,
-        enemy.y,
-        enemy.width,
-        enemy.height
-      );
-    });
+    this.addObjectsToCanvas(this.backgrounds);
+    this.drawOnCanvas(this.character);
+    this.addObjectsToCanvas(this.crabEnemies);
 
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
-}
 
-function updateCanvasSize() {
-  const aspectRatio = 16 / 9;
-  const maxWidth = window.innerWidth;
-  const maxHeight = window.innerHeight;
-  /* const availableWidth = maxWidth; */
-  const availableHeight = maxWidth / aspectRatio;
+  addObjectsToCanvas(objects) {
+    objects.forEach((o) => {
+      this.drawOnCanvas(o);
+    });
+  }
 
-  if (availableHeight > maxHeight) {
-    this.canvas.width = maxHeight * aspectRatio;
-    this.canvas.height = maxHeight;
-  } else {
-    this.canvas.width = maxWidth;
-    this.canvas.height = maxWidth / aspectRatio;
+  drawOnCanvas(mo) {
+    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
   }
 }
+
 
 function createBackground(canvas, backgroundNumber) {
   const backgroundComponents = [];
@@ -94,7 +61,6 @@ function createCharacter(canvas) {
     `../img/Mermaid/PNG/Mermaid_1/idle_000.png`,
     665,
     1028,
-    canvas.width
   );
   return character;
 }

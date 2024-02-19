@@ -28,7 +28,7 @@ body {
 .page {
   max-width: 1440px;
   height: 100vh;
-  height: 100svh;
+  height: 100dvh;
   margin: 0 auto;
   padding: 0.5em;
   position: relative;
@@ -40,7 +40,9 @@ body {
 
 .playing-area-wrapper {
   position: relative;
-  width: clamp(90vw, 100%, 720px);
+  width: clamp(90dvw, 100%, 720px);
+  height: 90vh;
+  height: 90dvh;
 }
 
 .gradient-text {
@@ -97,8 +99,8 @@ canvas {
 
 @media (min-width: 720px) and (height < 480px) and (orientation: landscape){
   .playing-area-wrapper {
-    /* max-height: 90%; */
     max-height: 90vh;
+    max-height: 90dvh;
   }
 }
 

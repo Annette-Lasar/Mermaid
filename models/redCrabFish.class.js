@@ -8,6 +8,6 @@ class redCrabFish extends Crab {
     this.x = canvasWidth / 4 + Math.random() * 500;
     this.y = Math.random() * (canvas.height / 3);
     this.loadImage(imgPath);
-    this.setDimensions(canvasWidth / 12, originalWidth, originalHeight);
+    this.setDimensions(80, originalWidth, originalHeight);
   }
 }
