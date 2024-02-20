@@ -26,45 +26,29 @@ function createCrabEnemies(numYellowCrabs, numRedCrabs) {
   setInterval(() => {
     filteredEnemies = enemies.filter((enemy) => enemy.y > CANVAS_HEIGHT);
     console.log('Alle Krebse 1: ', enemies);
-    
+
     filteredEnemies.forEach((filteredEnemy) => {
-        let crabIndex = enemies.findIndex((item) => item.id === filteredEnemy.id);
-        console.log('Krebs-Index: ', crabIndex);
-        enemies.splice(crabIndex, 1);
-        console.log('Alle Krebse 2: ', enemies);
+      let crabIndex = enemies.findIndex((item) => item.id === filteredEnemy.id);
+      console.log('Krebs-Index: ', crabIndex);
+      enemies.splice(crabIndex, 1);
+      console.log('Alle Krebse 2: ', enemies);
     });
-    addNewCrabEnemies(8, 8, filteredEnemies); // Neue Feinde hinzufügen
-    console.log('Alle Krebse 3: ', enemies);
   }, 3000);
 
+  setInterval(() => {
+    let updatedEnemies = addNewCrabEnemies(1, 1, enemies); // Neue Feinde hinzufügen
+    enemies = enemies.concat(updatedEnemies);
+  }, 5000);
+  console.log('Alle Krebse 3: ', enemies);
   return enemies;
 }
 
-/* function addNewCrabEnemies(numYellowCrabs, numRedCrabs, currentEnemies) {
+function addNewCrabEnemies(numYellowCrabs, numRedCrabs, currentEnemies) {
   let newYellowEnemies = addYellowCrabs(numYellowCrabs);
   let newRedEnemies = addRedCrabs(numRedCrabs);
-  let newEnemies = newYellowEnemies.concat(newRedEnemies);
-
-  // Füge neue Krebse hinzu
-  const updatedEnemies = currentEnemies.concat(newEnemies);
-
-  // Aktualisiere die Liste der Feinde in der Klasse World
-  currentEnemies.splice(0, currentEnemies.length, ...updatedEnemies);
-} */
-
-function addNewCrabEnemies(numYellowCrabs, numRedCrabs, currentEnemies) {
-    let newYellowEnemies = addYellowCrabs(numYellowCrabs);
-    let newRedEnemies = addRedCrabs(numRedCrabs);
-    let newEnemies = newYellowEnemies.concat(newRedEnemies);
-  
-    // Kopie des aktuellen Enemies-Arrays erstellen
-    let updatedEnemies = [...currentEnemies];
-  
-    // Neue Krebse zu der Kopie hinzufügen
-    updatedEnemies = updatedEnemies.concat(newEnemies);
-  
-    return updatedEnemies;
-  }
+  currentEnemies = newYellowEnemies.concat(newRedEnemies);
+  return currentEnemies;
+}
 
 function addYellowCrabs(numYellowCrabs) {
   let yellowEnemies = [];
