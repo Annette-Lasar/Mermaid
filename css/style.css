@@ -45,8 +45,17 @@ body {
   height: 90dvh;
 }
 
-.gradient-text {
-  font-family: 'Watersplash';
+h1 {
+  font-family: 'Rubik Doodle Shadow';
+  font-size: 4.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: darkblue;
+}
+
+/* .gradient-text {
+  font-family: 'Rubik Doodle Shadow';
   font-size: 4.8rem;
   font-weight: 700;
   background: linear-gradient(
@@ -61,7 +70,7 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
+} */
 
 .headline {
   display: none;
@@ -73,7 +82,7 @@ body {
   right: 12px;
   rotate: -6deg;
   font-family: 'Salsa';
-  font-size: 32px;
+  font-size: 1.6rem;
   color: var(--accent-color-red);
 }
 

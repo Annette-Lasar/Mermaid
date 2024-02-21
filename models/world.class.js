@@ -12,6 +12,10 @@ class World {
     this.character = createCharacter();
     this.crabEnemies = createCrabEnemies(4, 3);
     this.draw();
+    setInterval(() => {
+      filterAndRemoveCrabEnemies(this.crabEnemies);
+    }, 3000);
+
   }
 
   draw() {
@@ -36,5 +40,5 @@ class World {
   drawOnCanvas(mo) {
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
   }
-}
 
+}

@@ -12,7 +12,7 @@ function createBackground(backgroundNumber) {
 
 function createCharacter() {
   const character = new Character(
-    `../img/Mermaid/PNG/Mermaid_${mermaidType}/idle_000.png`
+    `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_000.png`
   );
   return character;
 }
@@ -21,26 +21,44 @@ function createCrabEnemies(numYellowCrabs, numRedCrabs) {
   let newYellowEnemies = addYellowCrabs(numYellowCrabs);
   let newRedEnemies = addRedCrabs(numRedCrabs);
   let enemies = newYellowEnemies.concat(newRedEnemies);
-  let filteredEnemies;
+  console.log('Alle Krebse 4: ', enemies);
 
-  setInterval(() => {
-    filteredEnemies = enemies.filter((enemy) => enemy.y > CANVAS_HEIGHT);
-    console.log('Alle Krebse 1: ', enemies);
+  let newCrabEnemies = addReasonableAmountOfCrabs(enemies);
+  console.log('Alle Krebse 3: ', newCrabEnemies);
+  return newCrabEnemies;
+}
 
-    filteredEnemies.forEach((filteredEnemy) => {
-      let crabIndex = enemies.findIndex((item) => item.id === filteredEnemy.id);
-      console.log('Krebs-Index: ', crabIndex);
-      enemies.splice(crabIndex, 1);
-      console.log('Alle Krebse 2: ', enemies);
-    });
-  }, 3000);
+function addReasonableAmountOfCrabs(enemies) {
+  let newEnemies = [];
+  let addCrabInterval = setInterval(() => {
+    let updatedEnemies = addNewCrabEnemies(3, 4, enemies);
+    updatedEnemies.forEach((updatedEnemy) => newEnemies.push(updatedEnemy));
+  }, 15000);
 
-  setInterval(() => {
-    let updatedEnemies = addNewCrabEnemies(1, 1, enemies); // Neue Feinde hinzufügen
-    enemies = enemies.concat(updatedEnemies);
-  }, 5000);
-  console.log('Alle Krebse 3: ', enemies);
-  return enemies;
+  checkAmountOfCrabs(addCrabInterval, newEnemies);
+  return newEnemies;
+}
+
+function checkAmountOfCrabs(addCrabInterval, newEnemies) {
+  if (newEnemies.length >= 7) {
+    clearInterval(addCrabInterval);
+  } else {
+    newEnemies = addNewCrabEnemies(1, 1, newEnemies);
+  }
+}
+
+function filterAndRemoveCrabEnemies(crabEnemies) {
+  let filteredEnemies = crabEnemies.filter((enemy) => enemy.y > CANVAS_HEIGHT);
+  console.log('Alle Krebse 1: ', crabEnemies);
+
+  filteredEnemies.forEach((filteredEnemy) => {
+    let crabIndex = crabEnemies.findIndex(
+      (item) => item.id === filteredEnemy.id
+    );
+    console.log('Krebs-Index: ', crabIndex);
+    crabEnemies.splice(crabIndex, 1);
+    console.log('Alle Krebse 2: ', crabEnemies);
+  });
 }
 
 function addNewCrabEnemies(numYellowCrabs, numRedCrabs, currentEnemies) {
@@ -52,34 +70,32 @@ function addNewCrabEnemies(numYellowCrabs, numRedCrabs, currentEnemies) {
 
 function addYellowCrabs(numYellowCrabs) {
   let yellowEnemies = [];
-  let idCounter = 1;
   for (let i = 0; i < numYellowCrabs; i++) {
-    let id = 'yellow' + idCounter;
-    let speed = Math.random() * 0.4 + 0.1; // Zufällige Geschwindigkeit zwischen 0.1 und 0.6
+    let id = 'yellow' + crabIDCounter;
+    let speed = Math.random() * 0.4 + 0.1;
     let yellowCrab = new yellowCrabFish(
       './img/Fish_crab_jellyfish_shark/PNG/Crab_yellow/Crab_yellow_move_000.png',
       speed,
       id
     );
     yellowEnemies.push(yellowCrab);
-    idCounter++;
+    crabIDCounter++;
   }
   return yellowEnemies;
 }
 
 function addRedCrabs(numRedCrabs) {
   let redEnemies = [];
-  let idCounter = 1;
   for (let i = 0; i < numRedCrabs; i++) {
-    let id = 'red' + idCounter;
+    let id = 'red' + crabIDCounter;
     let speed = Math.random() * 0.4 + 0.1;
     let redCrab = new redCrabFish(
-      '../img/Fish_crab_jellyfish_shark/PNG/Crab_red/Crab_red_idle_000.png',
+      './img/Fish_crab_jellyfish_shark/PNG/Crab_red/Crab_red_idle_000.png',
       speed,
       id
     );
     redEnemies.push(redCrab);
-    idCounter++;
+    crabIDCounter++;
   }
   return redEnemies;
 }
