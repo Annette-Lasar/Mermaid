@@ -10,12 +10,22 @@ class World {
     this.canvas = canvas;
     this.backgrounds = createBackground(1);
     this.character = createCharacter();
-    this.crabEnemies = createCrabEnemies(4, 3);
+    this.spawnCrabEnemies();
     this.draw();
     setInterval(() => {
       filterAndRemoveCrabEnemies(this.crabEnemies);
     }, 3000);
+  }
 
+  spawnCrabEnemies() {
+    let random = Math.floor(Math.random() * 2);
+    if (random == 0) {
+      this.crabEnemies.push(createYellowCrab());
+    } else {
+      this.crabEnemies.push(createRedCrab());
+    }
+    const timeout = 2000 + Math.random() * 2000;
+    setTimeout(this.spawnCrabEnemies.bind(this), timeout);
   }
 
   draw() {
@@ -40,5 +50,4 @@ class World {
   drawOnCanvas(mo) {
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
   }
-
 }

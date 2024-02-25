@@ -17,6 +17,32 @@ const backgroundImagesPathBack = [
   '/layers/6.png',
 ];
 
+const mermaidIdles = [
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_000.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_001.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_002.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_003.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_004.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_005.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_006.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_007.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_008.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Idle_009.png`,
+];
+
+const mermaidMoves = [
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_000.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_001.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_002.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_003.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_004.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_005.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_006.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_007.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_008.png`,
+  `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_009.png`,
+];
+
 const mermaidData = {
   1: {
     acceleration_width: 1082,

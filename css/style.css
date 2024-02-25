@@ -40,7 +40,7 @@ body {
 
 .playing-area-wrapper {
   position: relative;
-  width: clamp(90dvw, 100%, 720px);
+  width: clamp(90dvw, 100%, 853px);
   height: 90vh;
   height: 90dvh;
 }
@@ -53,24 +53,6 @@ h1 {
   letter-spacing: 4px;
   color: darkblue;
 }
-
-/* .gradient-text {
-  font-family: 'Rubik Doodle Shadow';
-  font-size: 4.8rem;
-  font-weight: 700;
-  background: linear-gradient(
-    to bottom,
-    var(--background-color-blue),
-    var(--background-color-aquamarine),
-    var(--background-color-royalblue),
-    var(--background-color-mediumblue),
-    var(--background-color-royalblue),
-    var(--background-color-blue)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-} */
 
 .headline {
   display: none;
@@ -98,7 +80,7 @@ canvas {
   display: none;
 }
 
-@media (min-width: 720px) and (min-height: 560px) and (orientation: landscape) {
+@media (min-width: 853px) and (min-height: 560px) and (orientation: landscape) {
   .headline {
     display: flex;
     align-items: center;
@@ -106,30 +88,29 @@ canvas {
   }
 }
 
-@media (min-width: 720px) and (height < 480px) and (orientation: landscape){
+@media (min-width: 853px) and (height < 480px) and (orientation: landscape){
   .playing-area-wrapper {
     max-height: 90vh;
     max-height: 90dvh;
   }
 }
 
-@media (min-width: 720px) and (height > 480px) and (orientation: landscape){
+@media (min-width: 853px) and (height > 480px) and (orientation: landscape){
   .playing-area-wrapper {
     width: 100%;
-    /* width: 90vw; */
-    max-width: 720px;
+    max-width: 853px;
     height: 100%;
     max-height: 560px;
   }
   canvas {
-    width: 720px;
+    width: 853px;
     /* width: 90vw; */
     height: 480px;
     /* height: calc(90vw * 480 / 720); */
   }
 }
 
-@media (max-width: 720px) and (orientation: portrait) {
+@media (max-width: 853px) and (orientation: portrait) {
   .page {
     position: relative;
   }
@@ -140,7 +121,7 @@ canvas {
 
   canvas {
     width: 100%;
-    height: calc(100vw * 480 / 720);
+    height: calc(100vw * 480 / 853);
   }
   .message {
     width: 100%;
