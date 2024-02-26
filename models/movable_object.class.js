@@ -3,6 +3,7 @@ class movableObject {
   y = 350;
   img;
   imageCache = {};
+  currentImage = 0;
 
   constructor() {
     this.width = 0;
@@ -23,7 +24,8 @@ class movableObject {
     arr.forEach((path) => {
       let img = new Image();
       img.src = path;
-      this.imageCache[path] = path;
+      this.imageCache[path] = img;
+      /* console.log(this.imageCache); */
     });
   }
 
