@@ -16,7 +16,6 @@ class Crab extends movableObject {
       let i = this.currentImage % array.length;
       let path = array[i];
       this.img = this.imageCache[path];
-      /* console.log(this.imageCache); */
       this.currentImage++;
     }, 1000/10);
   }

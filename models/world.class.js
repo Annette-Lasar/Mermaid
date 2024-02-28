@@ -1,8 +1,9 @@
 class World {
+  canvas;
+  backgrounds = [];
   character;
   crabEnemies = [];
-  backgrounds = [];
-  canvas;
+  blowfishEnemies = [];
   keyboard;
   ctx;
 
@@ -13,6 +14,8 @@ class World {
     this.backgrounds = createBackground(1);
     this.character = createCharacter();
     this.spawnCrabEnemies();
+    this.blowfishEnemies = createBlowfishEnemies();
+    /* this.spawnBlowfishEnemies(); */
     this.draw();
     setInterval(() => {
       filterAndRemoveCrabEnemies(this.crabEnemies);
@@ -35,11 +38,15 @@ class World {
     setTimeout(this.spawnCrabEnemies.bind(this), timeout);
   }
 
+ /*  spawnBlowfishEnemies() {
+    
+  } */
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.addObjectsToCanvas(this.backgrounds);
     this.drawOnCanvas(this.character);
+    this.addObjectsToCanvas(this.blowfishEnemies);
     this.addObjectsToCanvas(this.crabEnemies);
 
     let self = this;

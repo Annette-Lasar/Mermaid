@@ -4,6 +4,7 @@ class movableObject {
   img;
   imageCache = {};
   currentImage = 0;
+  speed = 0.75;
 
   constructor() {
     this.width = 0;
@@ -25,7 +26,6 @@ class movableObject {
       let img = new Image();
       img.src = path;
       this.imageCache[path] = img;
-      /* console.log(this.imageCache); */
     });
   }
 

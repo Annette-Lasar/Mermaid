@@ -9,10 +9,11 @@ class Character extends movableObject {
       mermaidData[mermaidType].move_height
     );
     this.loadImagesMoves(mermaidMoves);
-    this.animate(mermaidMoves);
+    this.animateMoves(mermaidMoves);
   }
 
-  animate(array) {
+  animateMoves(array) {
+    console.log(this.speed);
     setInterval(() => {
       if (this.world.keyboard.ARROWRIGHT) {
         let i = this.currentImage % array.length;

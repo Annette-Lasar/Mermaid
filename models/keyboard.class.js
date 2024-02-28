@@ -7,7 +7,6 @@ class Keyboard {
 
     setKeyStatus(keyCode, status) {
         this[keyCode] = status;
-        console.log(this.SPACE);
     }
 
     getKeyStatus(keyCode) {

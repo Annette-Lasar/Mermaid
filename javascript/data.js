@@ -3,7 +3,7 @@ let mermaidType = 1;
 let world;
 const MAX_CRAB_ENEMIES = 15;
 const CANVAS_HEIGHT = 480;
-let crabIDCounter = 1;
+let animalIDCounter = 1;
 
 
 
