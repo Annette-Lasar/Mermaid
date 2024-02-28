@@ -3,11 +3,13 @@ class World {
   crabEnemies = [];
   backgrounds = [];
   canvas;
+  keyboard;
   ctx;
 
-  constructor(canvas) {
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
+    this.keyboard = keyboard;
     this.backgrounds = createBackground(1);
     this.character = createCharacter();
     this.spawnCrabEnemies();
@@ -15,6 +17,11 @@ class World {
     setInterval(() => {
       filterAndRemoveCrabEnemies(this.crabEnemies);
     }, 3000);
+    this.setWorld();
+  }
+
+  setWorld() {
+    this.character.world = this;
   }
 
   spawnCrabEnemies() {
