@@ -8,8 +8,8 @@ class Character extends movableObject {
       mermaidData[mermaidType].move_width,
       mermaidData[mermaidType].move_height
     );
-    this.loadImagesMoves(mermaidMoves);
-    this.animateMoves(mermaidMoves);
+    this.loadImagesMoves(mermaidMove);
+    this.animateMoves(mermaidMove);
   }
 
   animateMoves(array) {

@@ -1,7 +1,6 @@
 class Fish extends movableObject {
   constructor(imgPath, originalWidth, originalHeight) {
     super();
-    /* this.x = 280 + Math.random(); */
     this.x = 400 + Math.random() * 400;
     console.log(this.x);
     this.y = 200;

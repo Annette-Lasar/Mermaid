@@ -1,11 +1,36 @@
 let mermaidType = 1;
-/* let canvas; */
 let world;
 const MAX_CRAB_ENEMIES = 15;
 const CANVAS_HEIGHT = 480;
 let animalIDCounter = 1;
 
+const allAnimals = [
+  'blowfish',
+  'blueJellyfish',
+  'butterflyfish',
+  'clownfish',
+  'hammerhead',
+  'lionfish',
+  'pinkJellyfish',
+  'purpleJellyfish',
+  'redCrab',
+  'seaUrchin',
+  'shark',
+  'yellowCrab',
+];
 
+const allActions = [
+  'acceleration',
+  'attack',
+  'die',
+  'hurt',
+  'idle',
+  'joy',
+  'move',
+];
+
+const animalPathPrefix = './img/fish/PNG/';
+const animalPathSuffix = '.png';
 
 
 const originalBackgroundWidth = 1920;

@@ -5,6 +5,8 @@ class Blowfish extends Fish {
       imgPath,
       blowfishData.move_width,
       blowfishData.move_height,
+      speed, 
+      animalArrays.arrays.blowfishMove
     );
     this.id = id;
   }

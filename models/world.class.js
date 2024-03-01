@@ -11,6 +11,7 @@ class World {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
+    /* createAnimalImageArrays(); */
     this.backgrounds = createBackground(1);
     this.character = createCharacter();
     this.spawnCrabEnemies();

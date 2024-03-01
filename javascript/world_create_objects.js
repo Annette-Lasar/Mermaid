@@ -12,7 +12,7 @@ function createBackground(backgroundNumber) {
 
 function createCharacter() {
   const character = new Character(
-    `./img/Mermaid/PNG/Mermaid_${mermaidType}/Move_000.png`
+    `./img/mermaid/PNG/mermaid_${mermaidType}/move_000.png`
   );
   return character;
 }
@@ -21,7 +21,7 @@ function createYellowCrab() {
   let id = 'yellow' + animalIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
   let yellowCrab = new yellowCrabFish(
-    './img/Fish_crab_jellyfish_shark/PNG/Crab_yellow/Crab_yellow_move_000.png',
+    './img/fish/PNG/yellowCrab/move_000.png',
     speed,
     id
   );
@@ -33,7 +33,7 @@ function createRedCrab() {
   let id = 'red' + animalIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
   let redCrab = new redCrabFish(
-    './img/Fish_crab_jellyfish_shark/PNG/Crab_red/Crab_red_idle_000.png',
+    './img/fish/PNG/redCrab/idle_000.png',
     speed,
     id
   );
@@ -46,7 +46,7 @@ function createBlowfishEnemies() {
   let id = 'blowfish' + animalIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
   let blowFish = new Blowfish(
-    './img/Fish_crab_jellyfish_shark/PNG/Blowfish/Blowfish_move_000.png',
+    './img/fish/PNG/blowfish/move_000.png',
     speed,
     id
   );
@@ -65,3 +65,4 @@ function filterAndRemoveCrabEnemies(crabEnemies) {
     crabEnemies.splice(crabIndex, 1);
   });
 }
+
