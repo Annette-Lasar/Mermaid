@@ -2,9 +2,11 @@ let mermaidType = 1;
 let world;
 const MAX_CRAB_ENEMIES = 15;
 const CANVAS_HEIGHT = 480;
+const CANVAS_WIDTH = 853;
 let animalIDCounter = 1;
-
+const animalArrays = new AnimalArrays();
 const allAnimals = [
+  'mermaid',
   'blowfish',
   'blueJellyfish',
   'butterflyfish',
@@ -29,6 +31,7 @@ const allActions = [
   'move',
 ];
 
+const mermaidPathPrefix = './img/mermaid/PNG/mermaid_';
 const animalPathPrefix = './img/fish/PNG/';
 const animalPathSuffix = '.png';
 

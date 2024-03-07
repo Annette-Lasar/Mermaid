@@ -1,16 +1,27 @@
-// Beispiel für die Verwendung der Klasse
-const animalArrays = new AnimalArrays();
-
-// Aufruf der Funktion für alle Tierarten und Aktionen
-allAnimals.forEach((animal) => {
-  allActions.forEach((action) => {
-    for (let k = 0; k < 10; k++) {
-      const completePath =
-        animalPathPrefix + animal + '/' + action + '_00' + k + animalPathSuffix;
-      animalArrays.pushImagePath(action, animal, completePath); 
-    }
+function createAllAnimalsArrays() {
+  allAnimals.forEach((animal) => {
+    allActions.forEach((action) => {
+      for (let k = 0; k < 10; k++) {
+        const completePath = checkIfMermaidOrAnimal(animal, action, k);
+        animalArrays.pushImagePath(action, animal, completePath);
+      }
+    });
   });
-});
+}
+
+function checkIfMermaidOrAnimal(animal, action, k) {
+  let path =
+    animal == 'mermaid'
+      ? mermaidPathPrefix +
+        mermaidType +
+        '/' +
+        action +
+        '_00' +
+        k +
+        animalPathSuffix
+      : animalPathPrefix + animal + '/' + action + '_00' + k + animalPathSuffix;
+  return path;
+}
 
 console.log('Animal-Arrays: ', animalArrays);
 

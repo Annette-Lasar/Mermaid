@@ -1,12 +1,20 @@
 class Crab extends movableObject {
-  constructor(imgPath, originalWidth, originalHeight, speed, array) {
+  constructor(imgPath, speed, array) {
     super();
     this.x = 280 + (Math.random() * 425 * 2) / 3;
     this.y = Math.random() * 480 - 430; // (canvas.height / 3)
-    this.loadImage(imgPath);
-    this.setDimensions(80, originalWidth, originalHeight);
+    super.loadImage(imgPath);
+    this.img.onload = () => {
+      let currentWidth = this.img.width > this.img.height ? 80 : 60;
+      this.setDimensions(
+        currentWidth,
+        this.img.width,
+        this.img.height
+      );
+    };
     this.speed = speed;
     this.loadImagesMoves(array);
+
     this.animate(array);
     this.moveDown();
   }
@@ -17,7 +25,7 @@ class Crab extends movableObject {
       let path = array[i];
       this.img = this.imageCache[path];
       this.currentImage++;
-    }, 1000/10);
+    }, 1000 / 10);
   }
 
   moveDown() {

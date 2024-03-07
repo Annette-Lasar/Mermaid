@@ -11,15 +11,16 @@ class World {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
-    /* createAnimalImageArrays(); */
+    createAllAnimalsArrays();
     this.backgrounds = createBackground(1);
     this.character = createCharacter();
     this.spawnCrabEnemies();
-    this.blowfishEnemies = createBlowfishEnemies();
-    /* this.spawnBlowfishEnemies(); */
+    this.spawnBlowfishEnemies();
     this.draw();
     setInterval(() => {
-      filterAndRemoveCrabEnemies(this.crabEnemies);
+      filterAndRemoveEnemies(this.crabEnemies);
+      filterAndRemoveEnemies(this.blowfishEnemies);
+      console.log('this.crabEnemies: ', this.crabEnemies);
     }, 3000);
     this.setWorld();
   }
@@ -28,7 +29,7 @@ class World {
     this.character.world = this;
   }
 
-  spawnCrabEnemies() {
+  /*   spawnCrabEnemies() {
     let random = Math.floor(Math.random() * 2);
     if (random == 0) {
       this.crabEnemies.push(createYellowCrab());
@@ -37,11 +38,44 @@ class World {
     }
     const timeout = 2000 + Math.random() * 2000;
     setTimeout(this.spawnCrabEnemies.bind(this), timeout);
+  } */
+
+  spawnCrabEnemies() {
+    let random = Math.floor(Math.random() * 2);
+    let timeout = 0;
+    if (random == 0) {
+      this.crabEnemies.push(createYellowCrab());
+    } else {
+      this.crabEnemies.push(createRedCrab());
+    }
+    if (!this.spawnFirst) {
+      timeout = 0;
+      this.spawnFirst = true;
+    } else {
+      timeout = 2000 + Math.random() * 2000;
+    }
+
+    /*  console.log('currentTimeout', timeout); */
+    setTimeout(this.spawnCrabEnemies.bind(this), timeout);
   }
 
- /*  spawnBlowfishEnemies() {
-    
-  } */
+  spawnBlowfishEnemies() {
+    this.blowfishEnemies.push(createBlowfishEnemies());
+
+    const timeout = 4000 + Math.random() * 10000;
+    setTimeout(this.spawnBlowfishEnemies.bind(this), timeout);
+    /* console.log('Kugelfisch-Array: ', this.blowfishEnemies); */
+  }
+
+  checkForCurrentEnemies(enemiesArray) {
+    if (enemiesArray === this.crabEnemies) {
+      let enemies = enemiesArray.filter((enemy) => enemy.y > CANVAS_HEIGHT);
+      return enemies;
+    } else if (enemiesArray === this.blowfishEnemies) {
+      let enemies = enemiesArray.filter((enemy) => enemy.x < 0);
+      return enemies;
+    }
+  }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

@@ -3,8 +3,6 @@ class redCrabFish extends Crab {
   constructor(imgPath, speed, id) {
     super(
       imgPath,
-      redCrabData.idle_width,
-      redCrabData.idle_height,
       speed,
       animalArrays.arrays.redCrabIdle
     );

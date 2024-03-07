@@ -33,7 +33,7 @@ class movableObject {
     console.log('Moving right');
   }
 
-  moveLeft() {
+ /*  moveLeft() {
     console.log('Moving left');
-  }
+  } */
 }

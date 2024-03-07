@@ -11,8 +11,10 @@ function createBackground(backgroundNumber) {
 }
 
 function createCharacter() {
+  let speed = 0.5;
   const character = new Character(
-    `./img/mermaid/PNG/mermaid_${mermaidType}/move_000.png`
+    `./img/mermaid/PNG/mermaid_${mermaidType}/move_000.png`,
+    speed
   );
   return character;
 }
@@ -42,7 +44,6 @@ function createRedCrab() {
 }
 
 function createBlowfishEnemies() {
-  let blowFishArray = [];
   let id = 'blowfish' + animalIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
   let blowFish = new Blowfish(
@@ -50,19 +51,21 @@ function createBlowfishEnemies() {
     speed,
     id
   );
-  blowFishArray.push(blowFish);
   animalIDCounter++;
-  return blowFishArray;
+  return blowFish;
 }
 
-function filterAndRemoveCrabEnemies(crabEnemies) {
-  let filteredEnemies = crabEnemies.filter((enemy) => enemy.y > CANVAS_HEIGHT);
 
+function filterAndRemoveEnemies(enemiesArray) {
+  let filteredEnemies = world.checkForCurrentEnemies(enemiesArray);
+  
   filteredEnemies.forEach((filteredEnemy) => {
-    let crabIndex = crabEnemies.findIndex(
+    let enemyIndex = enemiesArray.findIndex(
       (item) => item.id === filteredEnemy.id
     );
-    crabEnemies.splice(crabIndex, 1);
+    enemiesArray.splice(enemyIndex, 1);
+    console.log('aktuelles Array: ', enemiesArray);
   });
 }
+
 
