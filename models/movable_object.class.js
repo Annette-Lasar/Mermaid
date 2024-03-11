@@ -5,6 +5,7 @@ class movableObject {
   imageCache = {};
   currentImage = 0;
   speed = 0.75;
+  otherDirection = false;
 
   constructor() {
     this.width = 0;

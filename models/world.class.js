@@ -1,11 +1,12 @@
 class World {
   canvas;
+  ctx;
   backgrounds = [];
   character;
   crabEnemies = [];
   blowfishEnemies = [];
   keyboard;
-  ctx;
+  camera_x = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -20,7 +21,6 @@ class World {
     setInterval(() => {
       filterAndRemoveEnemies(this.crabEnemies);
       filterAndRemoveEnemies(this.blowfishEnemies);
-      console.log('this.crabEnemies: ', this.crabEnemies);
     }, 3000);
     this.setWorld();
   }
@@ -29,16 +29,23 @@ class World {
     this.character.world = this;
   }
 
-  /*   spawnCrabEnemies() {
-    let random = Math.floor(Math.random() * 2);
-    if (random == 0) {
-      this.crabEnemies.push(createYellowCrab());
-    } else {
-      this.crabEnemies.push(createRedCrab());
+  addFurtherBackgrounds(direction) {
+    const movement = direction === 'right' ? CANVAS_WIDTH : -CANVAS_WIDTH;
+    
+    for (let i = 0; i < this.backgrounds.length; i++) {
+      this.backgrounds[i].x += movement;
     }
-    const timeout = 2000 + Math.random() * 2000;
-    setTimeout(this.spawnCrabEnemies.bind(this), timeout);
-  } */
+
+    if (direction === 'right' && this.backgrounds[this.backgrounds.length - 1].x <= this.canvas.width + movement) {
+      const newBackgrounds = createBackground(1);
+      this.backgrounds.push(...newBackgrounds);
+    } else if (direction === 'left' && this.backgrounds[this.backgrounds.length - 1].x <= CANVAS_WIDTH) {
+      const newBackgrounds = createBackground(1);
+      this.backgrounds.unshift(...newBackgrounds);
+    }
+
+  }
+
 
   spawnCrabEnemies() {
     let random = Math.floor(Math.random() * 2);
@@ -54,8 +61,6 @@ class World {
     } else {
       timeout = 2000 + Math.random() * 2000;
     }
-
-    /*  console.log('currentTimeout', timeout); */
     setTimeout(this.spawnCrabEnemies.bind(this), timeout);
   }
 
@@ -64,7 +69,6 @@ class World {
 
     const timeout = 4000 + Math.random() * 10000;
     setTimeout(this.spawnBlowfishEnemies.bind(this), timeout);
-    /* console.log('Kugelfisch-Array: ', this.blowfishEnemies); */
   }
 
   checkForCurrentEnemies(enemiesArray) {
@@ -79,10 +83,12 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.translate(this.camera_x, 0);
     this.addObjectsToCanvas(this.backgrounds);
     this.drawOnCanvas(this.character);
     this.addObjectsToCanvas(this.blowfishEnemies);
     this.addObjectsToCanvas(this.crabEnemies);
+    this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
     requestAnimationFrame(function () {
@@ -97,6 +103,16 @@ class World {
   }
 
   drawOnCanvas(mo) {
+    if (mo.otherDirection) {
+      this.ctx.save();
+      this.ctx.translate(mo.width, 0);
+      this.ctx.scale(-1, 1);
+      mo.x = mo.x * -1;
+    }
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    if (mo.otherDirection) {
+      mo.x = mo.x * -1;
+      this.ctx.restore();
+    }
   }
 }

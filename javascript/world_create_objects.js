@@ -4,14 +4,22 @@ function createBackground(backgroundNumber) {
     const backgroundImagePathBack = backgroundImagesPathBack[i];
     const backgroundImagePath =
       backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
-    let background = new Background(backgroundImagePath, 853);
-    backgroundComponents.push(background);
+    let background = new Background(backgroundImagePath, CANVAS_WIDTH);
+    backgroundComponents.push(background);   
   }
   return backgroundComponents;
 }
 
+/* function moveX_AxisRight(i, backgroundImagesPathBack) {
+  let new_x_axis = 0;
+  if (i % backgroundImagesPathBack.length === 0) {
+    new_x_axis = CANVAS_WIDTH;
+  }
+  return new_x_axis;
+} */
+
 function createCharacter() {
-  let speed = 0.5;
+  let speed = 5;
   const character = new Character(
     `./img/mermaid/PNG/mermaid_${mermaidType}/move_000.png`,
     speed
@@ -55,17 +63,13 @@ function createBlowfishEnemies() {
   return blowFish;
 }
 
-
 function filterAndRemoveEnemies(enemiesArray) {
   let filteredEnemies = world.checkForCurrentEnemies(enemiesArray);
-  
+
   filteredEnemies.forEach((filteredEnemy) => {
     let enemyIndex = enemiesArray.findIndex(
       (item) => item.id === filteredEnemy.id
     );
     enemiesArray.splice(enemyIndex, 1);
-    console.log('aktuelles Array: ', enemiesArray);
   });
 }
-
-
