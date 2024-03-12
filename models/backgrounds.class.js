@@ -1,9 +1,16 @@
 class Background extends movableObject {
-    constructor(imgPath, canvasWidth) {
-      super();
-      this.x = 0;
-      this.y = 0;
-      this.loadImage(imgPath, canvasWidth);
-      this.setDimensions(canvasWidth, originalBackgroundWidth, originalBackgroundHeight);
-    }
+  constructor(imgPath, x) {
+    super();
+    this.y = 0;
+    this.x = x;
+    this.loadImage(imgPath, CANVAS_WIDTH);
+    this.setDimensions(
+      CANVAS_WIDTH,
+      originalBackgroundWidth,
+      originalBackgroundHeight
+    );
+    /* this.loadImagesMoves(); */
+    /* console.log('Background-Array: ', backgrounds); */
+    /* console.log('Keyboard', world.backgrounds); */
   }
+}

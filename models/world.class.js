@@ -2,6 +2,7 @@ class World {
   canvas;
   ctx;
   backgrounds = [];
+  backgroundObjects = [];
   character;
   crabEnemies = [];
   blowfishEnemies = [];
@@ -14,6 +15,7 @@ class World {
     this.keyboard = keyboard;
     createAllAnimalsArrays();
     this.backgrounds = createBackground(1);
+    console.log('Backgrounds Konstruktor: ', this.backgrounds);
     this.character = createCharacter();
     this.spawnCrabEnemies();
     this.spawnBlowfishEnemies();
@@ -29,23 +31,64 @@ class World {
     this.character.world = this;
   }
 
-  addFurtherBackgrounds(direction) {
-    const movement = direction === 'right' ? CANVAS_WIDTH : -CANVAS_WIDTH;
-    
-    for (let i = 0; i < this.backgrounds.length; i++) {
-      this.backgrounds[i].x += movement;
+  /*   drawBackgroundObjects() {
+    console.log('Hintergründe Character', this.backgrounds);
+    this.backgrounds.forEach((bg) => {
+      bg.x = x_axis;
+      console.log('Hintergründe -x: ', this.backgrounds);
+    })
+  } */
+
+/*   drawBackgroundObjects() {
+    console.log('Hintergründe Character', this.backgrounds);
+    for (let i = 0; i < 3; i++) {
+      let x_axis = 852;
+      this.backgrounds.forEach((bg) => {
+        bg.x = x_axis * i;
+      })
     }
+  } */
 
-    if (direction === 'right' && this.backgrounds[this.backgrounds.length - 1].x <= this.canvas.width + movement) {
-      const newBackgrounds = createBackground(1);
-      this.backgrounds.push(...newBackgrounds);
-    } else if (direction === 'left' && this.backgrounds[this.backgrounds.length - 1].x <= CANVAS_WIDTH) {
-      const newBackgrounds = createBackground(1);
-      this.backgrounds.unshift(...newBackgrounds);
+  /*  drawBackgroundObjects() {
+    let firstBackground = CANVAS_WIDTH;
+    let imageCounter = 0;
+    for (let i = -1; i < 10; i++) {
+      imageCounter++;
+      if (imageCounter == 3) {
+        imageCounter = 1;
+      }
+
+      for (let j = 0; j < this.backgrounds.length && j < 6; j++) {
+        const bg = this.backgrounds[j];
+        this.backgroundObjects.push(
+          new Background(`${bg}`)
+          );
+      }
+      console.log('backgroundObjects', this.backgroundObjects);
     }
+  } */
 
-  }
+  /*  drawBackgroundObjects() {
+    let firstBackground = 852;
+    let imageCounter = 0;
+    for (let i = -1; i < 10; i++) {
+      imageCounter++;
+      if (imageCounter == 3) {
+        imageCounter = 1;
+      }
+      this.backgroundObjects.push(
+        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 0, this),
+        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 0.75, this),
+        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 2, this),
+        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 5, this),
+        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 7, this),
+        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 9, this),
+      );
+    }
+    console.log('backgroundObjects', this.backgroundObjects);
+  } */
 
+  // constructor(imgPath, canvasWidth, x, y) {
 
   spawnCrabEnemies() {
     let random = Math.floor(Math.random() * 2);

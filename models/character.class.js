@@ -14,17 +14,36 @@ class Character extends movableObject {
     this.animateMoves(animalArrays.arrays.mermaidMove);
   }
 
+  /*   animateMoves(array) {
+    setInterval(() => {
+      if (this.world.keyboard.ARROWRIGHT) {
+        this.x += this.speed;
+        this.otherDirection = false;
+        for (let x = 0; x < 3; x ++) {
+          this.world.drawBackgroundObjects((CANVAS_WIDTH - 1) * x);
+        }
+        
+      }
+      if (this.world.keyboard.ARROWLEFT) {
+        this.x -= this.speed;
+        this.otherDirection = true;
+        this.world.drawBackgroundObjects();
+      }
+      this.world.camera_x = -this.x;
+    }, 1000 / 60);
+ */
+
   animateMoves(array) {
     setInterval(() => {
       if (this.world.keyboard.ARROWRIGHT) {
         this.x += this.speed;
         this.otherDirection = false;
-        this.world.addFurtherBackgrounds('right');
+        /* this.world.drawBackgroundObjects(); */
       }
       if (this.world.keyboard.ARROWLEFT) {
         this.x -= this.speed;
         this.otherDirection = true;
-        this.world.addFurtherBackgrounds('left');
+        /* this.world.drawBackgroundObjects(); */
       }
       this.world.camera_x = -this.x;
     }, 1000 / 60);
