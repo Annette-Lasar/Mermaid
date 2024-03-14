@@ -2,7 +2,6 @@ class World {
   canvas;
   ctx;
   backgrounds = [];
-  backgroundObjects = [];
   character;
   crabEnemies = [];
   blowfishEnemies = [];
@@ -30,65 +29,6 @@ class World {
   setWorld() {
     this.character.world = this;
   }
-
-  /*   drawBackgroundObjects() {
-    console.log('Hintergründe Character', this.backgrounds);
-    this.backgrounds.forEach((bg) => {
-      bg.x = x_axis;
-      console.log('Hintergründe -x: ', this.backgrounds);
-    })
-  } */
-
-/*   drawBackgroundObjects() {
-    console.log('Hintergründe Character', this.backgrounds);
-    for (let i = 0; i < 3; i++) {
-      let x_axis = 852;
-      this.backgrounds.forEach((bg) => {
-        bg.x = x_axis * i;
-      })
-    }
-  } */
-
-  /*  drawBackgroundObjects() {
-    let firstBackground = CANVAS_WIDTH;
-    let imageCounter = 0;
-    for (let i = -1; i < 10; i++) {
-      imageCounter++;
-      if (imageCounter == 3) {
-        imageCounter = 1;
-      }
-
-      for (let j = 0; j < this.backgrounds.length && j < 6; j++) {
-        const bg = this.backgrounds[j];
-        this.backgroundObjects.push(
-          new Background(`${bg}`)
-          );
-      }
-      console.log('backgroundObjects', this.backgroundObjects);
-    }
-  } */
-
-  /*  drawBackgroundObjects() {
-    let firstBackground = 852;
-    let imageCounter = 0;
-    for (let i = -1; i < 10; i++) {
-      imageCounter++;
-      if (imageCounter == 3) {
-        imageCounter = 1;
-      }
-      this.backgroundObjects.push(
-        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 0, this),
-        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 0.75, this),
-        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 2, this),
-        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 5, this),
-        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 7, this),
-        new Background(`img/Game_backgrounds/PNG/game_background_1/layers/${imageCounter}.png`, firstBackground * i, 9, this),
-      );
-    }
-    console.log('backgroundObjects', this.backgroundObjects);
-  } */
-
-  // constructor(imgPath, canvasWidth, x, y) {
 
   spawnCrabEnemies() {
     let random = Math.floor(Math.random() * 2);
@@ -119,7 +59,7 @@ class World {
       let enemies = enemiesArray.filter((enemy) => enemy.y > CANVAS_HEIGHT);
       return enemies;
     } else if (enemiesArray === this.blowfishEnemies) {
-      let enemies = enemiesArray.filter((enemy) => enemy.x < 0);
+      let enemies = enemiesArray.filter((enemy) => enemy.x < -100);
       return enemies;
     }
   }

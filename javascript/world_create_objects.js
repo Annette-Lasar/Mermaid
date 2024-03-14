@@ -1,55 +1,39 @@
-/* function createBackground(backgroundNumber) {
-  let firstBackground = 852;
-  const backgroundComponents = [];
-  for (let i = 0; i < backgroundImagesPathBack.length; i++) {
-    const backgroundImagePathBack = backgroundImagesPathBack[i];
-    const backgroundImagePath =
-      backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
-    let background = new Background(backgroundImagePath, CANVAS_WIDTH);
-    backgroundComponents.push(background);   
-  }
-  return backgroundComponents;
-} */
-
-/* function createBackground(backgroundNumber) {
-  let firstBackground = 852;
-  const backgroundComponents = [];
-  let background;
-  for (let i = 0; i < backgroundImagesPathBack.length; i++) {
-    const backgroundImagePathBack = backgroundImagesPathBack[i];
-    const backgroundImagePath =
-      backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
-    background = new Background(backgroundImagePath);
-  }
-  backgroundComponents.push(
-    background,
-    firstBackground * -1,
-    background,
-    firstBackground * 0,
-    background,
-    firstBackground * 1,
-    background,
-    firstBackground * 2,
-    background,
-    firstBackground * 3
-  );
-  return backgroundComponents;
-} */
-
 function createBackground(backgroundNumber) {
-  let x_axis = 0;
+  let x_axis = 852;
   const backgroundComponents = [];
-  for (let i = 0; i < backgroundImagesPathBack.length; i++) {
-    const backgroundImagePathBack = backgroundImagesPathBack[i];
-    const backgroundImagePath =
-      backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
-    let background = new Background(backgroundImagePath, x_axis);
-    backgroundComponents.push(background);
-    x_axis += 852;
+  for (let i = -3; i < 10; i++) {
+    for (let j = 0; j < backgroundImagesPathBack.length; j++) {
+      const backgroundImagePathBack = backgroundImagesPathBack[j];
+      const backgroundImagePath =
+        backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
+      backgroundComponents.push(
+        new Background(backgroundImagePath, x_axis * i - 80)
+      );
+    }
   }
-
   return backgroundComponents;
 }
+
+/* function createBackground(backgroundNumber) {
+  let x_axis = CANVAS_WIDTH -1;
+  const backgroundComponents = [];
+  for (let i = -3; i < 10; i++) {
+    if (i % 3 === 0) {
+      backgroundNumber = 3;
+    } else {
+      backgroundNumber = 1;
+    }
+    backgroundImagesPathBack.forEach((backgroundImagePathBack) => {
+      const backgroundImagePath =
+        backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
+      backgroundComponents.push(new Background(backgroundImagePath, x_axis * i - 80));
+    });
+  }
+  return backgroundComponents;
+} */
+
+
+
 
 function createCharacter() {
   let speed = 5;

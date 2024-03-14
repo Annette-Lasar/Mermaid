@@ -38,7 +38,7 @@ const animalPathSuffix = '.png';
 
 const originalBackgroundWidth = 1920;
 const originalBackgroundHeight = 1080;
-const backgroundImagesPathFront = './img/Game_backgrounds/PNG/game_background_';
+const backgroundImagesPathFront = './img/game_backgrounds/PNG/game_background_';
 const backgroundImagesPathBack = [
   '/layers/1.png',
   '/layers/2.png',
