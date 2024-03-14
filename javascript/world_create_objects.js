@@ -1,11 +1,13 @@
-function createBackground(backgroundNumber) {
+console.log('Ich bin die world_create_objects-Datei!');
+
+function createBackground(number) {
   let x_axis = 852;
   const backgroundComponents = [];
-  for (let i = -3; i < 10; i++) {
+  for (let i = -2; i < 10; i++) {
     for (let j = 0; j < backgroundImagesPathBack.length; j++) {
       const backgroundImagePathBack = backgroundImagesPathBack[j];
       const backgroundImagePath =
-        backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
+        backgroundImagesPathFront + number + backgroundImagePathBack;
       backgroundComponents.push(
         new Background(backgroundImagePath, x_axis * i - 80)
       );
@@ -14,18 +16,18 @@ function createBackground(backgroundNumber) {
   return backgroundComponents;
 }
 
-/* function createBackground(backgroundNumber) {
+/* function createBackground(number) {
   let x_axis = CANVAS_WIDTH -1;
   const backgroundComponents = [];
-  for (let i = -3; i < 10; i++) {
+  for (let i = -2; i < 10; i++) {
     if (i % 3 === 0) {
-      backgroundNumber = 3;
+      number = 3;
     } else {
-      backgroundNumber = 1;
+      number = 1;
     }
     backgroundImagesPathBack.forEach((backgroundImagePathBack) => {
       const backgroundImagePath =
-        backgroundImagesPathFront + backgroundNumber + backgroundImagePathBack;
+        backgroundImagesPathFront + number + backgroundImagePathBack;
       backgroundComponents.push(new Background(backgroundImagePath, x_axis * i - 80));
     });
   }
@@ -43,6 +45,8 @@ function createCharacter() {
   );
   return character;
 }
+
+
 
 function createYellowCrab() {
   let id = 'yellow' + animalIDCounter;

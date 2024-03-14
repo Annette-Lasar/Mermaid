@@ -18,7 +18,7 @@ class Character extends movableObject {
         this.x += this.speed;
         this.otherDirection = false;
       }
-      if (this.world.keyboard.ARROWLEFT) {
+      if (this.world.keyboard.ARROWLEFT && this.x > -853) {
         this.x -= this.speed;
         this.otherDirection = true;
       }

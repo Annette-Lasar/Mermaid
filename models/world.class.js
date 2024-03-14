@@ -1,7 +1,8 @@
+console.log('Ich bin die world.class.js-Datei');
 class World {
   canvas;
   ctx;
-  backgrounds = [];
+  level = level1;
   character;
   crabEnemies = [];
   blowfishEnemies = [];
@@ -13,8 +14,6 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     createAllAnimalsArrays();
-    this.backgrounds = createBackground(1);
-    console.log('Backgrounds Konstruktor: ', this.backgrounds);
     this.character = createCharacter();
     this.spawnCrabEnemies();
     this.spawnBlowfishEnemies();
@@ -67,7 +66,7 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToCanvas(this.backgrounds);
+    this.addObjectsToCanvas(this.level.backgrounds);
     this.drawOnCanvas(this.character);
     this.addObjectsToCanvas(this.blowfishEnemies);
     this.addObjectsToCanvas(this.crabEnemies);

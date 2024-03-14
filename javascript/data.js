@@ -1,3 +1,4 @@
+console.log('Ich bin die data.js-Datei!')
 let mermaidType = 1;
 let world;
 const MAX_CRAB_ENEMIES = 15;
@@ -35,9 +36,9 @@ const mermaidPathPrefix = './img/mermaid/PNG/mermaid_';
 const animalPathPrefix = './img/fish/PNG/';
 const animalPathSuffix = '.png';
 
-
-const originalBackgroundWidth = 1920;
-const originalBackgroundHeight = 1080;
+/* const backgroundNumber = 1; */
+/* const originalBackgroundWidth = 1920; */
+/* const originalBackgroundHeight = 1080; */
 const backgroundImagesPathFront = './img/game_backgrounds/PNG/game_background_';
 const backgroundImagesPathBack = [
   '/layers/1.png',
@@ -48,7 +49,9 @@ const backgroundImagesPathBack = [
   '/layers/6.png',
 ];
 
-const mermaidData = {
+
+
+/* const mermaidData = {
   1: {
     acceleration_width: 1082,
     acceleration_height: 520,
@@ -99,9 +102,9 @@ const mermaidData = {
     move_width: 1173,
     move_height: 917,
   },
-};
+}; */
 
-const yellowCrabData = {
+/* const yellowCrabData = {
   attack_width: 340,
   attack_height: 270,
   die_width: 401,
@@ -200,3 +203,4 @@ const sharkData = {
   move_width: 1036,
   move_height: 483,
 };
+ */
