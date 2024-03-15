@@ -1,3 +1,4 @@
+console.log('Ich bin die create_arrays_for_animation-Datei.');
 function createAllAnimalsArrays() {
   allAnimals.forEach((animal) => {
     allActions.forEach((action) => {

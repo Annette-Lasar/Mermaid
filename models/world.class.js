@@ -68,6 +68,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToCanvas(this.level.backgrounds);
     this.drawOnCanvas(this.character);
+    this.drawOnCanvas(this.level.endboss);
     this.addObjectsToCanvas(this.blowfishEnemies);
     this.addObjectsToCanvas(this.crabEnemies);
     this.ctx.translate(-this.camera_x, 0);

@@ -40,7 +40,7 @@ function createBackground(number) {
 function createCharacter() {
   let speed = 5;
   const character = new Character(
-    `./img/mermaid/PNG/mermaid_${mermaidType}/move_000.png`,
+    `./img/mermaid/PNG/mermaid_${mermaidType}/idle_000.png`,
     speed
   );
   return character;
@@ -83,6 +83,17 @@ function createBlowfishEnemies() {
   animalIDCounter++;
   return blowFish;
 }
+
+
+function createEndboss() {
+  let speed = 5;
+  const endboss = new Endboss(
+    './img/fish/PNG/hammerhead/move_000.png',
+    speed
+  );
+  return endboss;
+}
+
 
 function filterAndRemoveEnemies(enemiesArray) {
   let filteredEnemies = world.checkForCurrentEnemies(enemiesArray);

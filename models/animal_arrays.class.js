@@ -1,3 +1,4 @@
+console.log('Ich bin die animal_arrays.class-Datei.');
 class AnimalArrays {
   constructor() {
     this.arrays = {};
