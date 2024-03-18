@@ -2,12 +2,12 @@ class Level {
   backgroundNumber;
   backgrounds = [];
   endboss;
-  level_end_x = 2500;
+  level_end_x = 5000;
 
   constructor(backgroundNumber) {
     this.backgroundNumber = backgroundNumber;
     this.backgrounds = createBackground(backgroundNumber);
-    this.endboss = createEndboss();
+    this.endboss = createEndboss(hammerheadArrays.move[0]);
     console.log('Endboss: ', this.endboss);
   }
 }

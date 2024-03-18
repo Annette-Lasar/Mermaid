@@ -30,11 +30,18 @@ class movableObject {
     });
   }
 
+  playAnimation(array) {
+    let i = this.currentImage % array.length;
+    let path = array[i];
+    this.img = this.imageCache[path];
+    this.currentImage++;
+  }
+
   moveRight() {
     console.log('Moving right');
   }
 
- /*  moveLeft() {
+  /*  moveLeft() {
     console.log('Moving left');
   } */
 }

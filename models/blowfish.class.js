@@ -11,17 +11,14 @@ class Blowfish extends Fish {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-    this.loadImagesMoves(animalArrays.arrays.blowfishMove);
-    this.animate(animalArrays.arrays.blowfishMove);
+    this.loadImagesMoves(blowfishArrays.move);
+    this.animate(blowfishArrays.move);
   }
 
   animate(array) {
     setInterval(() => {
       this.x -= 5;
-      let i = this.currentImage % array.length;
-      let path = array[i];
-      this.img = this.imageCache[path];
-      this.currentImage++;
+      this.playAnimation(array);
     }, 1000 / 10);
   }
 

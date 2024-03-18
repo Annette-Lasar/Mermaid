@@ -4,7 +4,7 @@ class redCrabFish extends Crab {
     super(
       imgPath,
       speed,
-      animalArrays.arrays.redCrabIdle
+      redCrabArrays.idle
     );
     this.id = id;
   }

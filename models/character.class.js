@@ -5,6 +5,7 @@ class Character extends movableObject {
   constructor(imgPath, speed) {
     super();
     super.loadImage(imgPath);
+    this.y = 200;
     this.speed = speed;
     this.imageDimensions = [];
     this.img.onload = () => {
@@ -13,10 +14,10 @@ class Character extends movableObject {
       /* this.checkImageDimensions(); */
     };
 
-    this.loadImagesMoves(animalArrays.arrays.mermaidIdle);
-    this.animateIdle(animalArrays.arrays.mermaidIdle);
-    this.loadImagesMoves(animalArrays.arrays.mermaidMove);
-    this.animateMoves(animalArrays.arrays.mermaidMove);
+    this.loadImagesMoves(mermaidArrays.idle);
+    this.animateIdle(mermaidArrays.idle);
+    this.loadImagesMoves(mermaidArrays.move);
+    this.animateMoves(mermaidArrays.move);
   }
 
   /*   checkImageDimensions() {
@@ -93,10 +94,7 @@ class Character extends movableObject {
 
     setInterval(() => {
       if (this.world.keyboard.ARROWRIGHT || this.world.keyboard.ARROWLEFT) {
-        let i = this.currentImage % array.length;
-        let path = array[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        this.playAnimation(array);
       }
     }, 50);
   }

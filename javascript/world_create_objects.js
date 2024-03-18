@@ -40,7 +40,7 @@ function createBackground(number) {
 function createCharacter() {
   let speed = 5;
   const character = new Character(
-    `./img/mermaid/PNG/mermaid_${mermaidType}/idle_000.png`,
+    mermaidArrays.idle[0],
     speed
   );
   return character;
@@ -52,7 +52,7 @@ function createYellowCrab() {
   let id = 'yellow' + animalIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
   let yellowCrab = new yellowCrabFish(
-    './img/fish/PNG/yellowCrab/move_000.png',
+    yellowCrabArrays.move[0],
     speed,
     id
   );
@@ -62,9 +62,9 @@ function createYellowCrab() {
 
 function createRedCrab() {
   let id = 'red' + animalIDCounter;
-  let speed = Math.random() * 0.4 + 0.1;
+  let speed = Math.random() * 0.8 + 0.3;
   let redCrab = new redCrabFish(
-    './img/fish/PNG/redCrab/idle_000.png',
+    redCrabArrays.idle[0],
     speed,
     id
   );
@@ -74,9 +74,9 @@ function createRedCrab() {
 
 function createBlowfishEnemies() {
   let id = 'blowfish' + animalIDCounter;
-  let speed = Math.random() * 0.4 + 0.1;
+  let speed = Math.random() * 0.8 + 0.1;
   let blowFish = new Blowfish(
-    './img/fish/PNG/blowfish/move_000.png',
+    blowfishArrays.move[0],
     speed,
     id
   );
@@ -85,10 +85,10 @@ function createBlowfishEnemies() {
 }
 
 
-function createEndboss() {
+function createEndboss(imgPath) {
   let speed = 5;
   const endboss = new Endboss(
-    './img/fish/PNG/hammerhead/move_000.png',
+    imgPath,
     speed
   );
   return endboss;

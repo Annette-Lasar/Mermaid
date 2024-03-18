@@ -5,7 +5,7 @@ const MAX_CRAB_ENEMIES = 15;
 const CANVAS_HEIGHT = 480;
 const CANVAS_WIDTH = 853;
 let animalIDCounter = 1;
-const animalArrays = new AnimalArrays();
+/* const animalArrays = new AnimalArrays(); */
 const allAnimals = [
   'mermaid',
   'blowfish',
