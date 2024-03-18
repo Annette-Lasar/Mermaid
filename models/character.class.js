@@ -48,7 +48,7 @@ class Character extends movableObject {
     imageKeys.forEach((key, index) => {
       if (index % 10 === 0) {
         const img = this.imageCache[key];
-        const desiredWidth = img.width > img.height ? 150 : 80; 
+        const desiredWidth = img.width > img.height ? 150 : 80;
         const updatedImg = new Image();
         updatedImg.src = img.src;
         updatedImg.onload = () => {

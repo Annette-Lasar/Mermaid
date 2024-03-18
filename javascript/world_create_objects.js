@@ -1,4 +1,4 @@
-console.log('Ich bin die world_create_objects-Datei!');
+/* console.log('Ich bin die world_create_objects-Datei!'); */
 
 function createBackground(number) {
   let x_axis = 852;

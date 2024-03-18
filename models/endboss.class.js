@@ -1,4 +1,4 @@
-console.log('Ich bin die Endboss-Datei.');
+/* console.log('Ich bin die Endboss-Datei.'); */
 class Endboss extends movableObject {
   constructor(imgPath, speed) {
     super();
@@ -10,8 +10,8 @@ class Endboss extends movableObject {
       let currentWidth = this.img.width > this.img.height ? 450 : 240;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-    /* this.loadImagesMoves(animalArrays.arrays.hammerheadIdle);
-    this.animateIdle(animalArrays.arrays.hammerheadIdle); */
+    this.loadImagesMoves(animalArrays.arrays.hammerheadIdle);
+    this.animateIdle(animalArrays.arrays.hammerheadIdle);
   }
 
   animateIdle() {

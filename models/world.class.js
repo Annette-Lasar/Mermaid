@@ -1,4 +1,4 @@
-console.log('Ich bin die world.class.js-Datei');
+/* console.log('Ich bin die world.class.js-Datei'); */
 class World {
   canvas;
   ctx;
