@@ -6,11 +6,22 @@ class movableObject {
   currentImage = 0;
   speed = 0.75;
   otherDirection = false;
+  speedY = 0;
+  acceleration = 1;
 
   constructor() {
     this.width = 0;
     this.height = 0;
   }
+
+/*   applyGravity() {
+    setInterval(() => {
+      if (this.y < 350) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25);
+  } */
 
   setDimensions(width, originalWidth, originalHeight) {
     this.width = width;

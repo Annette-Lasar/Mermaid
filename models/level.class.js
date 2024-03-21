@@ -7,7 +7,7 @@ class Level {
   constructor(backgroundNumber) {
     this.backgroundNumber = backgroundNumber;
     this.backgrounds = createBackground(backgroundNumber);
-    this.endboss = createEndboss(hammerheadArrays.move[0]);
+    this.endboss = createEndboss(lionfishArrays.move[0]);
     console.log('Endboss: ', this.endboss);
   }
 }

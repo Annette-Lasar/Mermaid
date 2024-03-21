@@ -1,9 +1,10 @@
-/* console.log('Ich bin die world.class.js-Datei'); */
 class World {
   canvas;
   ctx;
   level = level1;
   character;
+  treasureBox;
+  stoneSlabs = [];
   crabEnemies = [];
   blowfishEnemies = [];
   keyboard;
@@ -14,6 +15,8 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.character = createCharacter();
+    this.treasureBox = createTreasureBox();
+    this.createStoneSlabs();
     this.spawnCrabEnemies();
     this.spawnBlowfishEnemies();
     this.draw();
@@ -26,6 +29,16 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.stoneSlabs.world = this;
+  }
+
+  createStoneSlabs() {
+    this.stoneSlabs.push(
+      createStoneSlab(-850, 'WESTERN END OF TERRITORY', 20, 'white')
+    );
+    this.stoneSlabs.push(
+      createStoneSlab(5200, 'EASTERN END OF TERRITORY', 20, 'white')
+    );
   }
 
   spawnCrabEnemies() {
@@ -57,7 +70,7 @@ class World {
       let enemies = enemiesArray.filter((enemy) => enemy.y > CANVAS_HEIGHT);
       return enemies;
     } else if (enemiesArray === this.blowfishEnemies) {
-      let enemies = enemiesArray.filter((enemy) => enemy.x < -100);
+      let enemies = enemiesArray.filter((enemy) => enemy.x < -1100);
       return enemies;
     }
   }
@@ -66,7 +79,19 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToCanvas(this.level.backgrounds);
+    this.addObjectsToCanvas(this.stoneSlabs);
+    this.stoneSlabs.forEach((stone) => {
+      this.ctx.font = `${stone.textSize}px Josefin Slab`;
+      this.ctx.fillStyle = stone.textColor;
+      this.ctx.textAlign = 'center';
+      this.ctx.fillText(
+        stone.text,
+        stone.x + stone.width / 2,
+        stone.y + stone.height / 2
+      );
+    });
     this.drawOnCanvas(this.character);
+    this.drawOnCanvas(this.treasureBox);
     this.drawOnCanvas(this.level.endboss);
     this.addObjectsToCanvas(this.blowfishEnemies);
     this.addObjectsToCanvas(this.crabEnemies);
@@ -97,4 +122,20 @@ class World {
       this.ctx.restore();
     }
   }
+
+  /*   drawText() {
+    // Zeichne den Text auf die Steinplatte
+    this.ctx.font = `${this.textSize}px Arial`; // Schriftart und -größe festlegen
+    this.ctx.fillStyle = this.textColor; // Textfarbe festlegen
+    this.ctx.textAlign = 'center'; // Zentriere den Text horizontal
+    this.ctx.fillText(
+      this.text,
+      this.x + this.width / 2 + this.width / 4,
+      this.y + this.height / 2,
+    ); // Platzieren Sie den Text in der Mitte der Steinplatte
+    let self = this;
+    requestAnimationFrame(function () {
+      self.drawText();
+    });
+  } */
 }

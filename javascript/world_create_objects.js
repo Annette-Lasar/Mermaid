@@ -94,6 +94,24 @@ function createEndboss(imgPath) {
   return endboss;
 }
 
+function createTreasureBox() {
+  const treasureBox = new TreasureBox(
+    './img/game_items/PNG/neutral/chest_closed.png'
+  );
+  return treasureBox;
+}
+
+function createStoneSlab(x_axis, text, textSize, textColor) {
+  const stoneSlab = new StoneSlab(
+    './img/game_ui/PNG/menu/window.png',
+    x_axis,
+    text,
+    textSize,
+    textColor
+  );
+  return stoneSlab;
+}
+
 
 function filterAndRemoveEnemies(enemiesArray) {
   let filteredEnemies = world.checkForCurrentEnemies(enemiesArray);
