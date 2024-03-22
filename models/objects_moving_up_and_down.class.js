@@ -1,0 +1,3 @@
+class ObjectsMovingUpAndDown extends MovableObject {
+
+}

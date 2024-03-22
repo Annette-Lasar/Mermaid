@@ -1,4 +1,4 @@
-class Crab extends movableObject {
+class Crab extends MovableObject {
   constructor(imgPath, speed, array) {
     super();
     this.x = 1600 + (Math.random() * 425 * 2) / 3;

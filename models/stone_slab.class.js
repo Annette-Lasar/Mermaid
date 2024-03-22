@@ -15,7 +15,7 @@ class StoneSlab extends ImmobileItem {
     };
   }
 
-  /* drawText() {
+ /*  drawText() {
     if (this.world) {
       this.world.ctx.font = `${this.textSize}px Arial`; // Schriftart und -größe festlegen
       this.world.ctx.fillStyle = this.textColor; // Textfarbe festlegen
@@ -28,4 +28,8 @@ class StoneSlab extends ImmobileItem {
       console.log('drawText-Methode');
     }
   } */
+
+
+
+
 }

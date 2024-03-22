@@ -1,4 +1,4 @@
-class Fish extends movableObject {
+class Fish extends MovableObject {
   constructor() {
     super();
   }

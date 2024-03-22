@@ -3,8 +3,8 @@ class World {
   ctx;
   level = level1;
   character;
-  treasureBox;
   stoneSlabs = [];
+  gameItems = [];
   crabEnemies = [];
   blowfishEnemies = [];
   keyboard;
@@ -15,7 +15,7 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.character = createCharacter();
-    this.treasureBox = createTreasureBox();
+    this.createGameItems();
     this.createStoneSlabs();
     this.spawnCrabEnemies();
     this.spawnBlowfishEnemies();
@@ -30,6 +30,7 @@ class World {
   setWorld() {
     this.character.world = this;
     this.stoneSlabs.world = this;
+    this.gameItems.world = this;
   }
 
   createStoneSlabs() {
@@ -38,6 +39,36 @@ class World {
     );
     this.stoneSlabs.push(
       createStoneSlab(5200, 'EASTERN END OF TERRITORY', 20, 'white')
+    );
+  }
+
+  createGameItems() {
+    this.gameItems.push(
+      createGameItem(
+        4800,
+        280,
+        './img/game_items/PNG/neutral/chest_closed.png',
+        250,
+        80
+      )
+    );
+    this.gameItems.push(
+      createGameItem(50, 350, 'img/game_items/PNG/items/barrel_2.png', 200, 80)
+    );
+    this.gameItems.push(
+      createGameItem(600, 0, 'img/game_items/PNG/items/chain.png', 200, 20)
+    );
+    this.gameItems.push(
+      createGameItem(1200, 200, 'img/game_items/PNG/items/anchor.png', 200, 200)
+    );
+    this.gameItems.push(
+      createGameItem(
+        1800,
+        200,
+        'img/game_items/PNG/items/steering-wheel.png',
+        200,
+        200
+      )
     );
   }
 
@@ -78,9 +109,12 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToCanvas(this.level.backgrounds);
-    this.addObjectsToCanvas(this.stoneSlabs);
-    this.stoneSlabs.forEach((stone) => {
+    const arraysToDraw = this.defineArrays('nestedArrays');
+    arraysToDraw.forEach((array) => {
+      this.addObjectsToCanvas(array);
+    });
+    this.writeTextOnStoneSlabs();
+    /* this.stoneSlabs.forEach((stone) => {
       this.ctx.font = `${stone.textSize}px Josefin Slab`;
       this.ctx.fillStyle = stone.textColor;
       this.ctx.textAlign = 'center';
@@ -89,14 +123,12 @@ class World {
         stone.x + stone.width / 2,
         stone.y + stone.height / 2
       );
+    }); */
+    const objectsToDraw = this.defineArrays('singleArrays');
+    objectsToDraw.forEach((object) => {
+      this.drawOnCanvas(object);
     });
-    this.drawOnCanvas(this.character);
-    this.drawOnCanvas(this.treasureBox);
-    this.drawOnCanvas(this.level.endboss);
-    this.addObjectsToCanvas(this.blowfishEnemies);
-    this.addObjectsToCanvas(this.crabEnemies);
     this.ctx.translate(-this.camera_x, 0);
-
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
@@ -123,19 +155,32 @@ class World {
     }
   }
 
-  /*   drawText() {
-    // Zeichne den Text auf die Steinplatte
-    this.ctx.font = `${this.textSize}px Arial`; // Schriftart und -größe festlegen
-    this.ctx.fillStyle = this.textColor; // Textfarbe festlegen
-    this.ctx.textAlign = 'center'; // Zentriere den Text horizontal
-    this.ctx.fillText(
-      this.text,
-      this.x + this.width / 2 + this.width / 4,
-      this.y + this.height / 2,
-    ); // Platzieren Sie den Text in der Mitte der Steinplatte
-    let self = this;
-    requestAnimationFrame(function () {
-      self.drawText();
+  defineArrays(arrayType) {
+    if (arrayType === 'nestedArrays') {
+      const nestedArrays = [
+        this.level.backgrounds,
+        this.gameItems,
+        this.stoneSlabs,
+        this.blowfishEnemies,
+        this.crabEnemies,
+      ];
+      return nestedArrays;
+    } else {
+      const singleArrays = [this.character, this.level.endboss];
+      return singleArrays;
+    }
+  }
+
+  writeTextOnStoneSlabs() {
+    this.stoneSlabs.forEach((stone) => {
+      this.ctx.font = `${stone.textSize}px Josefin Slab`;
+      this.ctx.fillStyle = stone.textColor;
+      this.ctx.textAlign = 'center';
+      this.ctx.fillText(
+        stone.text,
+        stone.x + stone.width / 2,
+        stone.y + stone.height / 2
+      );
     });
-  } */
+  }
 }

@@ -1,4 +1,4 @@
-class seaUrchinFish extends movableObject {
+class seaUrchinFish extends MovableObject {
     // aspect ratio: 0.9 (311 x 318) (width x height)
     constructor(imagePath, originalWidth, originalHeight) {
         super();

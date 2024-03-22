@@ -94,11 +94,15 @@ function createEndboss(imgPath) {
   return endboss;
 }
 
-function createTreasureBox() {
-  const treasureBox = new TreasureBox(
-    './img/game_items/PNG/neutral/chest_closed.png'
+function createGameItem(x_axis, y_axis, imgPath, landscapeWidth, portraitWidth) {
+  const gameItem = new GameItem(
+    x_axis,
+    y_axis,
+    imgPath,
+    landscapeWidth,
+    portraitWidth
   );
-  return treasureBox;
+  return gameItem;
 }
 
 function createStoneSlab(x_axis, text, textSize, textColor) {

@@ -1,4 +1,4 @@
-class Character extends movableObject {
+class Character extends MovableObject {
   world;
   swimming_sound = new Audio('audio/underwater_movement_02.mp3');
 

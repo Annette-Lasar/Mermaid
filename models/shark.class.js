@@ -1,3 +1,3 @@
-class Shark extends movableObject {
+class Shark extends MovableObject {
     eat() {}
 }

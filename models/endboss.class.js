@@ -1,5 +1,5 @@
 /* console.log('Ich bin die Endboss-Datei.'); */
-class Endboss extends movableObject {
+class Endboss extends MovableObject {
   constructor(imgPath, speed) {
     super();
     super.loadImage(imgPath);
