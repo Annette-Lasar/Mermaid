@@ -29,8 +29,12 @@ class World {
 
   setWorld() {
     this.character.world = this;
-    this.stoneSlabs.world = this;
-    this.gameItems.world = this;
+    this.stoneSlabs.forEach((stoneSlab) => {
+      stoneSlab.world = this;
+    });
+    this.gameItems.forEach((gameItem) => {
+      gameItem.world = this;
+    });
   }
 
   createStoneSlabs() {
@@ -45,6 +49,7 @@ class World {
   createGameItems() {
     this.gameItems.push(
       createGameItem(
+        'chest_closed',
         4800,
         280,
         './img/game_items/PNG/neutral/chest_closed.png',
@@ -53,21 +58,121 @@ class World {
       )
     );
     this.gameItems.push(
-      createGameItem(50, 350, 'img/game_items/PNG/items/barrel_2.png', 200, 80)
-    );
-    this.gameItems.push(
-      createGameItem(600, 0, 'img/game_items/PNG/items/chain.png', 200, 20)
-    );
-    this.gameItems.push(
-      createGameItem(1200, 200, 'img/game_items/PNG/items/anchor.png', 200, 200)
+      createGameItem(
+        'smashed_barrel',
+        50,
+        350,
+        './img/game_items/PNG/items/barrel_2.png',
+        200,
+        80
+      )
     );
     this.gameItems.push(
       createGameItem(
-        1800,
+        'anchor',
+        1200,
         200,
-        'img/game_items/PNG/items/steering-wheel.png',
+        './img/game_items/PNG/items/anchor.png',
         200,
         200
+      )
+    );
+    this.gameItems.push(
+      createGameItem(
+        'steering_wheel',
+        1800,
+        200,
+        './img/game_items/PNG/items/steering-wheel.png',
+        200,
+        200
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'stalagtite',
+        970,
+        0,
+        './img/game_items/PNG/items/stone_4.png',
+        400, 
+        100
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'stalagtite',
+        905,
+        0,
+        './img/game_items/PNG/items/stone_4.png',
+        400, 
+        120
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'rock',
+        800,
+        80,
+        './img/game_items/PNG/items/stone_6.png',
+        400, 
+        150
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'flat_rock',
+        800,
+        350,
+        './img/game_items/PNG/items/stone_3.png',
+        300, 
+        150
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'stalagtite',
+        2900,
+        0,
+        './img/game_items/PNG/items/stone_4.png',
+        400, 
+        90
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'stalagmite',
+        2860,
+        260,
+        './img/game_items/PNG/items/stone_5.png',
+        400, 
+        140
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'stalagtite',
+        3700,
+        0,
+        './img/game_items/PNG/items/stone_4.png',
+        400, 
+        90
+      )
+    );
+
+    this.gameItems.push(
+      createGameItem(
+        'stalagmite',
+        3660,
+        260,
+        './img/game_items/PNG/items/stone_5.png',
+        400, 
+        140
       )
     );
   }
@@ -113,17 +218,9 @@ class World {
     arraysToDraw.forEach((array) => {
       this.addObjectsToCanvas(array);
     });
-    this.writeTextOnStoneSlabs();
-    /* this.stoneSlabs.forEach((stone) => {
-      this.ctx.font = `${stone.textSize}px Josefin Slab`;
-      this.ctx.fillStyle = stone.textColor;
-      this.ctx.textAlign = 'center';
-      this.ctx.fillText(
-        stone.text,
-        stone.x + stone.width / 2,
-        stone.y + stone.height / 2
-      );
-    }); */
+    this.stoneSlabs.forEach((stone) => {
+      stone.drawText();
+    });
     const objectsToDraw = this.defineArrays('singleArrays');
     objectsToDraw.forEach((object) => {
       this.drawOnCanvas(object);
@@ -159,28 +256,17 @@ class World {
     if (arrayType === 'nestedArrays') {
       const nestedArrays = [
         this.level.backgrounds,
+        this.blowfishEnemies,
         this.gameItems,
         this.stoneSlabs,
-        this.blowfishEnemies,
         this.crabEnemies,
+        this.level.decorativeMovingItems,
+        this.level.objectsMovingUpAndDown,
       ];
       return nestedArrays;
     } else {
       const singleArrays = [this.character, this.level.endboss];
       return singleArrays;
     }
-  }
-
-  writeTextOnStoneSlabs() {
-    this.stoneSlabs.forEach((stone) => {
-      this.ctx.font = `${stone.textSize}px Josefin Slab`;
-      this.ctx.fillStyle = stone.textColor;
-      this.ctx.textAlign = 'center';
-      this.ctx.fillText(
-        stone.text,
-        stone.x + stone.width / 2,
-        stone.y + stone.height / 2
-      );
-    });
   }
 }

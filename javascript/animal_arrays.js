@@ -235,7 +235,6 @@ const lionfishArrays = {
     './img/fish/PNG/lionfish/die_007.png',
     './img/fish/PNG/lionfish/die_008.png',
     './img/fish/PNG/lionfish/die_009.png',
-   
   ],
 
   move: [
@@ -249,8 +248,83 @@ const lionfishArrays = {
     './img/fish/PNG/lionfish/move_007.png',
     './img/fish/PNG/lionfish/move_008.png',
     './img/fish/PNG/lionfish/move_009.png',
+  ],
+};
+
+const blueJellyfishArrays = {
+  die: [
+    './img/fish/PNG/blueJellyfish/die_000.png',
+    './img/fish/PNG/blueJellyfish/die_001.png',
+    './img/fish/PNG/blueJellyfish/die_002.png',
+    './img/fish/PNG/blueJellyfish/die_003.png',
+    './img/fish/PNG/blueJellyfish/die_004.png',
+    './img/fish/PNG/blueJellyfish/die_005.png',
+    './img/fish/PNG/blueJellyfish/die_006.png',
+    './img/fish/PNG/blueJellyfish/die_007.png',
+    './img/fish/PNG/blueJellyfish/die_008.png',
+    './img/fish/PNG/blueJellyfish/die_009.png',
+  ],
+
+  move: [
+    './img/fish/PNG/blueJellyfish/move_000.png',
+    './img/fish/PNG/blueJellyfish/move_001.png',
+    './img/fish/PNG/blueJellyfish/move_002.png',
+    './img/fish/PNG/blueJellyfish/move_003.png',
+    './img/fish/PNG/blueJellyfish/move_004.png',
+    './img/fish/PNG/blueJellyfish/move_005.png',
+    './img/fish/PNG/blueJellyfish/move_006.png',
+    './img/fish/PNG/blueJellyfish/move_007.png',
+    './img/fish/PNG/blueJellyfish/move_008.png',
+    './img/fish/PNG/blueJellyfish/move_009.png',
+  ],
+};
+
+const ironChainArrays = {
+  move: [
+    './img/game_items/PNG/chain/chain_000.png',
+    './img/game_items/PNG/chain/chain_001.png',
+    './img/game_items/PNG/chain/chain_002.png',
+    './img/game_items/PNG/chain/chain_003.png',
+    './img/game_items/PNG/chain/chain_004.png',
+    './img/game_items/PNG/chain/chain_005.png',
+    './img/game_items/PNG/chain/chain_006.png',
+    './img/game_items/PNG/chain/chain_007.png',
+    './img/game_items/PNG/chain/chain_008.png',
+    './img/game_items/PNG/chain/chain_009.png',
+    './img/game_items/PNG/chain/chain_010.png',
+    './img/game_items/PNG/chain/chain_011.png',
+    './img/game_items/PNG/chain/chain_012.png',
+  ],
+};
+
+const bombArrays = {
+  move: [
+    './img/game_items/PNG/bomb/move_000.png',
+    './img/game_items/PNG/bomb/move_001.png',
+    './img/game_items/PNG/bomb/move_002.png',
+    './img/game_items/PNG/bomb/move_003.png',
+    './img/game_items/PNG/bomb/move_004.png',
+    './img/game_items/PNG/bomb/move_005.png',
+    './img/game_items/PNG/bomb/move_006.png',
+    './img/game_items/PNG/bomb/move_007.png',
+    './img/game_items/PNG/bomb/move_008.png',
+    './img/game_items/PNG/bomb/move_009.png',
+    './img/game_items/PNG/bomb/move_010.png',
+    './img/game_items/PNG/bomb/move_011.png',
+    './img/game_items/PNG/bomb/move_012.png',
+    './img/game_items/PNG/bomb/move_013.png',
+    './img/game_items/PNG/bomb/move_014.png',
+    './img/game_items/PNG/bomb/move_015.png',
+    './img/game_items/PNG/bomb/move_016.png',
+    './img/game_items/PNG/bomb/move_017.png',
+    './img/game_items/PNG/bomb/move_018.png',
+    './img/game_items/PNG/bomb/move_019.png',
+    './img/game_items/PNG/bomb/move_020.png',
+    './img/game_items/PNG/bomb/move_021.png',
+    './img/game_items/PNG/bomb/move_022.png',
+    './img/game_items/PNG/bomb/move_023.png'
   ]
-}
+};
 
 const hammerheadArrays = {
   attack: [
@@ -305,7 +379,6 @@ const sharkArrays = {
     './img/fish/PNG/shark/attack_007.png',
     './img/fish/PNG/shark/attack_008.png',
     './img/fish/PNG/shark/attack_009.png',
-
   ],
 
   die: [
@@ -320,7 +393,7 @@ const sharkArrays = {
     './img/fish/PNG/shark/die_008.png',
     './img/fish/PNG/shark/die_009.png',
   ],
-  
+
   move: [
     './img/fish/PNG/shark/move_000.png',
     './img/fish/PNG/shark/move_001.png',

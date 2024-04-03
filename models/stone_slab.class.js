@@ -11,13 +11,13 @@ class StoneSlab extends ImmobileItem {
     this.img.onload = () => {
       let currentWidth = this.img.width > this.img.height ? 350 : 140;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
-      /* this.drawText(); */
+      this.drawText();
     };
   }
 
- /*  drawText() {
+  drawText() {
     if (this.world) {
-      this.world.ctx.font = `${this.textSize}px Arial`; // Schriftart und -größe festlegen
+      this.world.ctx.font = `700 ${this.textSize}px Josefin Slab`; // Schriftart und -größe festlegen
       this.world.ctx.fillStyle = this.textColor; // Textfarbe festlegen
       this.world.ctx.textAlign = 'center';
       this.world.ctx.fillText(
@@ -25,11 +25,6 @@ class StoneSlab extends ImmobileItem {
         this.x + this.width / 2,
         this.y + this.height / 2
       );
-      console.log('drawText-Methode');
     }
-  } */
-
-
-
-
+  }
 }

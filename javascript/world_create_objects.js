@@ -34,28 +34,16 @@ function createBackground(number) {
   return backgroundComponents;
 } */
 
-
-
-
 function createCharacter() {
   let speed = 5;
-  const character = new Character(
-    mermaidArrays.idle[0],
-    speed
-  );
+  const character = new Character(mermaidArrays.idle[0], speed);
   return character;
 }
-
-
 
 function createYellowCrab() {
   let id = 'yellow' + animalIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
-  let yellowCrab = new yellowCrabFish(
-    yellowCrabArrays.move[0],
-    speed,
-    id
-  );
+  let yellowCrab = new yellowCrabFish(yellowCrabArrays.move[0], speed, id);
   animalIDCounter++;
   return yellowCrab;
 }
@@ -63,11 +51,7 @@ function createYellowCrab() {
 function createRedCrab() {
   let id = 'red' + animalIDCounter;
   let speed = Math.random() * 0.8 + 0.3;
-  let redCrab = new redCrabFish(
-    redCrabArrays.idle[0],
-    speed,
-    id
-  );
+  let redCrab = new redCrabFish(redCrabArrays.idle[0], speed, id);
   animalIDCounter++;
   return redCrab;
 }
@@ -75,27 +59,38 @@ function createRedCrab() {
 function createBlowfishEnemies() {
   let id = 'blowfish' + animalIDCounter;
   let speed = Math.random() * 0.8 + 0.1;
-  let blowFish = new Blowfish(
-    blowfishArrays.move[0],
-    speed,
-    id
-  );
+  let blowFish = new Blowfish(blowfishArrays.move[0], speed, id);
   animalIDCounter++;
   return blowFish;
 }
 
-
-function createEndboss(imgPath) {
-  let speed = 5;
-  const endboss = new Endboss(
+function createObjectMovingUpAndDown(x_axis, y_axis, imgPath) {
+  let speed = 1 + Math.random() * 0.8 + 0.1;
+  const objectMovingUpAndDown = new ObjectMovingUpAndDown(
+    x_axis,
+    y_axis,
     imgPath,
     speed
   );
+  return objectMovingUpAndDown;
+}
+
+function createEndboss(imgPath) {
+  let speed = 5;
+  const endboss = new Endboss(imgPath, speed);
   return endboss;
 }
 
-function createGameItem(x_axis, y_axis, imgPath, landscapeWidth, portraitWidth) {
+function createGameItem(
+  name,
+  x_axis,
+  y_axis,
+  imgPath,
+  landscapeWidth,
+  portraitWidth
+) {
   const gameItem = new GameItem(
+    name,
     x_axis,
     y_axis,
     imgPath,
@@ -116,6 +111,17 @@ function createStoneSlab(x_axis, text, textSize, textColor) {
   return stoneSlab;
 }
 
+function createIronChain(x_axis, y_axis, landscapeWidth, portraitWidth, array) {
+  const ironChain = new MobileGameItem(
+    x_axis,
+    y_axis,
+    ironChainArrays.move[0],
+    landscapeWidth,
+    portraitWidth,
+    array
+  );
+  return ironChain;
+}
 
 function filterAndRemoveEnemies(enemiesArray) {
   let filteredEnemies = world.checkForCurrentEnemies(enemiesArray);
