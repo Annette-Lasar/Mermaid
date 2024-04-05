@@ -1,11 +1,14 @@
+console.log('Ich bin die game.js-Datei.');
 let keyboard = new Keyboard();
 function init() {
+  /* createAllAnimalsArrays(); */
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
   createButton(canvas);
 }
 
 window.addEventListener('keyup', (event) => {
+  console.log('Event: ', event);
   let keyboardEvent = event.code.toUpperCase();
   keyboard.setKeyStatus(keyboardEvent, false);
 });

@@ -1,3 +1,4 @@
+console.log('Ich bin die world.class-Datei.');
 class World {
   canvas;
   ctx;
@@ -47,134 +48,18 @@ class World {
   }
 
   createGameItems() {
-    this.gameItems.push(
-      createGameItem(
-        'chest_closed',
-        4800,
-        280,
-        './img/game_items/PNG/neutral/chest_closed.png',
-        250,
-        80
-      )
-    );
-    this.gameItems.push(
-      createGameItem(
-        'smashed_barrel',
-        50,
-        350,
-        './img/game_items/PNG/items/barrel_2.png',
-        200,
-        80
-      )
-    );
-    this.gameItems.push(
-      createGameItem(
-        'anchor',
-        1200,
-        200,
-        './img/game_items/PNG/items/anchor.png',
-        200,
-        200
-      )
-    );
-    this.gameItems.push(
-      createGameItem(
-        'steering_wheel',
-        1800,
-        200,
-        './img/game_items/PNG/items/steering-wheel.png',
-        200,
-        200
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'stalagtite',
-        970,
-        0,
-        './img/game_items/PNG/items/stone_4.png',
-        400, 
-        100
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'stalagtite',
-        905,
-        0,
-        './img/game_items/PNG/items/stone_4.png',
-        400, 
-        120
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'rock',
-        800,
-        80,
-        './img/game_items/PNG/items/stone_6.png',
-        400, 
-        150
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'flat_rock',
-        800,
-        350,
-        './img/game_items/PNG/items/stone_3.png',
-        300, 
-        150
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'stalagtite',
-        2900,
-        0,
-        './img/game_items/PNG/items/stone_4.png',
-        400, 
-        90
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'stalagmite',
-        2860,
-        260,
-        './img/game_items/PNG/items/stone_5.png',
-        400, 
-        140
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'stalagtite',
-        3700,
-        0,
-        './img/game_items/PNG/items/stone_4.png',
-        400, 
-        90
-      )
-    );
-
-    this.gameItems.push(
-      createGameItem(
-        'stalagmite',
-        3660,
-        260,
-        './img/game_items/PNG/items/stone_5.png',
-        400, 
-        140
-      )
-    );
+    this.gameItems.push(createGameItem('chest_closed', 4800, 280, './img/game_items/PNG/neutral/chest_closed.png', 250, 80));
+    this.gameItems.push(createGameItem('smashed_barrel', 50, 350, './img/game_items/PNG/items/barrel_2.png', 200, 80));
+    this.gameItems.push(createGameItem('anchor', 1200, 200, './img/game_items/PNG/items/anchor.png', 200, 200));
+    this.gameItems.push(createGameItem('steering_wheel', 1800, 200, './img/game_items/PNG/items/steering-wheel.png', 200, 200));
+    this.gameItems.push(createGameItem('stalagtite', 970, 0, './img/game_items/PNG/items/stone_4.png', 400, 100));
+    this.gameItems.push(createGameItem('stalagtite', 905, 0, './img/game_items/PNG/items/stone_4.png', 400, 120));
+    this.gameItems.push(createGameItem('rock', 800, 80, './img/game_items/PNG/items/stone_6.png', 400, 150));
+    this.gameItems.push(createGameItem('flat_rock', 800, 350, './img/game_items/PNG/items/stone_3.png', 300, 150));
+    this.gameItems.push(createGameItem('stalagtite', 2900, 0, './img/game_items/PNG/items/stone_4.png', 400, 90));
+    this.gameItems.push(createGameItem('stalagmite', 2860, 260, './img/game_items/PNG/items/stone_5.png', 400, 140));
+    this.gameItems.push(createGameItem('stalagtite', 3700, 0, './img/game_items/PNG/items/stone_4.png', 400, 90));
+    this.gameItems.push(createGameItem('stalagmite', 3660, 260, './img/game_items/PNG/items/stone_5.png', 400, 140));
   }
 
   spawnCrabEnemies() {
@@ -197,7 +82,7 @@ class World {
   spawnBlowfishEnemies() {
     this.blowfishEnemies.push(createBlowfishEnemies());
 
-    const timeout = 4000 + Math.random() * 10000;
+    const timeout = 3000 + Math.random() * 1000;
     setTimeout(this.spawnBlowfishEnemies.bind(this), timeout);
   }
 
@@ -234,6 +119,9 @@ class World {
 
   addObjectsToCanvas(objects) {
     objects.forEach((o) => {
+      if (objects == this.level.lionfishEnemies && this.otherDirection == true) {
+        debugger;
+      }
       this.drawOnCanvas(o);
     });
   }
@@ -262,6 +150,7 @@ class World {
         this.crabEnemies,
         this.level.decorativeMovingItems,
         this.level.objectsMovingUpAndDown,
+        this.level.lionfishEnemies
       ];
       return nestedArrays;
     } else {

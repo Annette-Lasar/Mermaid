@@ -1,3 +1,4 @@
+console.log('Ich bin die character.class-Datei.');
 class Character extends MovableObject {
   world;
   swimming_sound = new Audio('audio/underwater_movement_02.mp3');
@@ -5,7 +6,7 @@ class Character extends MovableObject {
   constructor(imgPath, speed) {
     super();
     super.loadImage(imgPath);
-    this.x = 700;
+    this.x = 2975;
     this.y = 200;
     this.speed = speed;
     this.img.onload = () => {
@@ -33,23 +34,20 @@ class Character extends MovableObject {
   animateMoves(array) {
     setInterval(() => {
       this.swimming_sound.pause();
-      if (
-        this.world.keyboard.ARROWRIGHT &&
-        this.x < this.world.level.level_end_x
-      ) {
-        this.x += this.speed;
-        this.otherDirection = false;
-        this.swimming_sound.play();
-        let currentWidth = this.img.width > this.img.height ? 150 : 80;
-        this.setDimensions(currentWidth, this.img.width, this.img.height);
+      if (this.keyArrowRightIsPressed()) {
+        this.moveRight();
       }
 
-      if (this.world.keyboard.ARROWLEFT && this.x > -853) {
-        this.x -= this.speed;
-        this.otherDirection = true;
-        this.swimming_sound.play();
-        let currentWidth = this.img.width > this.img.height ? 150 : 80;
-        this.setDimensions(currentWidth, this.img.width, this.img.height);
+      if (this.keyArrowLeftIsPressed()) {
+        this.moveLeft();
+      }
+
+      if (this.keyArrowUpIsPressed()) {
+        this.moveUp();
+      }
+
+      if (this.keyArrowDownIsPressed()) {
+        this.moveDown();
       }
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
@@ -63,10 +61,50 @@ class Character extends MovableObject {
     }, 50);
   }
 
+  keyArrowRightIsPressed() {
+    return (
+      this.world.keyboard.ARROWRIGHT && this.x < this.world.level.level_end_x
+    );
+  }
+
+  keyArrowLeftIsPressed() {
+    return this.world.keyboard.ARROWLEFT && this.x > -853;
+  }
+
+  keyArrowUpIsPressed() {
+    return this.world.keyboard.ARROWUP && this.y > 0;
+  }
+
+  keyArrowDownIsPressed() {
+    return this.world.keyboard.ARROWDOWN && this.y < 375;
+  }
+
+  moveRight() {
+    this.x += this.speed;
+    this.otherDirection = false;
+    this.swimming_sound.play();
+    let currentWidth = this.img.width > this.img.height ? 150 : 80;
+    this.setDimensions(currentWidth, this.img.width, this.img.height);
+  }
+
+  moveLeft() {
+    this.x -= this.speed;
+    this.otherDirection = true;
+    this.swimming_sound.play();
+    let currentWidth = this.img.width > this.img.height ? 150 : 80;
+    this.setDimensions(currentWidth, this.img.width, this.img.height);
+  }
+
   moveUp() {
-    console.log('Moving up');
+    this.y -= this.speed;
+    this.swimming_sound.play();
+    let currentWidth = this.img.width > this.img.height ? 150 : 80;
+    this.setDimensions(currentWidth, this.img.width, this.img.height);
   }
   moveDown() {
-    console.log('Moving down');
+    this.y += this.speed;
+    this.swimming_sound.play();
+    let currentWidth = this.img.width > this.img.height ? 150 : 80;
+    this.setDimensions(currentWidth, this.img.width, this.img.height);
   }
 }

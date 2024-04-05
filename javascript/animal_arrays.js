@@ -1,3 +1,4 @@
+console.log('Ich bin die animal_arrays.js-Datei.');
 const mermaidArrays = {
   acceleration: [
     `./img/mermaid/PNG/mermaid_${mermaidType}/acceleration_000.png`,

@@ -1,3 +1,4 @@
+console.log('Ich bin die background.class-Datei.');
 class Background extends MovableObject {
   constructor(imgPath, x) {
     super();
