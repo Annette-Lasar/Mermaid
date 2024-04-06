@@ -1,4 +1,3 @@
-console.log('Ich bin die character.class-Datei.');
 class Character extends MovableObject {
   world;
   swimming_sound = new Audio('audio/underwater_movement_02.mp3');

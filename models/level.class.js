@@ -3,6 +3,7 @@ class Level {
   verticallyMovingObjects;
   backgrounds = [];
   lionfishEnemies = [];
+  gameItems = [];
   decorativeMovingItems = [];
   endboss;
   objectsMovingUpAndDown = [];
@@ -11,13 +12,16 @@ class Level {
   constructor(
     backgroundNumber,
     verticallyMovingObjects,
-    numLionfishEnemiesToCreate
+    numLionfishEnemiesToCreate,
+    gameItemsData
   ) {
     this.backgroundNumber = backgroundNumber;
     this.verticallyMovingObjects = verticallyMovingObjects;
     this.numLionfishEnemiesToCreate = numLionfishEnemiesToCreate;
     this.backgrounds = createBackground(backgroundNumber);
     this.generateLionfishEnemies(numLionfishEnemiesToCreate);
+    this.gameItemsData = gameItemsData;
+    this.createGameItems();
     this.createMobileItems();
     this.endboss = createEndboss(lionfishArrays.move[0]);
     this.createObjectsMovingUpAndDown();
@@ -38,6 +42,21 @@ class Level {
     );
   }
 
+  createGameItems() {
+    this.gameItemsData.forEach((item) =>
+      this.gameItems.push(
+        createGameItem(
+          item.name,
+          item.x,
+          item.y,
+          item.src,
+          item.width,
+          item.height
+        )
+      )
+    );
+  }
+
   createMobileItems() {
     this.decorativeMovingItems.push(
       createIronChain(450, -50, 500, 200, ironChainArrays.move)
@@ -51,10 +70,10 @@ class Level {
   }
 
   generateLionfishEnemies(numLionfishEnemiesToCreate) {
-    let y_axis = 10; 
+    let y_axis = 10;
     for (let i = 0; i < numLionfishEnemiesToCreate; i++) {
       this.lionfishEnemies.push(createLionfishEnemies(y_axis));
-      y_axis += 90; 
+      y_axis += 90;
     }
   }
 }
