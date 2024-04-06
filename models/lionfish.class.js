@@ -21,7 +21,6 @@ class Lionfish extends Fish {
     setInterval(() => {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
-      //   this.x -= this.speed;
       this.playAnimation(array);
     }, 1000 / 10);
   }
@@ -36,13 +35,15 @@ class Lionfish extends Fish {
       }
     } else {
       if (this.x < minX) {
-        this.otherDirection = true;
         this.speed *= -1;
+        this.otherDirection = true;
       }
     }
+    this.moveHorizontally();
+  }
 
+  moveHorizontally() {
     this.x += this.speed;
-
     setTimeout(() => {
       this.moveToAndFro();
     }, 1000 / 60);

@@ -6,7 +6,8 @@ class Character extends MovableObject {
   constructor(imgPath, speed) {
     super();
     super.loadImage(imgPath);
-    this.x = 2975;
+    this.x = 4015;
+    // this.x = 20;
     this.y = 200;
     this.speed = speed;
     this.img.onload = () => {

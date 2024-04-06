@@ -8,7 +8,6 @@ function init() {
 }
 
 window.addEventListener('keyup', (event) => {
-  console.log('Event: ', event);
   let keyboardEvent = event.code.toUpperCase();
   keyboard.setKeyStatus(keyboardEvent, false);
 });

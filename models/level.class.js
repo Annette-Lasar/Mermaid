@@ -17,7 +17,7 @@ class Level {
     this.verticallyMovingObjects = verticallyMovingObjects;
     this.numLionfishEnemiesToCreate = numLionfishEnemiesToCreate;
     this.backgrounds = createBackground(backgroundNumber);
-    this.spawnLionfishEnemies(numLionfishEnemiesToCreate);
+    this.generateLionfishEnemies(numLionfishEnemiesToCreate);
     this.createMobileItems();
     this.endboss = createEndboss(lionfishArrays.move[0]);
     this.createObjectsMovingUpAndDown();
@@ -50,25 +50,11 @@ class Level {
     );
   }
 
-  /*  spawnLionfishEnemies() {
-    this.lionfishEnemies.push(createLionfishEnemies());
-    const timeout = 2000 + Math.random() * 1000;
-    setTimeout(this.spawnLionfishEnemies.bind(this), timeout);
-  } */
-
-  /*  spawnLionfishEnemies(numLionfishEnemiesToCreate) {
-    for (let i = 0; i < numLionfishEnemiesToCreate; i++) {
-      let y_axis = 10;
-      this.lionfishEnemies.push(createLionfishEnemies(y_axis));
-      y_axis += 90;
-    }
-  } */
-
-  spawnLionfishEnemies(numLionfishEnemiesToCreate) {
-    let y_axis = 10; // Initialwert für den y-Wert des ersten Feuerfischs
+  generateLionfishEnemies(numLionfishEnemiesToCreate) {
+    let y_axis = 10; 
     for (let i = 0; i < numLionfishEnemiesToCreate; i++) {
       this.lionfishEnemies.push(createLionfishEnemies(y_axis));
-      y_axis += 90; // Erhöhe den y-Wert für den nächsten Feuerfisch um 90
+      y_axis += 90; 
     }
   }
 }

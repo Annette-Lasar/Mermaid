@@ -30,6 +30,7 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.level.endboss.world = this;
     this.stoneSlabs.forEach((stoneSlab) => {
       stoneSlab.world = this;
     });
