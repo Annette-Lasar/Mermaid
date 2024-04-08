@@ -1,5 +1,5 @@
 class MobileGameItem extends MovableObject {
-  constructor(x_axis, y_axis, imgPath, landscapeWidth, portraitWidth, array) {
+  constructor(x_axis, y_axis, imgPath, landscapeWidth, portraitWidth, array, timeout) {
     super();
     super.loadImage(imgPath);
     this.x = x_axis;
@@ -7,6 +7,7 @@ class MobileGameItem extends MovableObject {
     this.array = array;
     this.landscapeWidth = landscapeWidth;
     this.portraitWidth = portraitWidth;
+    this.timeout = timeout;
     this.img.onload = () => {
       let currentWidth =
         this.img.width > this.img.height
@@ -26,6 +27,6 @@ class MobileGameItem extends MovableObject {
           : this.portraitWidth;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
       this.playAnimation(array);
-    }, 200);
+    }, this.timeout);
   }
 }

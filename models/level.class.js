@@ -4,6 +4,7 @@ class Level {
   backgrounds = [];
   lionfishEnemies = [];
   gameItems = [];
+  valuableItems = [];
   decorativeMovingItems = [];
   endboss;
   objectsMovingUpAndDown = [];
@@ -13,7 +14,9 @@ class Level {
     backgroundNumber,
     verticallyMovingObjects,
     numLionfishEnemiesToCreate,
-    gameItemsData
+    gameItemsData,
+    mobileItemsData,
+    valuableItemsData
   ) {
     this.backgroundNumber = backgroundNumber;
     this.verticallyMovingObjects = verticallyMovingObjects;
@@ -21,8 +24,14 @@ class Level {
     this.backgrounds = createBackground(backgroundNumber);
     this.generateLionfishEnemies(numLionfishEnemiesToCreate);
     this.gameItemsData = gameItemsData;
+    this.mobileItemsData = mobileItemsData;
+    this.valuableItemsData = valuableItemsData;
     this.createGameItems();
-    this.createMobileItems();
+    this.createGoldenKey();
+    this.generateStarfishSpecimen();
+    this.createPearlItem();
+    this.createIronChains();
+    this.createBombs();
     this.endboss = createEndboss(lionfishArrays.move[0]);
     this.createObjectsMovingUpAndDown();
   }
@@ -57,16 +66,96 @@ class Level {
     );
   }
 
-  createMobileItems() {
-    this.decorativeMovingItems.push(
-      createIronChain(450, -50, 500, 200, ironChainArrays.move)
+  createGoldenKey() {
+    let speed = 0.6;
+    this.valuableItems.push(
+      createValuableItem(
+        this.valuableItemsData.golden_key.name,
+        this.valuableItemsData.golden_key.x,
+        this.valuableItemsData.golden_key.y,
+        this.valuableItemsData.golden_key.src,
+        this.valuableItemsData.golden_key.width,
+        this.valuableItemsData.golden_key.height,
+        speed
+      )
     );
-    this.decorativeMovingItems.push(
-      createIronChain(1200, -50, 500, 200, ironChainArrays.move)
-    );
-    this.decorativeMovingItems.push(
-      createIronChain(180, 180, 80, 80, bombArrays.move)
-    );
+  }
+
+  generateStarfishSpecimen() {
+    for (let i = 0; i < 20; i++) {
+      let randomRangeX = Math.random() * 5800 - 800;
+      let randomRangeY = Math.random() * 450;
+      let randomSpeed = 0.3 + Math.random() * 0.5;
+
+      this.valuableItems.push(
+        createValuableItem(
+          this.valuableItemsData.yellow_starfish.name,
+          randomRangeX,
+          randomRangeY,
+          this.valuableItemsData.yellow_starfish.src,
+          this.valuableItemsData.yellow_starfish.width,
+          this.valuableItemsData.yellow_starfish.height,
+          randomSpeed
+        )
+      );
+    }
+  }
+
+  createPearlItem() {
+    for (let i = 0; i < 10; i++) {
+      let randomRangeX = Math.random() * 5800 - 800;
+      let randomRangeY = Math.random() * 450;
+      let randomSpeed = 0.3 + Math.random() * 0.5;
+
+      this.valuableItems.push(
+        createValuableItem(
+          this.valuableItemsData.pearl_in_a_shell.name,
+          randomRangeX,
+          randomRangeY,
+          this.valuableItemsData.pearl_in_a_shell.src,
+          this.valuableItemsData.pearl_in_a_shell.width,
+          this.valuableItemsData.pearl_in_a_shell.height,
+          randomSpeed
+        )
+      );
+    }
+  }
+
+  createIronChains() {
+    let x_axis = 450;
+    for (let i = 0; i < 2; i++) {
+      let timeout = 100 + Math.random() * 100;
+      this.decorativeMovingItems.push(
+        createDecorativeMovingItem(
+          x_axis,
+          this.mobileItemsData.ironChain.y,
+          this.mobileItemsData.ironChain.src,
+          this.mobileItemsData.ironChain.landscape_width,
+          this.mobileItemsData.ironChain.portrait_width,
+          this.mobileItemsData.ironChain.array,
+          timeout
+        )
+      );
+      x_axis += 750;
+    }
+  }
+
+  createBombs() {
+    for (let i = 0; i < 8; i++) {
+      let randomRangeX = Math.random() * 5800 - 800;
+      let randomRangeY = Math.random() * 450;
+      this.decorativeMovingItems.push(
+        createDecorativeMovingItem(
+          randomRangeX,
+          randomRangeY,
+          this.mobileItemsData.dangerousBomb.src,
+          this.mobileItemsData.dangerousBomb.landscape_width,
+          this.mobileItemsData.dangerousBomb.portrait_width,
+          this.mobileItemsData.dangerousBomb.array,
+          200
+        )
+      );
+    }
   }
 
   generateLionfishEnemies(numLionfishEnemiesToCreate) {

@@ -1,5 +1,3 @@
-console.log('Ich bin die world_create_objects-Datei!');
-
 function createBackground(number) {
   let x_axis = 852;
   const backgroundComponents = [];
@@ -16,16 +14,12 @@ function createBackground(number) {
   return backgroundComponents;
 }
 
-
-
 function createCharacter() {
   let speed = 5;
   const character = new Character(mermaidArrays.idle[0], speed);
   /* await character.loadImage(mermaidArrays.idle[0]); */
   return character;
 }
-
-
 
 function createYellowCrab() {
   let id = 'yellow' + animalIDCounter;
@@ -101,6 +95,28 @@ function createGameItem(
   return gameItem;
 }
 
+function createValuableItem(
+  name,
+  x_axis,
+  y_axis,
+  imgPath,
+  landscapeWidth,
+  portraitWidth,
+  speed
+) {
+  const valuableItem = new ValuableGameItem(
+    name,
+    x_axis,
+    y_axis,
+    imgPath,
+    landscapeWidth,
+    portraitWidth,
+    speed
+  );
+  /* await valuableItem.loadImage(imgPath); */
+  return valuableItem;
+}
+
 function createStoneSlab(x_axis, text, textSize, textColor) {
   const stoneSlab = new StoneSlab(
     './img/game_ui/PNG/menu/window.png',
@@ -113,14 +129,23 @@ function createStoneSlab(x_axis, text, textSize, textColor) {
   return stoneSlab;
 }
 
-function createIronChain(x_axis, y_axis, landscapeWidth, portraitWidth, array) {
+function createDecorativeMovingItem(
+  x_axis,
+  y_axis,
+  imgPath,
+  landscapeWidth,
+  portraitWidth,
+  array,
+  timeout
+) {
   const ironChain = new MobileGameItem(
     x_axis,
     y_axis,
-    ironChainArrays.move[0],
+    imgPath,
     landscapeWidth,
     portraitWidth,
-    array
+    array,
+    timeout
   );
   /* await ironChain.loadImage(ironChainArrays.move[0]); */
   return ironChain;
@@ -136,4 +161,3 @@ function filterAndRemoveEnemies(enemiesArray) {
     enemiesArray.splice(enemyIndex, 1);
   });
 }
-

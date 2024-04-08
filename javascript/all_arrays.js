@@ -1,4 +1,3 @@
-console.log('Ich bin die animal_arrays.js-Datei.');
 const mermaidArrays = {
   acceleration: [
     `./img/mermaid/PNG/mermaid_${mermaidType}/acceleration_000.png`,
@@ -280,53 +279,6 @@ const blueJellyfishArrays = {
   ],
 };
 
-const ironChainArrays = {
-  move: [
-    './img/game_items/PNG/chain/chain_000.png',
-    './img/game_items/PNG/chain/chain_001.png',
-    './img/game_items/PNG/chain/chain_002.png',
-    './img/game_items/PNG/chain/chain_003.png',
-    './img/game_items/PNG/chain/chain_004.png',
-    './img/game_items/PNG/chain/chain_005.png',
-    './img/game_items/PNG/chain/chain_006.png',
-    './img/game_items/PNG/chain/chain_007.png',
-    './img/game_items/PNG/chain/chain_008.png',
-    './img/game_items/PNG/chain/chain_009.png',
-    './img/game_items/PNG/chain/chain_010.png',
-    './img/game_items/PNG/chain/chain_011.png',
-    './img/game_items/PNG/chain/chain_012.png',
-  ],
-};
-
-const bombArrays = {
-  move: [
-    './img/game_items/PNG/bomb/move_000.png',
-    './img/game_items/PNG/bomb/move_001.png',
-    './img/game_items/PNG/bomb/move_002.png',
-    './img/game_items/PNG/bomb/move_003.png',
-    './img/game_items/PNG/bomb/move_004.png',
-    './img/game_items/PNG/bomb/move_005.png',
-    './img/game_items/PNG/bomb/move_006.png',
-    './img/game_items/PNG/bomb/move_007.png',
-    './img/game_items/PNG/bomb/move_008.png',
-    './img/game_items/PNG/bomb/move_009.png',
-    './img/game_items/PNG/bomb/move_010.png',
-    './img/game_items/PNG/bomb/move_011.png',
-    './img/game_items/PNG/bomb/move_012.png',
-    './img/game_items/PNG/bomb/move_013.png',
-    './img/game_items/PNG/bomb/move_014.png',
-    './img/game_items/PNG/bomb/move_015.png',
-    './img/game_items/PNG/bomb/move_016.png',
-    './img/game_items/PNG/bomb/move_017.png',
-    './img/game_items/PNG/bomb/move_018.png',
-    './img/game_items/PNG/bomb/move_019.png',
-    './img/game_items/PNG/bomb/move_020.png',
-    './img/game_items/PNG/bomb/move_021.png',
-    './img/game_items/PNG/bomb/move_022.png',
-    './img/game_items/PNG/bomb/move_023.png'
-  ]
-};
-
 const hammerheadArrays = {
   attack: [
     './img/fish/PNG/hammerhead/attack_000.png',
@@ -407,4 +359,204 @@ const sharkArrays = {
     './img/fish/PNG/shark/move_008.png',
     './img/fish/PNG/shark/move_009.png',
   ],
+};
+
+/**
+ * arrays for movable items
+ */
+
+const ironChainArrays = {
+  move: [
+    './img/game_items/PNG/chain/chain_000.png',
+    './img/game_items/PNG/chain/chain_001.png',
+    './img/game_items/PNG/chain/chain_002.png',
+    './img/game_items/PNG/chain/chain_003.png',
+    './img/game_items/PNG/chain/chain_004.png',
+    './img/game_items/PNG/chain/chain_005.png',
+    './img/game_items/PNG/chain/chain_006.png',
+    './img/game_items/PNG/chain/chain_007.png',
+    './img/game_items/PNG/chain/chain_008.png',
+    './img/game_items/PNG/chain/chain_009.png',
+    './img/game_items/PNG/chain/chain_010.png',
+    './img/game_items/PNG/chain/chain_011.png',
+    './img/game_items/PNG/chain/chain_012.png',
+  ],
+};
+
+const bombArrays = {
+  move: [
+    './img/game_items/PNG/bomb/move_000.png',
+    './img/game_items/PNG/bomb/move_001.png',
+    './img/game_items/PNG/bomb/move_002.png',
+    './img/game_items/PNG/bomb/move_003.png',
+    './img/game_items/PNG/bomb/move_004.png',
+    './img/game_items/PNG/bomb/move_005.png',
+    './img/game_items/PNG/bomb/move_006.png',
+    './img/game_items/PNG/bomb/move_007.png',
+    './img/game_items/PNG/bomb/move_008.png',
+    './img/game_items/PNG/bomb/move_009.png',
+    './img/game_items/PNG/bomb/move_010.png',
+    './img/game_items/PNG/bomb/move_011.png',
+    './img/game_items/PNG/bomb/move_012.png',
+    './img/game_items/PNG/bomb/move_013.png',
+    './img/game_items/PNG/bomb/move_014.png',
+    './img/game_items/PNG/bomb/move_015.png',
+    './img/game_items/PNG/bomb/move_016.png',
+    './img/game_items/PNG/bomb/move_017.png',
+    './img/game_items/PNG/bomb/move_018.png',
+    './img/game_items/PNG/bomb/move_019.png',
+    './img/game_items/PNG/bomb/move_020.png',
+    './img/game_items/PNG/bomb/move_021.png',
+    './img/game_items/PNG/bomb/move_022.png',
+    './img/game_items/PNG/bomb/move_023.png',
+  ],
+};
+
+const gameItemArrays = [
+  {
+    name: 'chest_closed',
+    x: 4800,
+    y: 280,
+    src: './img/game_items/PNG/neutral/chest_closed.png',
+    width: 250,
+    height: 80,
+  },
+  {
+    name: 'smashed_barrel',
+    x: 50,
+    y: 350,
+    src: './img/game_items/PNG/items/barrel_2.png',
+    width: 200,
+    height: 80,
+  },
+  {
+    name: 'anchor',
+    x: 1200,
+    y: 200,
+    src: './img/game_items/PNG/items/anchor.png',
+    width: 200,
+    height: 200,
+  },
+  {
+    name: 'steering_wheel',
+    x: 1800,
+    y: 200,
+    src: './img/game_items/PNG/items/steering-wheel.png',
+    width: 200,
+    height: 200,
+  },
+  {
+    name: 'stalagtite',
+    x: 970,
+    y: 0,
+    src: './img/game_items/PNG/items/stone_4.png',
+    width: 400,
+    height: 100,
+  },
+  {
+    name: 'stalagtite',
+    x: 905,
+    y: 0,
+    src: './img/game_items/PNG/items/stone_4.png',
+    width: 400,
+    height: 120,
+  },
+  {
+    name: 'rock',
+    x: 800,
+    y: 80,
+    src: './img/game_items/PNG/items/stone_6.png',
+    width: 400,
+    height: 150,
+  },
+  {
+    name: 'flat_rock',
+    x: 800,
+    y: 350,
+    src: './img/game_items/PNG/items/stone_3.png',
+    width: 300,
+    height: 150,
+  },
+  {
+    name: 'stalagtite',
+    x: 2900,
+    y: 0,
+    src: './img/game_items/PNG/items/stone_4.png',
+    width: 400,
+    height: 90,
+  },
+  {
+    name: 'stalagmite',
+    x: 2860,
+    y: 260,
+    src: './img/game_items/PNG/items/stone_5.png',
+    width: 400,
+    height: 140,
+  },
+  {
+    name: 'stalagtite',
+    x: 3700,
+    y: 0,
+    src: './img/game_items/PNG/items/stone_4.png',
+    width: 400,
+    height: 90,
+  },
+  {
+    name: 'stalagmite',
+    x: 3660,
+    y: 260,
+    src: './img/game_items/PNG/items/stone_5.png',
+    width: 400,
+    height: 140,
+  },
+];
+
+const mobileItems = {
+  ironChain: {
+    name: 'chain',
+    x: 450,
+    y: -50,
+    src: 'img/game_items/PNG/chain/chain_000.png',
+    landscape_width: 500,
+    portrait_width: 200,
+    array: ironChainArrays.move,
+  },
+  dangerousBomb: {
+    name: 'bomb',
+    x: 180,
+    y: 180,
+    src: './img/game_items/PNG/bomb/move_000.png',
+    landscape_width: 80,
+    portrait_width: 80,
+    array: bombArrays.move,
+  },
+};
+
+const valuableItems = {
+  golden_key: {
+    name: 'key',
+    x: randomRangeX,
+    y: randomRangeY,
+    src: './img/game_items/PNG/items/key.png',
+    width: 20,
+    height: 50,
+  },
+
+  yellow_starfish: {
+    name: 'starfish',
+    x: randomRangeX,
+    y: randomRangeY,
+    src: './img/game_items/PNG/items/starfish.png',
+    width: 50,
+    height: 80,
+  },
+
+  pearl_in_a_shell: {
+    name: 'pearl',
+    x: randomRangeX,
+    y: randomRangeY,
+    src: './img/game_items/PNG/bonus/pearl.png',
+    width: 50,
+    height: 80,
+  },
 };

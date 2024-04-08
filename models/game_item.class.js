@@ -1,5 +1,5 @@
 class GameItem extends ImmobileItem {
-  /* world; */
+  world;
   constructor(name, x_axis, y_axis, imgPath, landscapeWidth, portraitWidth) {
     super(imgPath);
     this.name = name;
@@ -20,7 +20,7 @@ class GameItem extends ImmobileItem {
   rotateObject() {
     if (this.world) {
       this.world.ctx.save(); // Speichern des aktuellen Canvas-Kontexts
-      if (this.name === 'smashed_barrel') {
+      if (this.name === 'anchor') {
         this.world.ctx.translate(this.x, this.y); // Position des Bildes festlegen
         this.world.ctx.rotate((Math.PI / 180) * 90); // Rotation um 90 Grad im Bogenmaß
         this.world.ctx.drawImage(this.img, 0, 0, this.width, this.height); // Zeichnen des Bildes

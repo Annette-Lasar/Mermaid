@@ -14,15 +14,6 @@ class MovableObject {
     this.height = 0;
   }
 
-/*   applyGravity() {
-    setInterval(() => {
-      if (this.y < 350) {
-        this.y -= this.speedY;
-        this.speedY -= this.acceleration;
-      }
-    }, 1000 / 25);
-  } */
-
   setDimensions(width, originalWidth, originalHeight) {
     this.width = width;
     this.height = this.width * (originalHeight / originalWidth);
@@ -47,12 +38,4 @@ class MovableObject {
     this.img = this.imageCache[path];
     this.currentImage++;
   }
-
-  moveRight() {
-    console.log('Moving right');
-  }
-
-  /*  moveLeft() {
-    console.log('Moving left');
-  } */
 }

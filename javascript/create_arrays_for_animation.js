@@ -1,4 +1,3 @@
-console.log('Ich bin die create_arrays_for_animation.js-Datei.');
 const animalArrays = new AnimalArrays();
 function createAllAnimalsArrays() {
   allAnimals.forEach((animal) => {

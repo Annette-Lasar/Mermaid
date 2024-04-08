@@ -1,4 +1,3 @@
-console.log('Ich bin die blowfish.class-Datei.');
 class Blowfish extends Fish {
   id = '';
   constructor(imgPath, speed, id) {

@@ -1,20 +1,21 @@
 class Character extends MovableObject {
   world;
   swimming_sound = new Audio('audio/underwater_movement_02.mp3');
+  bubbles = [];
 
   constructor(imgPath, speed) {
     super();
     super.loadImage(imgPath);
-    this.x = 4015;
-    // this.x = 20;
+    // this.x = 4015;
+    this.currentX = this.x;
     this.y = 200;
     this.speed = speed;
+    this.bubbleSpeed = this.speed + 2;
     this.img.onload = () => {
       let currentWidth = this.img.width > this.img.height ? 150 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
 
-    /* this.applyGravity(); */
     this.loadImagesMoves(mermaidArrays.idle);
     this.animateIdle(mermaidArrays.idle);
     this.loadImagesMoves(mermaidArrays.move);
@@ -49,6 +50,10 @@ class Character extends MovableObject {
       if (this.keyArrowDownIsPressed()) {
         this.moveDown();
       }
+
+      /* if (this.keySpaceIsPressed()) {
+        this.shoot();
+      } */
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
 
@@ -79,6 +84,10 @@ class Character extends MovableObject {
     return this.world.keyboard.ARROWDOWN && this.y < 375;
   }
 
+  keySpaceIsPressed() {
+    return this.world.keyboard.SPACE;
+  }
+
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;
@@ -106,5 +115,32 @@ class Character extends MovableObject {
     this.swimming_sound.play();
     let currentWidth = this.img.width > this.img.height ? 150 : 80;
     this.setDimensions(currentWidth, this.img.width, this.img.height);
+  }
+
+  shoot() {
+    this.generateDangerousBubbles();
+    this.moveBubbles();
+  }
+
+
+  generateDangerousBubbles() {
+    let src = './img/game_items/PNG/neutral/bubble_1.png';
+    for (let i = 0; i < 3; i++) {
+      let bubble = createGameItem('bubble', this.x, this.y, src, 30, 30);
+      this.bubbles.push(bubble);
+    }
+  }
+
+  moveBubbles() {
+    setInterval(() => {
+      this.bubbles.forEach((bubble) => {
+        bubble.moveBubble(this.bubbleSpeed);
+      });
+    }, 1000 / 60); // Ändere die Zeitintervalle nach Bedarf
+  }
+
+  moveBubble(speed) {
+    this.x += speed;
+    this.y -= speed;
   }
 }

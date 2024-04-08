@@ -1,4 +1,3 @@
-console.log('Ich bin die game.js-Datei.');
 let keyboard = new Keyboard();
 function init() {
   /* createAllAnimalsArrays(); */

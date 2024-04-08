@@ -1,4 +1,3 @@
-console.log('Ich bin die world.class-Datei.');
 class World {
   canvas;
   ctx;
@@ -15,7 +14,6 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.character = createCharacter();
-    
     this.createStoneSlabs();
     this.spawnCrabEnemies();
     this.spawnBlowfishEnemies();
@@ -132,11 +130,13 @@ class World {
         this.level.backgrounds,
         this.blowfishEnemies,
         this.level.gameItems,
+        this.level.valuableItems,
         this.stoneSlabs,
         this.crabEnemies,
         this.level.decorativeMovingItems,
         this.level.objectsMovingUpAndDown,
-        this.level.lionfishEnemies
+        this.level.lionfishEnemies,
+        this.character.bubbles
       ];
       return nestedArrays;
     } else {
