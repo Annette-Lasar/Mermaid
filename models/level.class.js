@@ -1,8 +1,11 @@
 class Level {
+  world;
   backgroundNumber;
   verticallyMovingObjects;
   backgrounds = [];
+  blowfishEnemies = [];
   lionfishEnemies = [];
+  crabEnemies = [];
   gameItems = [];
   valuableItems = [];
   decorativeMovingItems = [];
@@ -26,6 +29,8 @@ class Level {
     this.gameItemsData = gameItemsData;
     this.mobileItemsData = mobileItemsData;
     this.valuableItemsData = valuableItemsData;
+    this.spawnBlowfishEnemies();
+    this.spawnCrabEnemies();
     this.createGameItems();
     this.createGoldenKey();
     this.generateStarfishSpecimen();
@@ -49,6 +54,30 @@ class Level {
     this.objectsMovingUpAndDown.push(
       createObjectMovingUpAndDown(2500, 80, this.verticallyMovingObjects)
     );
+  }
+
+  spawnBlowfishEnemies() {
+    this.blowfishEnemies.push(createBlowfishEnemies());
+
+    const timeout = 3000 + Math.random() * 1000;
+    setTimeout(this.spawnBlowfishEnemies.bind(this), timeout);
+  }
+
+  spawnCrabEnemies() {
+    let random = Math.floor(Math.random() * 2);
+    let timeout = 0;
+    if (random == 0) {
+      this.crabEnemies.push(createYellowCrab());
+    } else {
+      this.crabEnemies.push(createRedCrab());
+    }
+    if (!this.spawnFirst) {
+      timeout = 0;
+      this.spawnFirst = true;
+    } else {
+      timeout = 2000 + Math.random() * 2000;
+    }
+    setTimeout(this.spawnCrabEnemies.bind(this), timeout);
   }
 
   createGameItems() {
@@ -122,11 +151,12 @@ class Level {
   }
 
   createIronChains() {
-    let x_axis = 450;
+    let x_axis = 600;
     for (let i = 0; i < 2; i++) {
       let timeout = 100 + Math.random() * 100;
       this.decorativeMovingItems.push(
         createDecorativeMovingItem(
+          this.mobileItemsData.ironChain.name,
           x_axis,
           this.mobileItemsData.ironChain.y,
           this.mobileItemsData.ironChain.src,
@@ -146,6 +176,7 @@ class Level {
       let randomRangeY = Math.random() * 450;
       this.decorativeMovingItems.push(
         createDecorativeMovingItem(
+          this.mobileItemsData.dangerousBomb.name,
           randomRangeX,
           randomRangeY,
           this.mobileItemsData.dangerousBomb.src,

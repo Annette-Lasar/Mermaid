@@ -1,5 +1,6 @@
 class ValuableGameItem extends MovableObject {
-    constructor(
+  world;  
+  constructor(
       name,
       x_axis,
       y_axis,

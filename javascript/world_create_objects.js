@@ -130,6 +130,7 @@ function createStoneSlab(x_axis, text, textSize, textColor) {
 }
 
 function createDecorativeMovingItem(
+  name,
   x_axis,
   y_axis,
   imgPath,
@@ -139,6 +140,7 @@ function createDecorativeMovingItem(
   timeout
 ) {
   const ironChain = new MobileGameItem(
+    name,
     x_axis,
     y_axis,
     imgPath,

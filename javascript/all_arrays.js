@@ -379,7 +379,6 @@ const ironChainArrays = {
     './img/game_items/PNG/chain/chain_009.png',
     './img/game_items/PNG/chain/chain_010.png',
     './img/game_items/PNG/chain/chain_011.png',
-    './img/game_items/PNG/chain/chain_012.png',
   ],
 };
 
@@ -514,11 +513,11 @@ const gameItemArrays = [
 const mobileItems = {
   ironChain: {
     name: 'chain',
-    x: 450,
-    y: -50,
+    x: 600,
+    y: -2,
     src: 'img/game_items/PNG/chain/chain_000.png',
-    landscape_width: 500,
-    portrait_width: 200,
+    landscape_width: 200,
+    portrait_width: 90,
     array: ironChainArrays.move,
   },
   dangerousBomb: {
@@ -526,8 +525,8 @@ const mobileItems = {
     x: 180,
     y: 180,
     src: './img/game_items/PNG/bomb/move_000.png',
-    landscape_width: 80,
-    portrait_width: 80,
+    landscape_width: 40,
+    portrait_width: 40,
     array: bombArrays.move,
   },
 };
@@ -556,7 +555,7 @@ const valuableItems = {
     x: randomRangeX,
     y: randomRangeY,
     src: './img/game_items/PNG/bonus/pearl.png',
-    width: 50,
-    height: 80,
+    width: 40,
+    height: 50,
   },
 };
