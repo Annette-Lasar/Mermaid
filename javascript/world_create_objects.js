@@ -15,44 +15,44 @@ function createBackground(number) {
 }
 
 function createCharacter() {
-  let speed = 5;
+  let speed = 10;
   const character = new Character(mermaidArrays.idle[0], speed);
   /* await character.loadImage(mermaidArrays.idle[0]); */
   return character;
 }
 
 function createYellowCrab() {
-  let id = 'yellow' + animalIDCounter;
+  let id = 'yellow' + objectIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
   let yellowCrab = new yellowCrabFish(yellowCrabArrays.move[0], speed, id);
-  animalIDCounter++;
+  objectIDCounter++;
   /* await yellowCrab.loadImage(yellowCrabMove[0]); */
   return yellowCrab;
 }
 
 function createRedCrab() {
-  let id = 'red' + animalIDCounter;
+  let id = 'red' + objectIDCounter;
   let speed = Math.random() * 0.8 + 0.3;
   let redCrab = new redCrabFish(redCrabArrays.idle[0], speed, id);
-  animalIDCounter++;
+  objectIDCounter++;
   /* await redCrab.loadImage(redCrabIdle[0]); */
   return redCrab;
 }
 
 function createBlowfishEnemies() {
-  let id = 'blowfish' + animalIDCounter;
+  let id = 'blowfish' + objectIDCounter;
   let speed = Math.random() * 2 + 3;
   let blowFish = new Blowfish(blowfishArrays.move[0], speed, id);
-  animalIDCounter++;
+  objectIDCounter++;
   /* await blowFish.loadImage(blowfishMove[0]); */
   return blowFish;
 }
 
 function createLionfishEnemies(y_axis) {
-  let id = 'lionfish' + animalIDCounter;
+  let id = 'lionfish' + objectIDCounter;
   let speed = Math.random() * 2 + 3;
   let lionFish = new Lionfish(lionfishArrays.move[0], speed, id, y_axis);
-  animalIDCounter++;
+  objectIDCounter++;
   return lionFish;
 }
 
@@ -83,14 +83,17 @@ function createGameItem(
   landscapeWidth,
   portraitWidth
 ) {
+  let id = 'gameItem' + objectIDCounter;
   const gameItem = new GameItem(
     name,
+    id,
     x_axis,
     y_axis,
     imgPath,
     landscapeWidth,
     portraitWidth
   );
+  objectIDCounter++;
   /* await gameItem.loadImage(imgPath); */
   return gameItem;
 }
@@ -104,8 +107,10 @@ function createValuableItem(
   portraitWidth,
   speed
 ) {
+  let id = 'valuableItem' + objectIDCounter;
   const valuableItem = new ValuableGameItem(
     name,
+    id,
     x_axis,
     y_axis,
     imgPath,
@@ -113,6 +118,7 @@ function createValuableItem(
     portraitWidth,
     speed
   );
+  objectIDCounter++;
   /* await valuableItem.loadImage(imgPath); */
   return valuableItem;
 }
@@ -139,8 +145,10 @@ function createDecorativeMovingItem(
   array,
   timeout
 ) {
+  let id = 'decorativeItem' + objectIDCounter;
   const ironChain = new MobileGameItem(
     name,
+    id,
     x_axis,
     y_axis,
     imgPath,
@@ -149,6 +157,7 @@ function createDecorativeMovingItem(
     array,
     timeout
   );
+  objectIDCounter++;
   /* await ironChain.loadImage(ironChainArrays.move[0]); */
   return ironChain;
 }

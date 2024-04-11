@@ -1,8 +1,9 @@
 class MobileGameItem extends MovableObject {
-  constructor(name, x_axis, y_axis, imgPath, landscapeWidth, portraitWidth, array, timeout) {
+  constructor(name, id, x_axis, y_axis, imgPath, landscapeWidth, portraitWidth, array, timeout) {
     super();
     super.loadImage(imgPath);
     this.name = name;
+    this.id = id;
     this.x = x_axis;
     this.y = y_axis;
     this.array = array;

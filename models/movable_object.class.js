@@ -8,6 +8,8 @@ class MovableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 1;
+  energyCount = 100;
+  lastHit = 0;
 
   constructor() {
     this.width = 0;
@@ -65,6 +67,26 @@ class MovableObject {
     this.y + this.height > mo.y &&
     this.x < mo.x &&
     this.y < mo.y + mo.height
+  }
+
+  hit() {
+    this.energyCount -= 5;
+    if (this.energyCount < 0) {
+      this.energyCount = 0;
+    } else {
+      this.lastHit = new Date().getTime();
+    }
+  }
+
+
+  isHurt() {
+    let timePassed = new Date().getTime() - this.lastHit;
+    let timePassedSec = timePassed / 1000;
+    return timePassedSec < 1;
+  }
+
+  isDead() {
+    return this.energyCount == 0;
   }
 
 

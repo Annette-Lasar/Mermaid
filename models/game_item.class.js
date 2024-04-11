@@ -1,8 +1,9 @@
 class GameItem extends ImmobileItem {
   world;
-  constructor(name, x_axis, y_axis, imgPath, landscapeWidth, portraitWidth) {
+  constructor(name, id, x_axis, y_axis, imgPath, landscapeWidth, portraitWidth) {
     super(imgPath);
     this.name = name;
+    this.id = id;
     this.x = x_axis;
     this.y = y_axis;
     this.landscapeWidth = landscapeWidth;

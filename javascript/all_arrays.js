@@ -24,6 +24,13 @@ const mermaidArrays = {
     `./img/mermaid/PNG/mermaid_${mermaidType}/attack_009.png`,
   ],
 
+  dead: [
+    `./img/mermaid/PNG/mermaid_${mermaidType}/dead_000.png`,
+    `./img/mermaid/PNG/mermaid_${mermaidType}/dead_001.png`,
+    `./img/mermaid/PNG/mermaid_${mermaidType}/dead_002.png`,
+    `./img/mermaid/PNG/mermaid_${mermaidType}/dead_003.png`,
+  ],
+
   die: [
     `./img/mermaid/PNG/mermaid_${mermaidType}/die_000.png`,
     `./img/mermaid/PNG/mermaid_${mermaidType}/die_001.png`,

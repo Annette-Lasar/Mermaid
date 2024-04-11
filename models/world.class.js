@@ -14,7 +14,7 @@ class World {
     this.keyboard = keyboard;
     this.character = createCharacter();
     this.createStoneSlabs();
-    // this.spawnCrabEnemies();
+    this.checkCollisions();
     this.draw();
     setInterval(() => {
       filterAndRemoveEnemies(this.level.crabEnemies);
@@ -46,30 +46,6 @@ class World {
     );
   }
 
- /*  spawnCrabEnemies() {
-    let random = Math.floor(Math.random() * 2);
-    let timeout = 0;
-    if (random == 0) {
-      this.crabEnemies.push(createYellowCrab());
-    } else {
-      this.crabEnemies.push(createRedCrab());
-    }
-    if (!this.spawnFirst) {
-      timeout = 0;
-      this.spawnFirst = true;
-    } else {
-      timeout = 2000 + Math.random() * 2000;
-    }
-    setTimeout(this.spawnCrabEnemies.bind(this), timeout);
-  } */
-
- /*  spawnBlowfishEnemies() {
-    this.blowfishEnemies.push(createBlowfishEnemies());
-
-    const timeout = 3000 + Math.random() * 1000;
-    setTimeout(this.spawnBlowfishEnemies.bind(this), timeout);
-  } */
-
   checkForCurrentEnemies(enemiesArray) {
     if (enemiesArray === this.level.crabEnemies) {
       let enemies = enemiesArray.filter((enemy) => enemy.y > CANVAS_HEIGHT);
@@ -78,6 +54,19 @@ class World {
       let enemies = enemiesArray.filter((enemy) => enemy.x < -1100);
       return enemies;
     }
+  }
+
+  checkCollisions() {
+    setInterval(() => {
+      this.isCollidingWithBlowfish();
+      this.isCollidingWithCrab();
+      this.isCollidingWithObjectMovingUpAndDown();
+      this.isCollidingWithLionfish();
+      this.isCollidingWithValualeItem();
+      this.isCollidingWithDecorativeMovingObject();
+      this.isCollidingWithEndboss();
+      // console.log('Character-Energie:', this.character.energyCount);
+    }, 50);
   }
 
   draw() {
@@ -151,5 +140,81 @@ class World {
       const singleArrays = [this.character, this.level.endboss];
       return singleArrays;
     }
+  }
+
+  isCollidingWithBlowfish() {
+    this.level.blowfishEnemies.forEach((blowfish) => {
+      if (this.character.isColliding(blowfish)) {
+        this.character.hit();
+      }
+    });
+  }
+
+  isCollidingWithCrab() {
+    this.level.crabEnemies.forEach((crab) => {
+      if (this.character.isColliding(crab)) {
+        this.character.hit();
+      }
+    });
+  }
+
+  isCollidingWithObjectMovingUpAndDown() {
+    this.level.objectsMovingUpAndDown.forEach((objectMoving) => {
+      if (this.character.isColliding(objectMoving)) {
+        this.character.hit();
+      }
+    });
+  }
+
+  isCollidingWithLionfish() {
+    this.level.lionfishEnemies.forEach((lionfish) => {
+      if (this.character.isColliding(lionfish)) {
+        this.character.hit();
+      }
+    });
+  }
+
+  isCollidingWithValualeItem() {
+    this.level.valuableItems.forEach((valuableItem) => {
+      if (this.character.isColliding(valuableItem)) {
+        if (valuableItem.name === 'starfish') {
+          this.character.energyCount += 10;
+          this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
+        } else if (valuableItem.name === 'pearl') {
+          this.character.ammunitionCount += 5;
+          this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
+        } else if (valuableItem.name === 'key') {
+          this.character.keyFound = true;
+          this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
+        }
+      }
+    });
+  }
+
+  isCollidingWithEndboss() {
+    if (this.character.isColliding(this.level.endboss)) {
+      this.character.hit();
+    }
+  }
+
+  isCollidingWithDecorativeMovingObject() {
+    this.level.decorativeMovingItems.forEach((movingItem) => {
+      if (this.character.isColliding(movingItem)) {
+        if (movingItem.name === 'bomb') {
+          this.character.energyCount = 0;
+          this.removeItemFromCanvas(
+            this.level.decorativeMovingItems,
+            movingItem
+          );
+        }
+      }
+    });
+  }
+
+  removeItemFromCanvas(array, object) {
+    let index = array.findIndex((item) => {
+      return item.id === object.id;
+    });
+    array.splice(index, 1);
   }
 }

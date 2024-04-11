@@ -3,10 +3,11 @@ let world;
 const MAX_CRAB_ENEMIES = 15;
 const CANVAS_HEIGHT = 480;
 const CANVAS_WIDTH = 853;
-let animalIDCounter = 1;
+let objectIDCounter = 1;
 let randomNumber = Math.random();
 let randomRangeX = randomNumber * 5800 - 800;
 let randomRangeY = randomNumber * 450;
+
 /* const animalArrays = new AnimalArrays(); */
 const allAnimals = [
   'mermaid',
