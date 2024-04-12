@@ -539,10 +539,19 @@ const mobileItems = {
 };
 
 const valuableItems = {
-  golden_key: {
+ /*  golden_key: {
     name: 'key',
     x: randomRangeX,
     y: randomRangeY,
+    src: './img/game_items/PNG/items/key.png',
+    width: 20,
+    height: 50,
+  }, */
+
+  golden_key: {
+    name: 'key',
+    x: 100,
+    y: 100,
     src: './img/game_items/PNG/items/key.png',
     width: 20,
     height: 50,
@@ -561,8 +570,82 @@ const valuableItems = {
     name: 'pearl',
     x: randomRangeX,
     y: randomRangeY,
-    src: './img/game_items/PNG/bonus/pearl.png',
+    src: './img/game_items/PNG/items/pearl.png',
     width: 40,
     height: 50,
+  },
+};
+
+const statusbarComponents = {
+  statusBarBackground1: {
+    name: 'background_bar1',
+    x: 40,
+    y: 25,
+    src: './img/game_ui/PNG/settings/window_6.png',
+    width: 200,
+    height: 15,
+  },
+
+  fillingLevel1: {
+    name: 'filling_level1',
+    x: 40,
+    y: 25,
+    src: './img/game_ui/PNG/settings/btn_1.png',
+    width: 100,
+    height: 15,
+  },
+
+  statusBarBackground2: {
+    name: 'background_bar2',
+    x: 280,
+    y: 25,
+    src: './img/game_ui/PNG/settings/window_6.png',
+    width: 200,
+    height: 15,
+  },
+
+  fillingLevel2: {
+    name: 'filling_level2',
+    x: 280,
+    y: 25,
+    src: './img/game_ui/PNG/settings/btn_3.png',
+    width: 0,
+    height: 15,
+  },
+
+  iconStar: {
+    name: 'star_icon',
+    x: 10,
+    y: 17,
+    src: './img/game_items/PNG/items/starfish.png',
+    width: 25,
+    height: 25,
+  },
+
+  iconPearl: {
+    name: 'pearl_icon',
+    x: 250,
+    y: 20,
+    src: './img/game_items/PNG/items/pearl.png',
+    width: 25,
+    height: 25,
+  },
+
+  iconKey: {
+    name: 'key_icon',
+    x: 490,
+    y: 10,
+    src: './img/game_items/PNG/items/key.png',
+    width: 40,
+    height: 40,
+  },
+
+  falseSign: {
+    name: 'false_sign',
+    x: 530,
+    y: 22,
+    src: './img/game_ui/PNG/settings/false.png',
+    width: 20,
+    height: 20,
   },
 };

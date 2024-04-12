@@ -26,7 +26,7 @@ class Character extends MovableObject {
     this.animate(mermaidArrays.idle);
   }
 
-  animate(array) {
+   animate(array) {
     setInterval(() => {
       this.swimming_sound.pause();
       if (this.isDead()) {
@@ -34,6 +34,7 @@ class Character extends MovableObject {
         this.defineImageDimensions();
         this.playAnimation(mermaidArrays.die);
       } else if (this.isHurt()) {
+        // this.changeEnergyStatus();
         this.defineImageDimensions();
         this.playAnimation(mermaidArrays.hurt);
       } else {
@@ -55,6 +56,28 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 200;
     }, 40);
   }
+
+/*   animate(array) {
+    setInterval(() => {
+      this.swimming_sound.pause();
+
+      if (this.keyArrowRightIsPressed()) {
+        this.playAnimation(mermaidArrays.move);
+        this.moveRight();
+      } else if (this.keyArrowLeftIsPressed()) {
+        this.playAnimation(mermaidArrays.move);
+        this.moveLeft();
+      } else if (this.keyArrowUpIsPressed()) {
+        this.moveUp();
+      } else if (this.keyArrowDownIsPressed()) {
+        this.moveDown();
+      } else {
+        this.defineImageDimensions();
+        this.playAnimation(array);
+      }
+      this.world.camera_x = -this.x + 200;
+    }, 50);
+  } */
 
   keyArrowRightIsPressed() {
     return (
@@ -126,4 +149,33 @@ class Character extends MovableObject {
     this.x += speed;
     this.y -= speed;
   }
+
+  
+  changeEnergyStatus() {
+    let statusWidth = statusbarComponents.statusBarBackground1.width;
+    let currentPercentage = (statusWidth * this.energyCount) / 100;
+    if (currentPercentage > 200) {
+      currentPercentage = 200;
+    }
+    console.log('Balkenlänge', currentPercentage);
+    let fillingLevelIndex = this.world.statusBarElements.findIndex((element) => {
+      return element.name === 'filling_level1';
+    });
+    if (fillingLevelIndex !== -1) {
+      this.world.statusBarElements[fillingLevelIndex].width = currentPercentage;
+    }
+}
+
+changeAmmunitionStatus() {
+    let statusWidth = statusbarComponents.statusBarBackground2.width;
+    let currentPercentage = (statusWidth * this.ammunitionCount) / 100;
+    console.log('Balkenlänge', currentPercentage);
+    let fillingLevelIndex = this.world.statusBarElements.findIndex((element) => {
+      return element.name === 'filling_level2';
+    });
+    if (fillingLevelIndex !== -1) {
+      this.world.statusBarElements[fillingLevelIndex].width = currentPercentage;
+    }
+}
+
 }

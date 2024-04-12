@@ -1,9 +1,10 @@
 let keyboard = new Keyboard();
+let loadedImages = 0;
 function init() {
-  /* createAllAnimalsArrays(); */
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
   createButton(canvas);
+  /* showLoadedImagesCount(); */
 }
 
 window.addEventListener('keyup', (event) => {
@@ -18,4 +19,10 @@ window.addEventListener('keydown', (event) => {
 
 function createButton(canvas) {
   canvas.innerHTML += '<button>Start</button>'
+}
+
+function showLoadedImagesCount() {
+  setInterval(() => {
+    console.log('Geladene Bilder: ', loadedImages);
+  })
 }

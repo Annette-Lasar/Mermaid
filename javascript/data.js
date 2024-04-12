@@ -7,6 +7,7 @@ let objectIDCounter = 1;
 let randomNumber = Math.random();
 let randomRangeX = randomNumber * 5800 - 800;
 let randomRangeY = randomNumber * 450;
+// keyFound = false;
 
 /* const animalArrays = new AnimalArrays(); */
 const allAnimals = [

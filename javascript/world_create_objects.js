@@ -162,6 +162,18 @@ function createDecorativeMovingItem(
   return ironChain;
 }
 
+function createStatusBar(name, x_axis, y_axis, imgPath, width, height) {
+  const statusBarElement = new Statusbar(
+    name,
+    x_axis,
+    y_axis,
+    imgPath,
+    width,
+    height
+  );
+  return statusBarElement;
+}
+
 function filterAndRemoveEnemies(enemiesArray) {
   let filteredEnemies = world.checkForCurrentEnemies(enemiesArray);
 
