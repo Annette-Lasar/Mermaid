@@ -5,17 +5,29 @@ class World {
   character;
   stoneSlabs = [];
   statusBarElements = [];
+  bubbles = [];
   keyboard;
   camera_x = 0;
+  musicSound = new Audio('./audio/atlantis.mp3');
+  starSound = new Audio('./audio/ping_stars.mp3');
+  pearlSound = new Audio('./audio/ping_pearl.mp3');
+  keySound = new Audio('./audio/ping_key.mp3');
+  bombSound = new Audio('./audio/explosion.mp3');
+  ploppSound = new Audio('./audio/plopp.mp3');
+  squelchSound = new Audio('./audio/squelch.mp3');
 
   constructor(canvas, keyboard) {
+    if (music) {
+      this.playMusic();
+    }
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.character = createCharacter();
+    this.bubbles;
     this.createStoneSlabs();
     this.createStatusBarElements();
-    this.checkCollisions();
+    this.checkIncidents();
     this.draw();
     setInterval(() => {
       filterAndRemoveEnemies(this.level.crabEnemies);
@@ -37,6 +49,9 @@ class World {
       valuableItem.world = this;
     });
     this.statusBarElements.forEach((element) => {
+      element.world = this;
+    });
+    this.bubbles.forEach((element) => {
       element.world = this;
     });
   }
@@ -150,17 +165,48 @@ class World {
     }
   }
 
-  checkCollisions() {
+  playMusic() {
+    this.musicSound.play();
+    setTimeout(this.playMusic.bind(this), 100);
+  }
+
+  checkIncidents() {
     setInterval(() => {
-      this.isCollidingWithBlowfish();
-      this.isCollidingWithCrab();
-      this.isCollidingWithObjectMovingUpAndDown();
-      this.isCollidingWithLionfish();
-      this.isCollidingWithValualeItem();
-      this.isCollidingWithDecorativeMovingObject();
-      this.isCollidingWithEndboss();
-      // console.log('Character-Energie:', this.character.energyCount);
+      this.checkCollisions();
+      this.checkKeyboard();
+      this.checkBubbleCollisions();
     }, 50);
+  }
+
+  checkCollisions() {
+    this.isCollidingWithBlowfish();
+    this.isCollidingWithCrab();
+    this.isCollidingWithObjectMovingUpAndDown();
+    this.isCollidingWithLionfish();
+    this.isCollidingWithValualeItem();
+    this.isCollidingWithDecorativeMovingObject();
+    this.isCollidingWithEndboss();
+    // console.log('Character-Energie:', this.character.energyCount);
+  }
+
+  checkKeyboard() {
+    if (this.keyboard.SPACE && this.character.ammunitionCount > 0) {
+      let bubble = createNewBubble(
+        this.character.x + this.character.width,
+        this.character.y + this.character.height - 100
+      );
+      this.bubbles.push(bubble);
+      this.ploppSound.play();
+      this.character.ammunitionCount -= 5;
+      this.character.changeAmmunitionStatus();
+    }
+  }
+
+  checkBubbleCollisions() {
+    this.bubbleIsCollidingWithFish(this.level.blowfishEnemies);
+    this.bubbleIsCollidingWithFish(this.level.crabEnemies);
+    this.bubbleIsCollidingWithFish(this.level.lionfishEnemies);
+    // this.bubbleIsCollidingWithEndboss();
   }
 
   draw() {
@@ -177,20 +223,12 @@ class World {
     objectsToDraw.forEach((object) => {
       this.drawOnCanvas(object);
     });
-
+    /* ------------------- space for fixed objects ---------------- */
     this.ctx.translate(-this.camera_x, 0);
     this.addObjectsToCanvas(this.statusBarElements);
     this.ctx.translate(this.camera_x, 0);
+    /* ------------------- space for fixed objects ---------------- */
 
-    if (this.character.keyFound) {
-      const falseSignIndex = this.statusBarElements.findIndex(
-        (element) => element.name === 'false_sign'
-      );
-      if (falseSignIndex !== -1) {
-        this.statusBarElements[falseSignIndex].src =
-          './img/game_ui/PNG/settings/true.png';
-      }
-    }
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
     requestAnimationFrame(function () {
@@ -241,7 +279,7 @@ class World {
         this.level.decorativeMovingItems,
         this.level.objectsMovingUpAndDown,
         this.level.lionfishEnemies,
-        this.character.bubbles,
+        this.bubbles,
       ];
       return nestedArrays;
     } else {
@@ -250,7 +288,7 @@ class World {
     }
   }
 
-    isCollidingWithBlowfish() {
+  isCollidingWithBlowfish() {
     this.level.blowfishEnemies.forEach((blowfish) => {
       if (this.character.isColliding(blowfish)) {
         this.character.hit();
@@ -258,20 +296,48 @@ class World {
     });
   }
 
-/*   isCollidingWithBlowfish() {
-    const currentTime = Date.now();
-    const timeSinceLastCollision = currentTime - this.lastBlowfishCollisionTime;
-    if (timeSinceLastCollision < 3000) {
-      return;
-    }
-    this.level.blowfishEnemies.forEach((blowfish) => {
-      if (this.character.isColliding(blowfish)) {
-        this.character.hit();
-        this.character.changeEnergyStatus();
-        this.lastBlowfishCollisionTime = currentTime; // Aktualisiere den Zeitpunkt der letzten Kollision
-      }
+  bubbleIsCollidingWithFish(array) {
+    array.forEach((fish) => {
+      this.bubbles.forEach((bubble) => {
+        if (bubble.isColliding(fish)) {
+          this.removeFishAndBubble(array, bubble, fish);
+        } else {
+          this.removeBubbleAfterTimeout(bubble);
+        }
+      });
     });
-  } */
+  }
+
+  removeFishAndBubble(array, bubble, fish) {
+    let fishIndex = array.findIndex((oneFish) => {
+      return oneFish.id === fish.id;
+    });
+    if (fishIndex !== -1) {
+      array.splice(fishIndex, 1);
+      this.squelchSound.play();
+    }
+    let bubbleIndex = this.bubbles.findIndex((oneBubble) => {
+      return oneBubble.id === bubble.id;
+    });
+    if (bubbleIndex !== -1) {
+      this.bubbles.splice(bubbleIndex, 1);
+    }
+  }
+
+  removeBubbleAfterTimeout(bubble) {
+    let bubbleIndex = this.bubbles.findIndex((oneBubble) => {
+      return oneBubble.id === bubble.id;
+    });
+    if (bubbleIndex !== -1) {
+      setTimeout(() => {
+        this.bubbles.splice(bubbleIndex, 1);
+      }, 3000);
+    }
+  }
+
+  bubbleIsCollidingWithEndboss() {
+    // Code
+  }
 
   isCollidingWithCrab() {
     const currentTime = Date.now();
@@ -323,19 +389,28 @@ class World {
     this.level.valuableItems.forEach((valuableItem) => {
       if (this.character.isColliding(valuableItem)) {
         if (valuableItem.name === 'starfish') {
+          if (noise) {
+            this.starSound.play();
+          }
           this.character.energyCount += 10;
           this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
           this.character.changeEnergyStatus();
         }
         if (valuableItem.name === 'pearl') {
-          this.character.ammunitionCount += 5;
+          if (noise) {
+            this.pearlSound.play();
+          }
+          this.character.ammunitionCount += 10;
           this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
           this.character.changeAmmunitionStatus();
         }
         if (valuableItem.name === 'key') {
+          if (noise) {
+            this.keySound.play();
+          }
           this.character.keyFound = true;
           this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
-          // this.changeKeyStatus();
+          this.changeKeyStatus();
         }
       }
     });
@@ -358,6 +433,9 @@ class World {
     this.level.decorativeMovingItems.forEach((movingItem) => {
       if (this.character.isColliding(movingItem)) {
         if (movingItem.name === 'bomb') {
+          if (noise) {
+            this.bombSound.play();
+          }
           this.character.energyCount = 0;
           this.removeItemFromCanvas(
             this.level.decorativeMovingItems,
@@ -377,13 +455,16 @@ class World {
 
   changeKeyStatus() {
     if (this.character.keyFound) {
-      let index = this.statusBarElements.findIndex((element) => {
-        return element.name === 'false_sign';
-      });
-      if (index !== -1) {
-        this.statusBarElements[index].src =
+      const falseSignIndex = this.statusBarElements.findIndex(
+        (element) => element.name === 'false_sign'
+      );
+      if (falseSignIndex !== -1) {
+        this.statusBarElements[falseSignIndex].img.src =
           './img/game_ui/PNG/settings/true.png';
+        this.addObjectsToCanvas(this.statusBarElements);
       }
     }
   }
+
+  
 }

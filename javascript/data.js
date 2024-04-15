@@ -1,5 +1,7 @@
 let mermaidType = 1;
 let world;
+let noise = true;
+let music = false;
 const MAX_CRAB_ENEMIES = 15;
 const CANVAS_HEIGHT = 480;
 const CANVAS_WIDTH = 853;

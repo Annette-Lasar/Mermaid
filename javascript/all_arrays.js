@@ -582,7 +582,7 @@ const statusbarComponents = {
     x: 40,
     y: 25,
     src: './img/game_ui/PNG/settings/window_6.png',
-    width: 200,
+    width: 250,
     height: 15,
   },
 
@@ -591,13 +591,13 @@ const statusbarComponents = {
     x: 40,
     y: 25,
     src: './img/game_ui/PNG/settings/btn_1.png',
-    width: 100,
+    width: 125,
     height: 15,
   },
 
   statusBarBackground2: {
     name: 'background_bar2',
-    x: 280,
+    x: 330,
     y: 25,
     src: './img/game_ui/PNG/settings/window_6.png',
     width: 200,
@@ -606,7 +606,7 @@ const statusbarComponents = {
 
   fillingLevel2: {
     name: 'filling_level2',
-    x: 280,
+    x: 330,
     y: 25,
     src: './img/game_ui/PNG/settings/btn_3.png',
     width: 0,
@@ -624,7 +624,7 @@ const statusbarComponents = {
 
   iconPearl: {
     name: 'pearl_icon',
-    x: 250,
+    x: 300,
     y: 20,
     src: './img/game_items/PNG/items/pearl.png',
     width: 25,
@@ -633,7 +633,7 @@ const statusbarComponents = {
 
   iconKey: {
     name: 'key_icon',
-    x: 490,
+    x: 540,
     y: 10,
     src: './img/game_items/PNG/items/key.png',
     width: 40,
@@ -642,7 +642,7 @@ const statusbarComponents = {
 
   falseSign: {
     name: 'false_sign',
-    x: 530,
+    x: 590,
     y: 22,
     src: './img/game_ui/PNG/settings/false.png',
     width: 20,

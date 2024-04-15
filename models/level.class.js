@@ -131,7 +131,7 @@ class Level {
   }
 
   createPearlItem() {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       let randomRangeX = Math.random() * 5800 - 800;
       let randomRangeY = Math.random() * 450;
       let randomSpeed = 0.3 + Math.random() * 0.5;

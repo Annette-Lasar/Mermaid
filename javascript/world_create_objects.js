@@ -69,9 +69,11 @@ function createObjectMovingUpAndDown(x_axis, y_axis, imgPath) {
 }
 
 function createEndboss(imgPath) {
+  let id = 'endboss' + objectIDCounter;
   let speed = 5;
-  const endboss = new Endboss(imgPath, speed);
+  const endboss = new Endboss(id, imgPath, speed);
   /* await endboss.loadImage(imgPath); */
+  objectIDCounter++;
   return endboss;
 }
 
@@ -183,4 +185,11 @@ function filterAndRemoveEnemies(enemiesArray) {
     );
     enemiesArray.splice(enemyIndex, 1);
   });
+}
+
+function createNewBubble(x, y) {
+  let id = 'bubble' + objectIDCounter;
+  let newBubble = new ThrowableObject(id, x, y);
+  objectIDCounter++;
+  return newBubble;
 }

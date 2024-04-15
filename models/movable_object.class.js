@@ -3,14 +3,19 @@ class MovableObject extends DrawableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 1;
-  energyCount = 100;
-  
+  energyCount = 50;
   lastHit = 0;
 
   constructor() {
     super();
   }
 
+ /*  applyGravity() {
+    setInterval(() => {
+      this.y = this.speedY;
+      this.speedY -= this.acceleration;
+    }, 1000 / 25);
+  } */
 
   loadImagesMoves(arr) {
     arr.forEach((path) => {
@@ -21,10 +26,12 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(mo) {
-    return this.x + this.width > mo.x &&
-    this.y + this.height > mo.y &&
-    this.x < mo.x &&
-    this.y < mo.y + mo.height
+    return (
+      this.x + this.width > mo.x &&
+      this.y + this.height > mo.y &&
+      this.x < mo.x &&
+      this.y < mo.y + mo.height
+    );
   }
 
   hit() {
@@ -36,17 +43,15 @@ class MovableObject extends DrawableObject {
     }
   }
 
-
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit;
     let timePassedSec = timePassed / 1000;
-    return timePassedSec < 1;
+    return timePassedSec < 3;
   }
 
   isDead() {
     return this.energyCount == 0;
   }
-
 
   playAnimation(array) {
     let i = this.currentImage % array.length;
@@ -55,5 +60,3 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 }
-
-

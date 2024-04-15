@@ -4,6 +4,7 @@ class Keyboard {
     ARROWUP = false;
     ARROWDOWN = false;
     SPACE = false;
+    // KEYD = false;
 
     setKeyStatus(keyCode, status) {
         this[keyCode] = status;

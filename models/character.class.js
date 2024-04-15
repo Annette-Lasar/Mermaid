@@ -1,18 +1,17 @@
 class Character extends MovableObject {
   world;
-  swimming_sound = new Audio('audio/underwater_movement_02.mp3');
+  swimming_sound = new Audio('./audio/underwater_movement.mp3');
   keyFound = false;
   ammunitionCount = 0;
-  bubbles = [];
 
   constructor(imgPath, speed) {
     super();
     super.loadImage(imgPath);
-    // this.x = 1500;
+    this.x = 3900;
     this.currentX = this.x;
-    this.y = 200;
+    this.y = 100;
+    // this.y = 200;
     this.speed = speed;
-    this.bubbleSpeed = this.speed + 2;
     this.img.onload = () => {
       let currentWidth = this.img.width > this.img.height ? 150 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
@@ -26,7 +25,7 @@ class Character extends MovableObject {
     this.animate(mermaidArrays.idle);
   }
 
-   animate(array) {
+  /*    animate(array) {
     setInterval(() => {
       this.swimming_sound.pause();
       if (this.isDead()) {
@@ -55,9 +54,9 @@ class Character extends MovableObject {
       }
       this.world.camera_x = -this.x + 200;
     }, 40);
-  }
+  } */
 
-/*   animate(array) {
+  animate(array) {
     setInterval(() => {
       this.swimming_sound.pause();
 
@@ -77,9 +76,10 @@ class Character extends MovableObject {
       }
       this.world.camera_x = -this.x + 200;
     }, 50);
-  } */
+  }
 
   keyArrowRightIsPressed() {
+    // console.log(this.world.level.blowfishEnemies);
     return (
       this.world.keyboard.ARROWRIGHT && this.x < this.world.level.level_end_x
     );
@@ -124,58 +124,37 @@ class Character extends MovableObject {
     this.defineImageDimensions();
   }
 
-  shoot() {
-    this.generateDangerousBubbles();
-    this.moveBubbles();
-  }
-
-  generateDangerousBubbles() {
-    let src = './img/game_items/PNG/neutral/bubble_1.png';
-    for (let i = 0; i < 3; i++) {
-      let bubble = createGameItem('bubble', this.x, this.y, src, 30, 30);
-      this.bubbles.push(bubble);
-    }
-  }
-
-  moveBubbles() {
-    setInterval(() => {
-      this.bubbles.forEach((bubble) => {
-        bubble.moveBubble(this.bubbleSpeed);
-      });
-    }, 1000 / 60);
-  }
-
-  moveBubble(speed) {
-    this.x += speed;
-    this.y -= speed;
-  }
-
-  
   changeEnergyStatus() {
     let statusWidth = statusbarComponents.statusBarBackground1.width;
     let currentPercentage = (statusWidth * this.energyCount) / 100;
-    if (currentPercentage > 200) {
-      currentPercentage = 200;
+    if (currentPercentage > statusWidth) {
+      currentPercentage = statusWidth;
     }
-    console.log('Balkenlänge', currentPercentage);
-    let fillingLevelIndex = this.world.statusBarElements.findIndex((element) => {
-      return element.name === 'filling_level1';
-    });
+    console.log('Energiestatus', currentPercentage);
+    let fillingLevelIndex = this.world.statusBarElements.findIndex(
+      (element) => {
+        return element.name === 'filling_level1';
+      }
+    );
     if (fillingLevelIndex !== -1) {
       this.world.statusBarElements[fillingLevelIndex].width = currentPercentage;
     }
-}
+  }
 
-changeAmmunitionStatus() {
+  changeAmmunitionStatus() {
     let statusWidth = statusbarComponents.statusBarBackground2.width;
     let currentPercentage = (statusWidth * this.ammunitionCount) / 100;
-    console.log('Balkenlänge', currentPercentage);
-    let fillingLevelIndex = this.world.statusBarElements.findIndex((element) => {
-      return element.name === 'filling_level2';
-    });
+    if (currentPercentage > statusWidth) {
+      currentPercentage = statusWidth;
+    }
+    // console.log('Munitionsvorrat:', currentPercentage);
+    let fillingLevelIndex = this.world.statusBarElements.findIndex(
+      (element) => {
+        return element.name === 'filling_level2';
+      }
+    );
     if (fillingLevelIndex !== -1) {
       this.world.statusBarElements[fillingLevelIndex].width = currentPercentage;
     }
-}
-
+  }
 }

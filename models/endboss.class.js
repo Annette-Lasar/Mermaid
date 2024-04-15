@@ -1,9 +1,10 @@
 /* console.log('Ich bin die Endboss-Datei.'); */
 class Endboss extends MovableObject {
   world;
-  constructor(imgPath, speed) {
+  constructor(id, imgPath, speed) {
     super();
     super.loadImage(imgPath);
+    this.id = id;
     this.speed = speed;
     this.x = 4800;
     this.y = 80;
@@ -14,11 +15,12 @@ class Endboss extends MovableObject {
     this.loadImagesMoves(lionfishArrays.move);
     this.animateMove(lionfishArrays.move);
     this.loadImagesMoves(lionfishArrays.attack);
-    // this.animateMove(lionfishArrays.attack);
-    this.moveToAndFro();
+    console.log('Bubbles: ', this.world);
+    // this.animateAttack(lionfishArrays.attack);
   }
 
-    animateMove(array) {
+  animateMove(array) {
+    this.moveToAndFro();
     setInterval(() => {
       let currentWidth = this.img.width > this.img.height ? 450 : 240;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
@@ -38,29 +40,34 @@ class Endboss extends MovableObject {
     const minX = 4025;
     const maxX = 4800;
     this.y_axis = Math.random() * 150;
-    /* console.log(this.y_axis); */
     if (this.speed > 0) {
+      // nur umkehren
       if (this.x > maxX) {
-        this.speed *= -1;
-        this.y = this.y_axis;
-        this.otherDirection = false;
-        /*  */
+        this.endbossMoveLeft();
       }
     } else {
       if (this.x < minX) {
-        this.speed *= -1;
-        this.otherDirection = true;
+        this.endbossMoveRight();
       }
     }
     this.moveHorizontally();
   }
 
-   moveHorizontally() {
+  endbossMoveLeft() {
+    this.speed *= -1;
+    this.y = this.y_axis;
+    this.otherDirection = false;
+  }
+
+  endbossMoveRight() {
+    this.speed *= -1;
+    this.otherDirection = true;
+  }
+
+  moveHorizontally() {
     this.x += this.speed;
     setTimeout(() => {
       this.moveToAndFro();
     }, 1000 / 60);
   }
-
-  
 }
