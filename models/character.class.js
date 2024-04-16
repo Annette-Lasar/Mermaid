@@ -132,7 +132,10 @@ class Character extends MovableObject {
   }
 
   changeEnergyStatus() {
-    let statusWidth = statusbarComponents.statusBarBackground1.width;
+    let background1Index = statusbarComponents.findIndex((component) => {
+      return component.name === 'background_bar1';
+    });
+    let statusWidth = statusbarComponents[background1Index].width;
     let currentPercentage = (statusWidth * this.energyCount) / 100;
     if (currentPercentage > statusWidth) {
       currentPercentage = statusWidth;
@@ -149,7 +152,10 @@ class Character extends MovableObject {
   }
 
   changeAmmunitionStatus() {
-    let statusWidth = statusbarComponents.statusBarBackground2.width;
+    let background2Index = statusbarComponents.findIndex((component) => {
+      return component.name === 'background_bar2';
+    });
+    let statusWidth = statusbarComponents[background2Index].width;
     let currentPercentage = (statusWidth * this.ammunitionCount) / 100;
     if (currentPercentage > statusWidth) {
       currentPercentage = statusWidth;

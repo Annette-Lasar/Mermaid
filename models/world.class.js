@@ -9,14 +9,6 @@ class World {
   keyboard;
   alreadyShot = false;
   camera_x = 0;
-  musicSound = new Audio('./audio/atlantis.mp3');
-  starSound = new Audio('./audio/ping_stars.mp3');
-  pearlSound = new Audio('./audio/ping_pearl.mp3');
-  keySound = new Audio('./audio/ping_key.mp3');
-  bombSound = new Audio('./audio/explosion.mp3');
-  ploppSound = new Audio('./audio/plopp.mp3');
-  squelchSound = new Audio('./audio/squelch.mp3');
-  successSound = new Audio('./audio/success_fanfare_trumpets.mp3');
 
   constructor(canvas, keyboard) {
     if (music) {
@@ -67,95 +59,22 @@ class World {
     );
   }
 
+
   createStatusBarElements() {
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.iconStar.name,
-        statusbarComponents.iconStar.x,
-        statusbarComponents.iconStar.y,
-        statusbarComponents.iconStar.src,
-        statusbarComponents.iconStar.width,
-        statusbarComponents.iconStar.height
-      )
-    );
-
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.statusBarBackground1.name,
-        statusbarComponents.statusBarBackground1.x,
-        statusbarComponents.statusBarBackground1.y,
-        statusbarComponents.statusBarBackground1.src,
-        statusbarComponents.statusBarBackground1.width,
-        statusbarComponents.statusBarBackground1.height
-      )
-    );
-
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.fillingLevel1.name,
-        statusbarComponents.fillingLevel1.x,
-        statusbarComponents.fillingLevel1.y,
-        statusbarComponents.fillingLevel1.src,
-        statusbarComponents.fillingLevel1.width,
-        statusbarComponents.fillingLevel1.height
-      )
-    );
-
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.iconPearl.name,
-        statusbarComponents.iconPearl.x,
-        statusbarComponents.iconPearl.y,
-        statusbarComponents.iconPearl.src,
-        statusbarComponents.iconPearl.width,
-        statusbarComponents.iconPearl.height
-      )
-    );
-
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.statusBarBackground2.name,
-        statusbarComponents.statusBarBackground2.x,
-        statusbarComponents.statusBarBackground2.y,
-        statusbarComponents.statusBarBackground2.src,
-        statusbarComponents.statusBarBackground2.width,
-        statusbarComponents.statusBarBackground2.height
-      )
-    );
-
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.fillingLevel2.name,
-        statusbarComponents.fillingLevel2.x,
-        statusbarComponents.fillingLevel2.y,
-        statusbarComponents.fillingLevel2.src,
-        statusbarComponents.fillingLevel2.width,
-        statusbarComponents.fillingLevel2.height
-      )
-    );
-
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.iconKey.name,
-        statusbarComponents.iconKey.x,
-        statusbarComponents.iconKey.y,
-        statusbarComponents.iconKey.src,
-        statusbarComponents.iconKey.width,
-        statusbarComponents.iconKey.height
-      )
-    );
-
-    this.statusBarElements.push(
-      createStatusBar(
-        statusbarComponents.falseSign.name,
-        statusbarComponents.falseSign.x,
-        statusbarComponents.falseSign.y,
-        statusbarComponents.falseSign.src,
-        statusbarComponents.falseSign.width,
-        statusbarComponents.falseSign.height
-      )
-    );
+    for (const component of statusbarComponents) {
+      this.statusBarElements.push(
+        createStatusBar(
+          component.name,
+          component.x,
+          component.y,
+          component.src,
+          component.width,
+          component.height
+        )
+      );
+    }
   }
+  
 
   checkForCurrentEnemies(enemiesArray) {
     if (enemiesArray === this.level.crabEnemies) {
@@ -200,7 +119,9 @@ class World {
         this.character.y + this.character.height - 100
       );
       this.bubbles.push(bubble);
-      this.ploppSound.play();
+      if (noise) {
+        ploppSound.play();
+      }
       this.character.ammunitionCount -= 5;
       setTimeout(() => {
         this.alreadyShot = false;
@@ -289,7 +210,7 @@ class World {
         this.level.objectsMovingUpAndDown,
         this.level.lionfishEnemies,
         this.bubbles,
-        this.level.clownfishVictims
+        this.level.clownfishVictims,
       ];
       return nestedArrays;
     } else {
@@ -324,7 +245,7 @@ class World {
     });
     if (fishIndex !== -1) {
       array.splice(fishIndex, 1);
-      this.squelchSound.play();
+      squelchSound.play();
     }
     let bubbleIndex = this.bubbles.findIndex((oneBubble) => {
       return oneBubble.id === bubble.id;
@@ -405,7 +326,7 @@ class World {
       if (this.character.isColliding(valuableItem)) {
         if (valuableItem.name === 'starfish') {
           if (noise) {
-            this.starSound.play();
+            starSound.play();
           }
           this.character.energyCount += 10;
           this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
@@ -413,7 +334,7 @@ class World {
         }
         if (valuableItem.name === 'pearl') {
           if (noise) {
-            this.pearlSound.play();
+            pearlSound.play();
           }
           this.character.ammunitionCount += 10;
           this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
@@ -421,7 +342,7 @@ class World {
         }
         if (valuableItem.name === 'key') {
           if (noise) {
-            this.keySound.play();
+            keySound.play();
           }
           this.character.keyFound = true;
           this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
@@ -453,7 +374,7 @@ class World {
       if (this.character.isColliding(movingItem)) {
         if (movingItem.name === 'bomb') {
           if (noise) {
-            this.bombSound.play();
+            bombSound.play();
           }
           this.character.energyCount = 0;
           this.removeItemFromCanvas(
@@ -477,7 +398,7 @@ class World {
         });
         this.level.gameItems[index].img.src =
           './img/game_items/PNG/neutral/chest_open.png';
-        this.successSound.play();
+        successSound.play();
         this.level.spawnClownfishVictims();
         this.character.loadImagesMoves(mermaidArrays.joy);
         this.character.playAnimation(mermaidArrays.joy);

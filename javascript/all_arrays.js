@@ -1,3 +1,14 @@
+const backgroundArrays = {
+  backgrounds: [
+    `./img/game_backgrounds/PNG/game_background_${backgroundNumber}/layers/1.png`,
+    `./img/game_backgrounds/PNG/game_background_${backgroundNumber}/layers/2.png`,
+    `./img/game_backgrounds/PNG/game_background_${backgroundNumber}/layers/3.png`,
+    `./img/game_backgrounds/PNG/game_background_${backgroundNumber}/layers/4.png`,
+    `./img/game_backgrounds/PNG/game_background_${backgroundNumber}/layers/5.png`,
+    `./img/game_backgrounds/PNG/game_background_${backgroundNumber}/layers/6.png`,
+  ]
+}
+
 const mermaidArrays = {
   acceleration: [
     `./img/mermaid/PNG/mermaid_${mermaidType}/acceleration_000.png`,
@@ -621,8 +632,8 @@ const valuableItems = {
   },
 };
 
-const statusbarComponents = {
-  statusBarBackground1: {
+const statusbarComponents = [
+  {
     name: 'background_bar1',
     x: 40,
     y: 25,
@@ -631,7 +642,7 @@ const statusbarComponents = {
     height: 15,
   },
 
-  fillingLevel1: {
+  {
     name: 'filling_level1',
     x: 40,
     y: 25,
@@ -640,7 +651,7 @@ const statusbarComponents = {
     height: 15,
   },
 
-  statusBarBackground2: {
+  {
     name: 'background_bar2',
     x: 330,
     y: 25,
@@ -649,7 +660,7 @@ const statusbarComponents = {
     height: 15,
   },
 
-  fillingLevel2: {
+  {
     name: 'filling_level2',
     x: 330,
     y: 25,
@@ -658,7 +669,7 @@ const statusbarComponents = {
     height: 15,
   },
 
-  iconStar: {
+  {
     name: 'star_icon',
     x: 10,
     y: 17,
@@ -667,7 +678,7 @@ const statusbarComponents = {
     height: 25,
   },
 
-  iconPearl: {
+  {
     name: 'pearl_icon',
     x: 300,
     y: 20,
@@ -676,7 +687,7 @@ const statusbarComponents = {
     height: 25,
   },
 
-  iconKey: {
+  {
     name: 'key_icon',
     x: 540,
     y: 10,
@@ -685,7 +696,7 @@ const statusbarComponents = {
     height: 40,
   },
 
-  falseSign: {
+  {
     name: 'false_sign',
     x: 590,
     y: 22,
@@ -693,4 +704,6 @@ const statusbarComponents = {
     width: 20,
     height: 20,
   },
-};
+];
+
+

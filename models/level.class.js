@@ -1,6 +1,5 @@
 class Level {
   world;
-  backgroundNumber;
   verticallyMovingObjects;
   backgrounds = [];
   blowfishEnemies = [];
@@ -15,14 +14,12 @@ class Level {
   level_end_x = 5500;
 
   constructor(
-    backgroundNumber,
     verticallyMovingObjects,
     numLionfishEnemiesToCreate,
     gameItemsData,
     mobileItemsData,
     valuableItemsData
   ) {
-    this.backgroundNumber = backgroundNumber;
     this.verticallyMovingObjects = verticallyMovingObjects;
     this.numLionfishEnemiesToCreate = numLionfishEnemiesToCreate;
     this.backgrounds = createBackground(backgroundNumber);

@@ -1,4 +1,4 @@
-function createBackground(number) {
+/* function createBackground(number) {
   let x_axis = 852;
   const backgroundComponents = [];
   for (let i = -2; i < 10; i++) {
@@ -12,6 +12,18 @@ function createBackground(number) {
     }
   }
   return backgroundComponents;
+} */
+
+function createBackground() {
+  let x_axis = 852;
+  const backgroundLayers = [];
+  for (let i = -2; i < 10; i++) {
+    for (let j = 0; j < backgroundArrays.backgrounds.length; j++) {
+      backgroundImagePath = backgroundArrays.backgrounds[j];
+      backgroundLayers.push(new Background(backgroundImagePath, x_axis * i - 80));
+    }
+  }
+  return backgroundLayers;
 }
 
 function createCharacter() {
