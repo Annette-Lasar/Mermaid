@@ -193,3 +193,10 @@ function createNewBubble(x, y) {
   objectIDCounter++;
   return newBubble;
 }
+
+function createClownFish(imgPath, x_axis, y_axis, speed) {
+  let id = 'clownfish' + objectIDCounter;
+  let newClownfish = new Clownfish(id, imgPath, x_axis, y_axis, speed);
+  objectIDCounter++;
+  return newClownfish;
+}

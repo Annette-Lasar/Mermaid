@@ -1,16 +1,18 @@
 class Character extends MovableObject {
   world;
-  swimming_sound = new Audio('./audio/underwater_movement.mp3');
+  swimmingSound = new Audio('./audio/underwater_movement.mp3');
+  gameFailedSound = new Audio('./audio/game_failed.mp3');
   keyFound = false;
-  ammunitionCount = 0;
+  ammunitionCount = 1000;
 
   constructor(imgPath, speed) {
     super();
     super.loadImage(imgPath);
-    this.x = 3900;
+    // this.x = 5250;
+    this.x = 3890;
     this.currentX = this.x;
     this.y = 100;
-    // this.y = 200;
+    // this.x = 200;
     this.speed = speed;
     this.img.onload = () => {
       let currentWidth = this.img.width > this.img.height ? 150 : 80;
@@ -25,13 +27,14 @@ class Character extends MovableObject {
     this.animate(mermaidArrays.idle);
   }
 
-  /*    animate(array) {
+  /*  animate(array) {
     setInterval(() => {
-      this.swimming_sound.pause();
+      this.swimmingSound.pause();
       if (this.isDead()) {
         console.log('tot');
         this.defineImageDimensions();
         this.playAnimation(mermaidArrays.die);
+        this.gameFailedSound.play();
       } else if (this.isHurt()) {
         // this.changeEnergyStatus();
         this.defineImageDimensions();
@@ -58,7 +61,7 @@ class Character extends MovableObject {
 
   animate(array) {
     setInterval(() => {
-      this.swimming_sound.pause();
+      this.swimmingSound.pause();
 
       if (this.keyArrowRightIsPressed()) {
         this.playAnimation(mermaidArrays.move);
@@ -104,14 +107,18 @@ class Character extends MovableObject {
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;
-    this.swimming_sound.play();
+    if (noise) {
+      this.swimmingSound.play();
+    }
     this.defineImageDimensions();
   }
 
   moveLeft() {
     this.x -= this.speed;
     this.otherDirection = true;
-    this.swimming_sound.play();
+    if (noise) {
+      this.swimmingSound.play();
+    }
     this.defineImageDimensions();
   }
 

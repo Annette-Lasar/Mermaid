@@ -4,7 +4,7 @@ function init() {
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
   createButton(canvas);
-  /* showLoadedImagesCount(); */
+  // showLoadedImagesCount();
 }
 
 window.addEventListener('keyup', (event) => {

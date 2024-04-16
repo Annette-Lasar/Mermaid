@@ -11,7 +11,8 @@ class Level {
   decorativeMovingItems = [];
   endboss;
   objectsMovingUpAndDown = [];
-  level_end_x = 5000;
+  clownfishVictims = [];
+  level_end_x = 5500;
 
   constructor(
     backgroundNumber,
@@ -39,6 +40,7 @@ class Level {
     this.createBombs();
     this.endboss = createEndboss(lionfishArrays.move[0]);
     this.createObjectsMovingUpAndDown();
+    // this.spawnClownfishVictims();
   }
 
   createObjectsMovingUpAndDown() {
@@ -194,6 +196,17 @@ class Level {
     for (let i = 0; i < numLionfishEnemiesToCreate; i++) {
       this.lionfishEnemies.push(createLionfishEnemies(y_axis));
       y_axis += 90;
+    }
+  }
+
+  spawnClownfishVictims() {
+    for (let i = 0; i < 5; i++) {
+      let x_axis = Math.random() * (5360 - 5220 + 1) + 5220;
+      let y_axis = Math.random() * (400 - 350 + 1) + 350;
+      let randomSpeed = 0.75 + Math.random() * 3;
+      this.clownfishVictims.push(
+        createClownFish(clownfishArrays.move[0], x_axis, y_axis, randomSpeed)
+      );
     }
   }
 }

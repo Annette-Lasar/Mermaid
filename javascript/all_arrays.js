@@ -94,6 +94,47 @@ const mermaidArrays = {
   ],
 };
 
+const clownfishArrays = {
+  attack: [
+'./img/fish/PNG/clownfish/attack_000.png',
+'./img/fish/PNG/clownfish/attack_001.png',
+'./img/fish/PNG/clownfish/attack_002.png',
+'./img/fish/PNG/clownfish/attack_003.png',
+'./img/fish/PNG/clownfish/attack_004.png',
+'./img/fish/PNG/clownfish/attack_005.png',
+'./img/fish/PNG/clownfish/attack_006.png',
+'./img/fish/PNG/clownfish/attack_007.png',
+'./img/fish/PNG/clownfish/attack_008.png',
+'./img/fish/PNG/clownfish/attack_009.png',
+  ],
+
+  die: [
+    './img/fish/PNG/clownfish/die_000.png',
+    './img/fish/PNG/clownfish/die_001.png',
+    './img/fish/PNG/clownfish/die_002.png',
+    './img/fish/PNG/clownfish/die_003.png',
+    './img/fish/PNG/clownfish/die_004.png',
+    './img/fish/PNG/clownfish/die_005.png',
+    './img/fish/PNG/clownfish/die_006.png',
+    './img/fish/PNG/clownfish/die_007.png',
+    './img/fish/PNG/clownfish/die_008.png',
+    './img/fish/PNG/clownfish/die_009.png',
+  ],
+
+  move: [
+    '/img/fish/PNG/clownfish/move_000.png',
+    '/img/fish/PNG/clownfish/move_001.png',
+    '/img/fish/PNG/clownfish/move_002.png',
+    '/img/fish/PNG/clownfish/move_003.png',
+    '/img/fish/PNG/clownfish/move_004.png',
+    '/img/fish/PNG/clownfish/move_005.png',
+    '/img/fish/PNG/clownfish/move_006.png',
+    '/img/fish/PNG/clownfish/move_007.png',
+    '/img/fish/PNG/clownfish/move_008.png',
+    '/img/fish/PNG/clownfish/move_009.png',
+  ]
+}
+
 const blowfishArrays = {
   attack: [
     './img/fish/PNG/blowfish/attack_000.png',
@@ -242,6 +283,10 @@ const lionfishArrays = {
     './img/fish/PNG/lionfish/die_007.png',
     './img/fish/PNG/lionfish/die_008.png',
     './img/fish/PNG/lionfish/die_009.png',
+    './img/fish/PNG/lionfish/die_010.png',
+    './img/fish/PNG/lionfish/die_011.png',
+    './img/fish/PNG/lionfish/die_012.png',
+    './img/fish/PNG/lionfish/die_013.png',
   ],
 
   move: [
@@ -421,8 +466,8 @@ const bombArrays = {
 const gameItemArrays = [
   {
     name: 'chest_closed',
-    x: 4800,
-    y: 280,
+    x: 5200,
+    y: 250,
     src: './img/game_items/PNG/neutral/chest_closed.png',
     width: 250,
     height: 80,
@@ -539,7 +584,7 @@ const mobileItems = {
 };
 
 const valuableItems = {
- /*  golden_key: {
+  /* golden_key: {
     name: 'key',
     x: randomRangeX,
     y: randomRangeY,
@@ -550,7 +595,7 @@ const valuableItems = {
 
   golden_key: {
     name: 'key',
-    x: 100,
+    x: 3850,
     y: 100,
     src: './img/game_items/PNG/items/key.png',
     width: 20,

@@ -7,6 +7,7 @@ class World {
   statusBarElements = [];
   bubbles = [];
   keyboard;
+  alreadyShot = false;
   camera_x = 0;
   musicSound = new Audio('./audio/atlantis.mp3');
   starSound = new Audio('./audio/ping_stars.mp3');
@@ -15,6 +16,7 @@ class World {
   bombSound = new Audio('./audio/explosion.mp3');
   ploppSound = new Audio('./audio/plopp.mp3');
   squelchSound = new Audio('./audio/squelch.mp3');
+  successSound = new Audio('./audio/success_fanfare_trumpets.mp3');
 
   constructor(canvas, keyboard) {
     if (music) {
@@ -61,7 +63,7 @@ class World {
       createStoneSlab(-850, 'WESTERN END OF TERRITORY', 20, 'white')
     );
     this.stoneSlabs.push(
-      createStoneSlab(5200, 'EASTERN END OF TERRITORY', 20, 'white')
+      createStoneSlab(5500, 'EASTERN END OF TERRITORY', 20, 'white')
     );
   }
 
@@ -186,11 +188,13 @@ class World {
     this.isCollidingWithValualeItem();
     this.isCollidingWithDecorativeMovingObject();
     this.isCollidingWithEndboss();
+    this.isCollidingWithTreasureChest();
     // console.log('Character-Energie:', this.character.energyCount);
   }
 
   checkKeyboard() {
-    if (this.keyboard.SPACE && this.character.ammunitionCount > 0) {
+    if (this.keyboard.SPACE && !this.alreadyShot) {
+      this.alreadyShot = true;
       let bubble = createNewBubble(
         this.character.x + this.character.width,
         this.character.y + this.character.height - 100
@@ -198,15 +202,20 @@ class World {
       this.bubbles.push(bubble);
       this.ploppSound.play();
       this.character.ammunitionCount -= 5;
-      this.character.changeAmmunitionStatus();
+      setTimeout(() => {
+        this.alreadyShot = false;
+      }, 500);
+      // this.character.changeAmmunitionStatus();
     }
   }
+
+  // && this.character.ammunitionCount > 0
 
   checkBubbleCollisions() {
     this.bubbleIsCollidingWithFish(this.level.blowfishEnemies);
     this.bubbleIsCollidingWithFish(this.level.crabEnemies);
     this.bubbleIsCollidingWithFish(this.level.lionfishEnemies);
-    // this.bubbleIsCollidingWithEndboss();
+    this.bubbleIsCollidingWithEndboss();
   }
 
   draw() {
@@ -280,6 +289,7 @@ class World {
         this.level.objectsMovingUpAndDown,
         this.level.lionfishEnemies,
         this.bubbles,
+        this.level.clownfishVictims
       ];
       return nestedArrays;
     } else {
@@ -336,7 +346,12 @@ class World {
   }
 
   bubbleIsCollidingWithEndboss() {
-    // Code
+    this.bubbles.forEach((bubble) => {
+      if (bubble.isColliding(this.level.endboss)) {
+        console.log('Getroffen!');
+        this.level.endboss.endbossHitCounter++;
+      }
+    });
   }
 
   isCollidingWithCrab() {
@@ -422,10 +437,14 @@ class World {
     if (timeSinceLastCollision < 3000) {
       return;
     }
-    if (this.character.isColliding(this.level.endboss)) {
-      this.character.hit();
-      this.character.changeEnergyStatus();
-      this.lastEndbossCollisionTime = currentTime;
+    if (this.level.endboss.endbossHitCounter == 0) {
+      if (this.character.isColliding(this.level.endboss)) {
+        this.character.hit();
+        this.character.changeEnergyStatus();
+        this.lastEndbossCollisionTime = currentTime;
+      } else {
+        return;
+      }
     }
   }
 
@@ -442,6 +461,26 @@ class World {
             movingItem
           );
         }
+      }
+    });
+  }
+
+  isCollidingWithTreasureChest() {
+    this.level.gameItems.forEach((oneItem) => {
+      if (
+        this.character.keyFound === true &&
+        this.level.endboss.endbossHitCounter >= 3 &&
+        this.character.isColliding(oneItem)
+      ) {
+        let index = this.level.gameItems.findIndex((item) => {
+          return item.name === 'chest_closed';
+        });
+        this.level.gameItems[index].img.src =
+          './img/game_items/PNG/neutral/chest_open.png';
+        this.successSound.play();
+        this.level.spawnClownfishVictims();
+        this.character.loadImagesMoves(mermaidArrays.joy);
+        this.character.playAnimation(mermaidArrays.joy);
       }
     });
   }
@@ -465,6 +504,4 @@ class World {
       }
     }
   }
-
-  
 }
