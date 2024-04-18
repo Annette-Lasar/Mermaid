@@ -22,9 +22,6 @@ class DrawableObject {
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
-    this.img.onload = () => {
-      loadedImages++;
-    };
   }
 
   draw(ctx) {

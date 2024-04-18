@@ -119,6 +119,12 @@ h3 {
   color: var(--accent-color-red);
 }
 
+.start-screen-outer-wrapper {
+  height: 100%;
+  border: red 2px solid;
+  overflow: hidden;
+}
+
 canvas {
   width: 100%;
   height: 100%;
@@ -175,6 +181,12 @@ canvas {
   background-color: grey;
   border: white 1.5px solid;
   border-radius: 8px;
+}
+
+.start-button {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .bold {

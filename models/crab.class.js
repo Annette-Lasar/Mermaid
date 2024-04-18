@@ -2,7 +2,6 @@ class Crab extends MovableObject {
   constructor(imgPath, speed, array) {
     super();
     this.x = 1600 + (Math.random() * 425 * 2) / 3;
-    /* this.y = Math.random() * 480 - 430; // (canvas.height / 3) */
     this.y = -20;
     super.loadImage(imgPath);
     this.img.onload = () => {
@@ -11,7 +10,6 @@ class Crab extends MovableObject {
     };
     this.speed = speed;
     this.loadImagesMoves(array);
-
     this.animate(array);
     this.moveDown();
   }

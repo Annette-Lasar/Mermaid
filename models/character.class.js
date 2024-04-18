@@ -1,5 +1,11 @@
 class Character extends MovableObject {
   world;
+  mermaidIndex = allImages.findIndex((item) => {
+    return item.type === 'mermaidArrays';
+  });
+  statusBarIndex = allImages.findIndex((item) => {
+    return item.type === 'statusbarComponents';
+  });
   swimmingSound = new Audio('./audio/underwater_movement.mp3');
   gameFailedSound = new Audio('./audio/game_failed.mp3');
   keyFound = false;
@@ -19,12 +25,12 @@ class Character extends MovableObject {
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
 
-    this.loadImagesMoves(mermaidArrays.idle);
-    this.loadImagesMoves(mermaidArrays.move);
-    this.loadImagesMoves(mermaidArrays.hurt);
-    this.loadImagesMoves(mermaidArrays.die);
-    this.loadImagesMoves(mermaidArrays.dead);
-    this.animate(mermaidArrays.idle);
+    this.loadImagesMoves(allImages[this.mermaidIndex].images.idle);
+    this.loadImagesMoves(allImages[this.mermaidIndex].images.move);
+    this.loadImagesMoves(allImages[this.mermaidIndex].images.hurt);
+    this.loadImagesMoves(allImages[this.mermaidIndex].images.die);
+    this.animate(allImages[this.mermaidIndex].images.idle);
+   
   }
 
   /*  animate(array) {
@@ -33,18 +39,18 @@ class Character extends MovableObject {
       if (this.isDead()) {
         console.log('tot');
         this.defineImageDimensions();
-        this.playAnimation(mermaidArrays.die);
+        this.playAnimation(allImages[this.mermaidIndex].images.die);
         this.gameFailedSound.play();
       } else if (this.isHurt()) {
         // this.changeEnergyStatus();
         this.defineImageDimensions();
-        this.playAnimation(mermaidArrays.hurt);
+        this.playAnimation(allImages[this.mermaidIndex].images.hurt);
       } else {
         if (this.keyArrowRightIsPressed()) {
-          this.playAnimation(mermaidArrays.move);
+          this.playAnimation(allImages[this.mermaidIndex].images.move);
           this.moveRight();
         } else if (this.keyArrowLeftIsPressed()) {
-          this.playAnimation(mermaidArrays.move);
+          this.playAnimation(allImages[this.mermaidIndex].images.move);
           this.moveLeft();
         } else if (this.keyArrowUpIsPressed()) {
           this.moveUp();
@@ -64,10 +70,10 @@ class Character extends MovableObject {
       this.swimmingSound.pause();
 
       if (this.keyArrowRightIsPressed()) {
-        this.playAnimation(mermaidArrays.move);
+        this.playAnimation(allImages[this.mermaidIndex].images.move);
         this.moveRight();
       } else if (this.keyArrowLeftIsPressed()) {
-        this.playAnimation(mermaidArrays.move);
+        this.playAnimation(allImages[this.mermaidIndex].images.move);
         this.moveLeft();
       } else if (this.keyArrowUpIsPressed()) {
         this.moveUp();
@@ -132,10 +138,11 @@ class Character extends MovableObject {
   }
 
   changeEnergyStatus() {
-    let background1Index = statusbarComponents.findIndex((component) => {
+    let background1Index = allImages[this.statusBarIndex].items.findIndex((component) => {
       return component.name === 'background_bar1';
     });
-    let statusWidth = statusbarComponents[background1Index].width;
+    console.log('background-bar1-Index: ', background1Index);
+    let statusWidth = allImages[this.statusBarIndex].items[background1Index].width;
     let currentPercentage = (statusWidth * this.energyCount) / 100;
     if (currentPercentage > statusWidth) {
       currentPercentage = statusWidth;
@@ -152,10 +159,10 @@ class Character extends MovableObject {
   }
 
   changeAmmunitionStatus() {
-    let background2Index = statusbarComponents.findIndex((component) => {
+    let background2Index = allImages[this.statusBarIndex].items.findIndex((component) => {
       return component.name === 'background_bar2';
     });
-    let statusWidth = statusbarComponents[background2Index].width;
+    let statusWidth = allImages[this.statusBarIndex].items[background2Index].width;
     let currentPercentage = (statusWidth * this.ammunitionCount) / 100;
     if (currentPercentage > statusWidth) {
       currentPercentage = statusWidth;

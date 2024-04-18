@@ -16,6 +16,7 @@ class Level {
   constructor(
     verticallyMovingObjects,
     numLionfishEnemiesToCreate,
+    endbossArray,
     gameItemsData,
     mobileItemsData,
     valuableItemsData
@@ -24,6 +25,7 @@ class Level {
     this.numLionfishEnemiesToCreate = numLionfishEnemiesToCreate;
     this.backgrounds = createBackground(backgroundNumber);
     this.generateLionfishEnemies(numLionfishEnemiesToCreate);
+    this.endbossArray = endbossArray;
     this.gameItemsData = gameItemsData;
     this.mobileItemsData = mobileItemsData;
     this.valuableItemsData = valuableItemsData;
@@ -35,9 +37,8 @@ class Level {
     this.createPearlItem();
     this.createIronChains();
     this.createBombs();
-    this.endboss = createEndboss(lionfishArrays.move[0]);
+    this.endboss = createEndboss(endbossArray[0]);
     this.createObjectsMovingUpAndDown();
-    // this.spawnClownfishVictims();
   }
 
   createObjectsMovingUpAndDown() {
@@ -197,12 +198,15 @@ class Level {
   }
 
   spawnClownfishVictims() {
+    let index = allImages.findIndex((item) => {
+      return item.type === 'clownfishArrays';
+    });
     for (let i = 0; i < 5; i++) {
       let x_axis = Math.random() * (5360 - 5220 + 1) + 5220;
       let y_axis = Math.random() * (400 - 350 + 1) + 350;
       let randomSpeed = 0.75 + Math.random() * 3;
       this.clownfishVictims.push(
-        createClownFish(clownfishArrays.move[0], x_axis, y_axis, randomSpeed)
+        createClownFish(allImages[index].images.move[0], x_axis, y_axis, randomSpeed)
       );
     }
   }

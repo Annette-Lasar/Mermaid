@@ -1,25 +1,12 @@
-/* function createBackground(number) {
-  let x_axis = 852;
-  const backgroundComponents = [];
-  for (let i = -2; i < 10; i++) {
-    for (let j = 0; j < backgroundImagesPathBack.length; j++) {
-      const backgroundImagePathBack = backgroundImagesPathBack[j];
-      const backgroundImagePath =
-        backgroundImagesPathFront + number + backgroundImagePathBack;
-      backgroundComponents.push(
-        new Background(backgroundImagePath, x_axis * i - 80)
-      );
-    }
-  }
-  return backgroundComponents;
-} */
-
 function createBackground() {
+  let index = allImages.findIndex((item) => {
+    return item.type === 'backgroundArrays';
+  });
   let x_axis = 852;
   const backgroundLayers = [];
   for (let i = -2; i < 10; i++) {
-    for (let j = 0; j < backgroundArrays.backgrounds.length; j++) {
-      backgroundImagePath = backgroundArrays.backgrounds[j];
+    for (let j = 0; j < allImages[index].array.length; j++) {
+      backgroundImagePath = allImages[index].array[j];
       backgroundLayers.push(new Background(backgroundImagePath, x_axis * i - 80));
     }
   }
@@ -27,43 +14,54 @@ function createBackground() {
 }
 
 function createCharacter() {
+  let index = allImages.findIndex((item) => {
+    return item.type === 'mermaidArrays';
+  });
   let speed = 10;
-  const character = new Character(mermaidArrays.idle[0], speed);
-  /* await character.loadImage(mermaidArrays.idle[0]); */
+  const character = new Character(allImages[index].images.idle[0], speed);
   return character;
 }
 
 function createYellowCrab() {
+  let index = allImages.findIndex((item) => {
+    return item.type == 'yellowCrabArrays';
+  });
   let id = 'yellow' + objectIDCounter;
   let speed = Math.random() * 0.4 + 0.1;
-  let yellowCrab = new yellowCrabFish(yellowCrabArrays.move[0], speed, id);
+  let yellowCrab = new yellowCrabFish(allImages[index].images.move[0], speed, id);
   objectIDCounter++;
-  /* await yellowCrab.loadImage(yellowCrabMove[0]); */
   return yellowCrab;
 }
 
 function createRedCrab() {
+  let index = allImages.findIndex((item) => {
+    return item.type == 'redCrabArrays';
+  });
   let id = 'red' + objectIDCounter;
   let speed = Math.random() * 0.8 + 0.3;
-  let redCrab = new redCrabFish(redCrabArrays.idle[0], speed, id);
+  let redCrab = new redCrabFish(allImages[index].images.idle[0], speed, id);
   objectIDCounter++;
-  /* await redCrab.loadImage(redCrabIdle[0]); */
   return redCrab;
 }
 
 function createBlowfishEnemies() {
+  let index = allImages.findIndex((item) => {
+    return item.type == 'blowfishArrays';
+  });
   let id = 'blowfish' + objectIDCounter;
   let speed = Math.random() * 2 + 3;
-  let blowFish = new Blowfish(blowfishArrays.move[0], speed, id);
+  let blowFish = new Blowfish(allImages[index].images.move[0], speed, id);
   objectIDCounter++;
-  /* await blowFish.loadImage(blowfishMove[0]); */
   return blowFish;
 }
 
 function createLionfishEnemies(y_axis) {
+  let index = allImages.findIndex((item) => {
+    return item.type == 'lionfishArrays';
+  });
   let id = 'lionfish' + objectIDCounter;
   let speed = Math.random() * 2 + 3;
-  let lionFish = new Lionfish(lionfishArrays.move[0], speed, id, y_axis);
+  let lionFish = new Lionfish(allImages[index].images.move[0], speed, id, y_axis);
   objectIDCounter++;
   return lionFish;
 }
@@ -76,7 +74,6 @@ function createObjectMovingUpAndDown(x_axis, y_axis, imgPath) {
     imgPath,
     speed
   );
-  /* await objectMovingUpAndDown.loadImage(imgPath); */
   return objectMovingUpAndDown;
 }
 
@@ -84,7 +81,6 @@ function createEndboss(imgPath) {
   let id = 'endboss' + objectIDCounter;
   let speed = 5;
   const endboss = new Endboss(id, imgPath, speed);
-  /* await endboss.loadImage(imgPath); */
   objectIDCounter++;
   return endboss;
 }
@@ -108,7 +104,6 @@ function createGameItem(
     portraitWidth
   );
   objectIDCounter++;
-  /* await gameItem.loadImage(imgPath); */
   return gameItem;
 }
 
@@ -133,19 +128,21 @@ function createValuableItem(
     speed
   );
   objectIDCounter++;
-  /* await valuableItem.loadImage(imgPath); */
   return valuableItem;
 }
 
 function createStoneSlab(x_axis, text, textSize, textColor) {
+  let index = allImages.findIndex((item) => {
+    return item.type == 'stoneSlabs';
+  });
+  let imgPath = allImages[index].images.src;
   const stoneSlab = new StoneSlab(
-    './img/game_ui/PNG/menu/window.png',
+    imgPath,
     x_axis,
     text,
     textSize,
     textColor
   );
-  /* await stoneSlab.loadImage('./img/game_ui/PNG/menu/window.png'); */
   return stoneSlab;
 }
 
@@ -172,7 +169,6 @@ function createDecorativeMovingItem(
     timeout
   );
   objectIDCounter++;
-  /* await ironChain.loadImage(ironChainArrays.move[0]); */
   return ironChain;
 }
 
@@ -200,8 +196,12 @@ function filterAndRemoveEnemies(enemiesArray) {
 }
 
 function createNewBubble(x, y) {
+  let index = allImages.findIndex((item) => {
+    return item.type == 'bubbleWeapon';
+  });
+  let bubbleImgPath = allImages[index].images.src;
   let id = 'bubble' + objectIDCounter;
-  let newBubble = new ThrowableObject(id, x, y);
+  let newBubble = new ThrowableObject(id, bubbleImgPath, x, y);
   objectIDCounter++;
   return newBubble;
 }

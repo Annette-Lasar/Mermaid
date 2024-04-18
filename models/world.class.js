@@ -59,9 +59,12 @@ class World {
     );
   }
 
-
   createStatusBarElements() {
-    for (const component of statusbarComponents) {
+    const statusBarIndex = allImages.findIndex((item) => {
+      return item.type === 'statusbarComponents';
+    });
+
+    for (const component of allImages[statusBarIndex].items) {
       this.statusBarElements.push(
         createStatusBar(
           component.name,
@@ -74,7 +77,6 @@ class World {
       );
     }
   }
-  
 
   checkForCurrentEnemies(enemiesArray) {
     if (enemiesArray === this.level.crabEnemies) {
@@ -393,15 +395,16 @@ class World {
         this.level.endboss.endbossHitCounter >= 3 &&
         this.character.isColliding(oneItem)
       ) {
-        let index = this.level.gameItems.findIndex((item) => {
+        let chestIndex = this.level.gameItems.findIndex((item) => {
           return item.name === 'chest_closed';
         });
-        this.level.gameItems[index].img.src =
-          './img/game_items/PNG/neutral/chest_open.png';
+        let openChestIndex = allImages.findIndex((item) => {
+          return item.type === 'openTreasureChest';
+        });
+        this.level.gameItems[chestIndex].img.src =
+          allImages[openChestIndex].images.src;
         successSound.play();
         this.level.spawnClownfishVictims();
-        this.character.loadImagesMoves(mermaidArrays.joy);
-        this.character.playAnimation(mermaidArrays.joy);
       }
     });
   }
@@ -414,13 +417,16 @@ class World {
   }
 
   changeKeyStatus() {
+    let index = allImages.findIndex((item) => {
+      return item.type === 'trueSign';
+    });
+    let imgPathTrueSign = allImages[index].images.src;
     if (this.character.keyFound) {
       const falseSignIndex = this.statusBarElements.findIndex(
         (element) => element.name === 'false_sign'
       );
       if (falseSignIndex !== -1) {
-        this.statusBarElements[falseSignIndex].img.src =
-          './img/game_ui/PNG/settings/true.png';
+        this.statusBarElements[falseSignIndex].img.src = imgPathTrueSign;
         this.addObjectsToCanvas(this.statusBarElements);
       }
     }

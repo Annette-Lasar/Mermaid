@@ -1,5 +1,8 @@
 class Endboss extends MovableObject {
   world;
+  index = allImages.findIndex((item) => {
+    return item.type == 'lionfishArrays';
+  });
   endbossHitCounter = 0;
   endbossDeath = new Audio('./audio/zombie_death.mp3');
   constructor(id, imgPath, speed) {
@@ -13,9 +16,9 @@ class Endboss extends MovableObject {
       let currentWidth = this.img.width > this.img.height ? 450 : 240;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-    this.loadImagesMoves(lionfishArrays.move);
-    this.loadImagesMoves(lionfishArrays.die);
-    this.animateMove(lionfishArrays.move);
+    this.loadImagesMoves(allImages[this.index].images.move);
+    this.loadImagesMoves(allImages[this.index].images.die);
+    this.animateMove(allImages[this.index].images.move);
   }
 
   animateMove(array) {
@@ -32,7 +35,7 @@ class Endboss extends MovableObject {
     this.endbossDeath.pause();
     if (this.endbossHitCounter >= 3) {
       this.speed = 0;
-      this.playAnimation(lionfishArrays.die);
+      this.playAnimation(allImages[this.index].images.die);
       if (noise) {
         setInterval(() => this.endbossDeath.play(), 500);
       }

@@ -1,4 +1,4 @@
-class redCrabFish extends Crab {
+/* class redCrabFish extends Crab {
   id = '';
   constructor(imgPath, speed, id) {
     super(
@@ -9,3 +9,14 @@ class redCrabFish extends Crab {
     this.id = id;
   }
 }
+ */
+
+class redCrabFish extends Crab {
+  constructor(imgPath, speed, id) {
+    const redCrabIndex = allImages.findIndex((item) => item.type === 'redCrabArrays');
+    const redCrabImages = allImages[redCrabIndex].images.idle;
+    super(imgPath, speed, redCrabImages);
+    this.id = id;
+  }
+}
+

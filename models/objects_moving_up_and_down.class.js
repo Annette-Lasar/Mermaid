@@ -1,4 +1,7 @@
 class ObjectMovingUpAndDown extends MovableObject {
+  index = allImages.findIndex((item) => {
+    return item.type == 'blueJellyfishArrays';
+  });
   x = 300;
   y = 300;
 
@@ -12,8 +15,8 @@ class ObjectMovingUpAndDown extends MovableObject {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-    this.loadImagesMoves(blueJellyfishArrays.move);
-    this.animateMove(blueJellyfishArrays.move);
+    this.loadImagesMoves(allImages[this.index].images.move);
+    this.animateMove(allImages[this.index].images.move);
     this.moveUpAndDown();
   }
 

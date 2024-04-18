@@ -1,9 +1,10 @@
 class Lionfish extends Fish {
-  id = '';
+  index = allImages.findIndex((item) => {
+    return item.type == 'lionfishArrays';
+  });
   constructor(imgPath, speed, id, y_axis) {
     super();
     this.x = 3500;
-    // this.y = Math.random() * 420;
     this.speed = speed;
     this.id = id;
     this.y = y_axis;
@@ -12,8 +13,8 @@ class Lionfish extends Fish {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-    this.loadImagesMoves(lionfishArrays.move);
-    this.animate(lionfishArrays.move);
+    this.loadImagesMoves(allImages[this.index].images.move);
+    this.animate(allImages[this.index].images.move);
     this.moveToAndFro();
   }
 
