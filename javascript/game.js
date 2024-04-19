@@ -3,10 +3,11 @@ let keyboard = new Keyboard();
 function init() {
   renderStartScreenContent();
   showStartButton();
-  const imagePaths = getAllImagePaths(allImages);
+  getAllImages();
+  /* const imagePaths = getAllImagePaths(allImages);
   preloadImages(imagePaths).then(() => {
    // später showButton hier einfügen
-  });
+  }); */
 }
 
 
@@ -53,7 +54,7 @@ function getAllImagePaths(obj) {
     }
   }
 
-  console.log('Pfade: ', paths);
+  // console.log('Pfade: ', paths);
   return paths;
 }
 
@@ -79,7 +80,7 @@ function preloadImages(imagePaths) {
       img.src = updatedPath;
       imagePromises.push(img);
     });
-    console.log('Geladene Bilder: ', imagePromises);
+    // console.log('Geladene Bilder: ', imagePromises);
   });
 }
 

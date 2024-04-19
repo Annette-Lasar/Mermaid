@@ -156,7 +156,7 @@ header {
 
 .illustration-right {
   width: 80px;
-  float: right; 
+  float: right;
   margin-left: 0.5em;
 }
 
@@ -268,6 +268,7 @@ h3 {
     'aside main_area main_area main_area'
     'aside main_area main_area main_area'
     'aside main_area main_area main_area';
+  grid-auto-rows: 1fr;
   background-image: url('../img/game_ui/PNG/basic_window/start_screen_bg.png');
   background-size: cover;
   background-position: center;
@@ -369,7 +370,7 @@ h3 {
 .mermaid-image2 {
   height: 200px;
   position: absolute;
-  top: 0;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
 }
