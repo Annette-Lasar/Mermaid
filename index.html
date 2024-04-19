@@ -40,7 +40,8 @@
     <script src="./models/throwable_object.class.js"></script>
     <script src="./models/clownfish.class.js"></script>
     <script src="./javascript/world_create_objects.js"></script>
-    <script src="./javascript/game.js"></script>
+    <script src="./javascript/game.js" defer></script>
+    <script src="./javascript/html_templates.js" defer></script>
   </head>
   <body onload="init()">
     <div class="page">
@@ -52,80 +53,11 @@
             the big fish
           </p>
         </div>
-        <div class="start-screen-outer-wrapper">
-          <div class="start-screen-inner-wrapper">
-            <header class="start-screen-header">
-              <h1 class="h1-playing-area">
-                Mermaid - A girl fights the big fish
-              </h1>
-            </header>
-            <aside class="start-screen-aside">
-              <figure class="wooden-panel" onclick="openStoryInfo()">
-                <button class="story">Story</button>
-              </figure>
-              <figure class="wooden-panel">
-                <button class="game-rules">Game rules</button>
-              </figure>
-              <figure class="wooden-panel">
-                <button class="imprint-button">Imprint</button>
-              </figure>
-
-              <figure class="wooden-panel">
-                <div class="copyright">
-                  coded by Annette Lasar <br />
-                  April 2024
-                </div>
-              </figure>
-            </aside>
-            <div class="main-area">
-              <img
-                class="mermaid-image1"
-                src="./img/mermaid/PNG/mermaid_1/idle_000.png"
-                alt=""
-                class=""
-              />
-
-              <img
-                class="mermaid-image2"
-                src="./img/mermaid/PNG/mermaid_2/idle_000.png"
-                alt=""
-                class=""
-              />
-
-              <img
-                class="mermaid-image3"
-                src="./img/mermaid/PNG/mermaid_3/idle_000.png"
-                alt=""
-                class=""
-              />
-              <div class="stone-slab">
-                <img src="./img/game_ui/PNG/menu/window.png" alt="" />
-              </div>
-
-              <div class="start-panel">
-                <div class="wooden-start-panel">
-                  <img
-                    src="./img/game_ui/PNG/basic_window/wooden_panel.png"
-                    alt=""
-                  />
-                </div>
-                <div class="caption-start-game">
-                  <span class="start-game-text">Start game</span>
-                  <button class="start-game-button">
-                    <img src="./img/game_ui/PNG/buttons/play.png" alt="" />
-                  </button>
-                </div>
-              </div>
-              <div class="sound-button-wrapper">
-                <img src="./img/game_ui/PNG/buttons/music.png" alt="" class="music"/>
-                <img src="./img/game_ui/PNG/buttons/sound.png" alt="" class="noise"/>
-                <span class="music-text">Music off</span>
-                <span class="noise-text">Noise off</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <canvas id="canvas" width="853" height="480" class="d-none"></canvas>
+        <div
+          id="start_screen_outer_wrapper"
+          class="start-screen-outer-wrapper"
+        ></div>
+        <!-- <canvas id="canvas" width="853" height="480" class="d-none"></canvas> -->
       </div>
       <div class="message">
         Please turn your device to landscape orientation.

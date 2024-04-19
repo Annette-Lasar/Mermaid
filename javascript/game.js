@@ -1,34 +1,92 @@
 let keyboard = new Keyboard();
 
 function init() {
+  renderStartScreenContent();
+  showStartButton();
   const imagePaths = getAllImagePaths(allImages);
   preloadImages(imagePaths).then(() => {
-    // createStartButton();
+   // später showButton hier einfügen
   });
+}
+
+
+function renderStartScreenContent() {
+  const outerStartScreen = document.getElementById(
+    'start_screen_outer_wrapper'
+  );
+  outerStartScreen.innerHTML = generateStartScreenContentHTML();
 }
 
 function getAllImagePaths(obj) {
   let paths = [];
-
   for (const key in obj) {
     if (Array.isArray(obj[key])) {
       obj[key].forEach((item) => {
         if (typeof item === 'string') {
+          // Ersetzen Sie die Platzhalter im Dateipfad durch den aktuellen Wert von mermaidType
+          item = item.replace('mermaid_1', `mermaid_${mermaidType}`);
           paths.push(item);
         } else if (typeof item === 'object') {
           paths = paths.concat(getAllImagePaths(item));
         }
       });
     } else if (typeof obj[key] === 'object') {
-      paths = paths.concat(getAllImagePaths(obj[key]));
-    } else if (key === 'src') {
-      paths.push(obj[key]);
+      // Prüfen, ob das aktuelle Objekt den Typ 'mermaidArrays' hat
+      if (obj[key].type === 'mermaidArrays' && obj[key].images) {
+        // Durchsuchen Sie die Bilder im Objekt 'images' und passen Sie die Bildpfade entsprechend an
+        for (const imageKey in obj[key].images) {
+          if (Array.isArray(obj[key].images[imageKey])) {
+            obj[key].images[imageKey].forEach((imagePath) => {
+              if (typeof imagePath === 'string') {
+                const regex = /mermaid_1/g;
+                // Ersetzen Sie die Platzhalter im Dateipfad durch den aktuellen Wert von mermaidType
+                // imagePath = imagePath.replace('mermaid_1', `mermaid_${mermaidType}`);
+                imagePath = imagePath.replace(regex, `mermaid_\${mermaidType}`);
+                paths.push(imagePath);
+              }
+            });
+          }
+        }
+      } else {
+        paths = paths.concat(getAllImagePaths(obj[key]));
+      }
     }
   }
+
+  console.log('Pfade: ', paths);
   return paths;
 }
 
+
 function preloadImages(imagePaths) {
+  return new Promise((resolve) => {
+    let loadedImages = 0;
+    const totalImages = imagePaths.length;
+
+    const onLoadHandler = () => {
+      loadedImages++;
+      if (loadedImages === totalImages) {
+        resolve();
+      }
+    };
+
+    const imagePromises = [];
+    imagePaths.forEach((path) => {
+      let updatedPath = path.replace(/'mermaid_$%7BmermaidType%7D'/g, `mermaid_' + mermaidType`);
+
+      const img = new Image();
+      img.onload = onLoadHandler;
+      img.src = updatedPath;
+      imagePromises.push(img);
+    });
+    console.log('Geladene Bilder: ', imagePromises);
+  });
+}
+
+
+
+
+/* function preloadImages(imagePaths) {
   return new Promise((resolve) => {
     let loadedImages = 0;
     const totalImages = imagePaths.length;
@@ -49,20 +107,73 @@ function preloadImages(imagePaths) {
     });
     console.log('Geladene Bilder: ', imagePromises);
   });
+} */
+
+function showStartButton() {
+  const startButton = document.getElementById('start_game_button');
+  startButton.classList.remove('d-none');
 }
 
+function showMermaidSelection() {
+  const outerStartScreen = document.getElementById(
+    'start_screen_outer_wrapper'
+  );
+  outerStartScreen.innerHTML = generateMermaidSelectionHTML();
+}
 
-function createStartButton() {
-  const startButton = document.createElement('button');
-  startButton.textContent = 'Mein Spiel starten';
-  startButton.classList.add('start-button');
-  startButton.addEventListener('click', startGame);
-  document.body.appendChild(startButton);
+function backToStartScreen() {
+  renderStartScreenContent();
+  showStartButton();
+}
+
+function selectMermaidType(typeNumber) {
+  mermaidType = typeNumber;
+  const outerStartScreen = document.getElementById(
+    'start_screen_outer_wrapper'
+  );
+  outerStartScreen.innerHTML = generateCanvasHTML();
+  startGame();
 }
 
 function startGame() {
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
+}
+
+function openStoryInfo() {
+  const outerStartScreen = document.getElementById(
+    'start_screen_outer_wrapper'
+  );
+  outerStartScreen.innerHTML = generateStoryContentHTML();
+}
+
+function openGameRules() {
+  const outerStartScreen = document.getElementById(
+    'start_screen_outer_wrapper'
+  );
+  outerStartScreen.innerHTML = generateGameRulesContentHTML();
+}
+
+function openImprintInfo() {
+  const outerStartScreen = document.getElementById(
+    'start_screen_outer_wrapper'
+  );
+  outerStartScreen.innerHTML = generateImprintContentHTML();
+}
+
+window.addEventListener('keyup', (event) => {
+  // console.log('Taste: ', event);
+  let keyboardEvent = event.code.toUpperCase();
+  keyboard.setKeyStatus(keyboardEvent, false);
+});
+
+window.addEventListener('keydown', (event) => {
+  let keyboardEvent = event.code.toUpperCase();
+  keyboard.setKeyStatus(keyboardEvent, true);
+});
+
+function createButton(canvas) {
+  canvas.innerHTML += '<button>Start</button>';
 }
 
 /* let fullscreenIsActivated = false;
@@ -144,22 +255,3 @@ function showKeyboardCommands() {
       document.body.removeChild(popUpBackground);
     });
 } */
-
-window.addEventListener('keyup', (event) => {
-  // console.log('Taste: ', event);
-  let keyboardEvent = event.code.toUpperCase();
-  keyboard.setKeyStatus(keyboardEvent, false);
-});
-
-window.addEventListener('keydown', (event) => {
-  let keyboardEvent = event.code.toUpperCase();
-  keyboard.setKeyStatus(keyboardEvent, true);
-});
-
-function createButton(canvas) {
-  canvas.innerHTML += '<button>Start</button>';
-}
-
-
-
-
