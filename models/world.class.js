@@ -18,7 +18,7 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.character = createCharacter();
-    this.bubbles;
+    // this.bubbles;
     this.createStoneSlabs();
     this.createStatusBarElements();
     this.checkIncidents();

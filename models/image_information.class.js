@@ -1,69 +1,98 @@
-/* class ImageInformation {
-  type;
-  relatedImages = [];
+class ImageInformation {
   images = {};
+  object_information = [];
+  relatedImages = [];
+  type;
 
   constructor(type) {
     this.type = type;
-    
   }
 
-  addImages(category, images) {
+  addImageInformation(
+    category,
+    images,
+    name,
+    x,
+    y,
+    src,
+    width,
+    height,
+    landscapeWidth,
+    portraitWidth
+  ) {
     this.relatedImages = [...this.relatedImages, ...images];
     this.images[category] = images;
+    let object = {
+      name: name,
+      x: x,
+      y: y,
+      src: src,
+      width: width,
+      height: height,
+      landscapeWidth: landscapeWidth,
+      portraitWidth: portraitWidth,
+    };
+    this.object_information.push(object);
   }
 
-  addImagesWithCounter(category, images, from, to) {
+
+  addImageInformationWithCounter(
+    category,
+    images,
+    name,
+    x,
+    y,
+    src,
+    width,
+    height,
+    landscapeWidth,
+    portraitWidth,
+    from,
+    to
+  ) {
     for (let i = from; i <= to; i++) {
       let imagesToAdd = [];
-      let categoryWithNumber = category;
+      let categoryWithNumber = category + '_' + i;
       images.forEach((img) => {
-        categoryWithNumber = category + '_' + i;
         imagesToAdd.push(img.replace('COUNTER', i));
-        // imagesToAdd.push(img);
       });
       this.relatedImages = [...this.relatedImages, ...imagesToAdd];
-      this.images[categoryWithNumber] = imagesToAdd; // vorher stand hier nur images
+      this.images[categoryWithNumber] = imagesToAdd;
+      this.addObjectInformation(
+        i,
+        name,
+        x,
+        y,
+        src,
+        width,
+        height,
+        landscapeWidth,
+        portraitWidth
+      );
     }
   }
-} */
 
-class ImageInformation {
-    type;
-    objectInfo = {};
-    relatedImages = [];
-    images = {};
-
-  
-    constructor(type) {
-      this.type = type;      
-    }
-  
-    addImages(category, images, name, x, y, width, height, landscapeWidth, portraitWidth) {
-      this.relatedImages = [...this.relatedImages, ...images];
-      this.images[category] = images;
-      this.objectInfo.name = name;
-      this.objectInfo.x = x;
-      this.objectInfo.y = y;
-      this.objectInfo.width = width;
-      this.objectInfo.height = height;
-      this.objectInfo.landscapeWidth = landscapeWidth;
-      this.objectInfo.portraitWidth = portraitWidth;
-    }
-
-    // , x, y, width, height, landscapeWidth, portraitWidth
-  
-    addImagesWithCounter(category, images, from, to) {
-      for (let i = from; i <= to; i++) {
-        let imagesToAdd = [];
-        let categoryWithNumber = category;
-        images.forEach((img) => {
-          categoryWithNumber = category + '_' + i;
-          imagesToAdd.push(img.replace('COUNTER', i));
-          // imagesToAdd.push(img);
-        });
-        this.relatedImages = [...this.relatedImages, ...imagesToAdd];
-        this.images[categoryWithNumber] = imagesToAdd; // vorher stand hier nur images
-      }
-    }
+  addObjectInformation(
+    i,
+    name,
+    x,
+    y,
+    src,
+    width,
+    height,
+    landscapeWidth,
+    portraitWidth
+  ) {
+    let object = {
+      name: name + '_' + i,
+      x: x,
+      y: y,
+      src: src.replace('COUNTER', i),
+      width: width,
+      height: height,
+      landscapeWidth: landscapeWidth,
+      portraitWidth: portraitWidth,
+    };
+    this.object_information.push(object);
   }
+}

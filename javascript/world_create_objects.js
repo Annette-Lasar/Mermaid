@@ -13,6 +13,21 @@ function createBackground() {
   return backgroundLayers;
 }
 
+/* function createBackground() {
+  let index = allPictures.findIndex((item) => {
+    return item.type === 'backgroundArrays';
+  });
+  let x_axis = 852;
+  const backgroundLayers = [];
+  for (let i = -2; i < 10; i++) {
+    for (let j = 0; j < allPictures[index].images.backgrounds.length; j++) {
+      backgroundImagePath = allPictures[index].images.backgrounds[j];
+      backgroundLayers.push(new Background(backgroundImagePath, x_axis * i - 80));
+    }
+  }
+  return backgroundLayers;
+} */
+
 function createCharacter() {
   let index = allImages.findIndex((item) => {
     return item.type === 'mermaidArrays';
