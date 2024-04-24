@@ -1,7 +1,11 @@
+/**
+ * This class manipulates clownfish that are kept prisoners in the treasure chest.
+ */
 class Clownfish extends Fish {
-  index = allImages.findIndex((item) => {
+  index = allImageObjects.findIndex((item) => {
     return item.type === 'clownfishArrays';
   });
+
   constructor(id, imgPath, x, y, speed) {
     super();
     super.loadImage(imgPath);
@@ -15,10 +19,14 @@ class Clownfish extends Fish {
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
 
-    this.loadImagesMoves(allImages[this.index].images.move);
-    this.animate(allImages[this.index].images.move);
+    this.loadImagesMoves(allImageObjects[this.index].images.move);
+    this.animate(allImageObjects[this.index].images.move);
   }
 
+  /**
+   * This function animates the fish.
+   * @param {Array} array - This is an array with all images to animate the fish
+   */
   animate(array) {
     setInterval(() => {
       let currentWidth = this.img.width > this.img.height ? 60 : 40;
@@ -28,6 +36,9 @@ class Clownfish extends Fish {
     }, 1000 / 10);
   }
 
+  /**
+   * This function moves the fish up.
+   */
   moveUp() {
     this.y -= this.speed;
   }

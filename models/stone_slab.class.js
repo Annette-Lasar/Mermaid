@@ -1,3 +1,6 @@
+/**
+ * This class manipulates stone slabs.
+ */
 class StoneSlab extends ImmobileItem {
   world;
   y = 200;
@@ -15,10 +18,13 @@ class StoneSlab extends ImmobileItem {
     };
   }
 
+  /**
+   * With this function text is written on the stone slabs.
+   */
   drawText() {
     if (this.world) {
-      this.world.ctx.font = `700 ${this.textSize}px Josefin Slab`; // Schriftart und -größe festlegen
-      this.world.ctx.fillStyle = this.textColor; // Textfarbe festlegen
+      this.world.ctx.font = `700 ${this.textSize}px Josefin Slab`;
+      this.world.ctx.fillStyle = this.textColor;
       this.world.ctx.textAlign = 'center';
       this.world.ctx.fillText(
         this.text,

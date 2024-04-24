@@ -1,32 +1,65 @@
-backgroundNumber = 5;
-let indexLionfish = allImages.findIndex((item) => {
+backgroundNumber = 1;
+/**
+ * The index for the lion fish array in the array allImageObjects is returned.
+ */
+let indexLionfish = allImageObjects.findIndex((item) => {
   return item.type == 'lionfishArrays';
 });
 
-let indexGameItems = allImages.findIndex((item) => {
-  return item.type == 'gameItems';
+/**
+ * The index for the blue jellyfish array in the array allImageObjects is returned.
+ */
+let indexBlueJellyfish = allImageObjects.findIndex((item) => {
+  return item.type == 'blueJellyfishArrays';
 });
 
-let indexMobileItems = allImages.findIndex((item) => {
-  return item.type == 'mobileItems';
+/**
+ * The index for the game items array in the array allImageObjects is returned.
+ */
+let indexGameItems = allImageObjects.findIndex((item) => {
+  return item.type == 'gameItemArrays';
 });
 
-let indexValuableItems = allImages.findIndex((item) => {
-  return item.type == 'valuableItems';
+/**
+ * The index for the mobile items array in the array allImageObjects is returned.
+ */
+let indexMobileItems = allImageObjects.findIndex((item) => {
+  return item.type == 'mobileItemArrays';
 });
-const endbossArray = allImages[indexLionfish].images.move;
-const verticallyMovingObjects = endbossArray[0];
+
+/**
+ * The index for the valuable items array in the array allImageObjects is returned.
+ */
+let indexValuableItems = allImageObjects.findIndex((item) => {
+  return item.type == 'valuableItemsArrays';
+});
+
+/**
+ * These are constants that serve as parameters in the Level class.
+ */
+const endbossArray = allImageObjects[indexLionfish].images.move;
+const verticallyMovingObjects =
+  allImageObjects[indexBlueJellyfish].images.move[0];
 const numLionfishEnemiesToCreate = 5;
+const gameItemsData = allImageObjects[indexGameItems].object_information; // defined in javascript => object_information.js
+const mobileItemsData = allImageObjects[indexMobileItems]; // defined in javascript => object_information.js
+const valuableItemsData =
+  allImageObjects[indexValuableItems].object_information; // defined in javascript => object_information.js
 
-const gameItemsData = allImages[indexGameItems].items; // defined in javascript => all_arrays.js
-const mobileItemsData = allImages[indexMobileItems].items; // defined in javascript => all_arrays.js
-const valuableItemsData = allImages[indexValuableItems].items; // defined in javascript => all_arrays.js
+let level1;
 
-const level1 = new Level(
-  verticallyMovingObjects,
-  numLionfishEnemiesToCreate,
-  endbossArray,
-  gameItemsData,
-  mobileItemsData,
-  valuableItemsData
-);
+/**
+ * This function initiates the first level of the game. (Currently there is just one level.)
+ */
+function initLevel() {
+  level1 = new Level(
+    verticallyMovingObjects,
+    numLionfishEnemiesToCreate,
+    endbossArray,
+    gameItemsData,
+    mobileItemsData,
+    valuableItemsData
+  );
+}
+
+

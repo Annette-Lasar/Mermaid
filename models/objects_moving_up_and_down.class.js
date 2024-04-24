@@ -1,5 +1,9 @@
+/**
+ * This class manipulates objects that are moving up and down like blue
+ * jellyfish in level 1.
+ */
 class ObjectMovingUpAndDown extends MovableObject {
-  index = allImages.findIndex((item) => {
+  index = allImageObjects.findIndex((item) => {
     return item.type == 'blueJellyfishArrays';
   });
   x = 300;
@@ -15,11 +19,17 @@ class ObjectMovingUpAndDown extends MovableObject {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-    this.loadImagesMoves(allImages[this.index].images.move);
-    this.animateMove(allImages[this.index].images.move);
+    this.loadImagesMoves(allImageObjects[this.index].images.move);
+    this.animateMove(allImageObjects[this.index].images.move);
     this.moveUpAndDown();
   }
 
+
+  /**
+   * This function animates the objects. 
+   * @param {Array} array - This is an array with all images necessaray 
+   * to animate the objects.
+   */
   animateMove(array) {
     setInterval(() => {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;
@@ -28,6 +38,9 @@ class ObjectMovingUpAndDown extends MovableObject {
     }, 50);
   }
 
+  /**
+   * This function moves the objects up and down.
+   */
   moveUpAndDown() {
     if (this.y > 0 && this.y < 430) {
       this.moveVertically();
@@ -37,6 +50,9 @@ class ObjectMovingUpAndDown extends MovableObject {
     }
   }
 
+  /**
+   * This functions sets the speed for the vertical movement.
+   */
   moveVertically() {
     this.y -= this.speed;
     setTimeout(() => {

@@ -1,6 +1,8 @@
+/**
+ * This class creates an array with all images that are preloaded.
+ */
 class ImageInformation {
   images = {};
-  object_information = [];
   relatedImages = [];
   type;
 
@@ -8,48 +10,25 @@ class ImageInformation {
     this.type = type;
   }
 
-  addImageInformation(
-    category,
-    images,
-    name,
-    x,
-    y,
-    src,
-    width,
-    height,
-    landscapeWidth,
-    portraitWidth
-  ) {
+  /**
+   * This function pushes all image paths into the array relatedImages.
+   * @param {string} category - This is the name of the category in the array.
+   * @param {Array} images - This is an array with all image paths.
+   */
+  addImageInformation(category, images) {
     this.relatedImages = [...this.relatedImages, ...images];
     this.images[category] = images;
-    let object = {
-      name: name,
-      x: x,
-      y: y,
-      src: src,
-      width: width,
-      height: height,
-      landscapeWidth: landscapeWidth,
-      portraitWidth: portraitWidth,
-    };
-    this.object_information.push(object);
   }
 
-
-  addImageInformationWithCounter(
-    category,
-    images,
-    name,
-    x,
-    y,
-    src,
-    width,
-    height,
-    landscapeWidth,
-    portraitWidth,
-    from,
-    to
-  ) {
+  /**
+   * This function pushes all mermaid image paths into the array relatedImages and
+   * replaces the word 'COUNTER' by a number so that later a mermaid type can be selected.
+   * @param {string} category - This is the name of the category in the array.
+   * @param {Array} images - This is an array with all image paths for mermaids.
+   * @param {number} from - This is the number of the first mermaid type.
+   * @param {number} to - This is the number of the last mermaid type.
+   */
+  addImageInformationWithCounter(category, images, from, to) {
     for (let i = from; i <= to; i++) {
       let imagesToAdd = [];
       let categoryWithNumber = category + '_' + i;
@@ -58,41 +37,6 @@ class ImageInformation {
       });
       this.relatedImages = [...this.relatedImages, ...imagesToAdd];
       this.images[categoryWithNumber] = imagesToAdd;
-      this.addObjectInformation(
-        i,
-        name,
-        x,
-        y,
-        src,
-        width,
-        height,
-        landscapeWidth,
-        portraitWidth
-      );
     }
-  }
-
-  addObjectInformation(
-    i,
-    name,
-    x,
-    y,
-    src,
-    width,
-    height,
-    landscapeWidth,
-    portraitWidth
-  ) {
-    let object = {
-      name: name + '_' + i,
-      x: x,
-      y: y,
-      src: src.replace('COUNTER', i),
-      width: width,
-      height: height,
-      landscapeWidth: landscapeWidth,
-      portraitWidth: portraitWidth,
-    };
-    this.object_information.push(object);
   }
 }

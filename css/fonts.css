@@ -95,15 +95,6 @@
   src: url('../fonts/roboto-v30-latin-900italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/* rubik-doodle-shadow-regular - latin_latin-ext */
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Rubik Doodle Shadow';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/rubik-doodle-shadow-v1-latin_latin-ext-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-
 /* salsa-regular - latin */
 @font-face {
     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */

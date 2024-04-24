@@ -12,9 +12,11 @@
     />
     <link rel="stylesheet" href="./css/reset_stylesheet.css" />
     <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/loading_animation.css" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/media_queries.css" />
     <script src="./javascript/data.js"></script>
-    <script src="./javascript/all_arrays.js"></script>
+    <script src="./javascript/object_information.js"></script>
     <script src="./models/image_information.class.js"></script>
     <script src="./models/drawable_object.class.js"></script>
     <script src="./models/movable_object.class.js"></script>
@@ -25,6 +27,7 @@
     <script src="./models/fish.class.js"></script>
     <script src="./models/blowfish.class.js"></script>
     <script src="./models/lionfish.class.js"></script>
+    <script src="./models/collision_detector.class.js"></script>
     <script src="./models/world.class.js"></script>
     <script src="./models/endboss.class.js"></script>
     <script src="./models/keyboard.class.js"></script>
@@ -43,6 +46,7 @@
     <script src="./javascript/world_create_objects.js"></script>
     <script src="./javascript/create_all_images_information.js" defer></script>
     <script src="./javascript/game.js" defer></script>
+
     <script src="./javascript/html_templates.js" defer></script>
   </head>
   <body onload="init()">
@@ -59,8 +63,14 @@
           id="start_screen_outer_wrapper"
           class="start-screen-outer-wrapper"
         ></div>
-        <!-- <canvas id="canvas" width="853" height="480" class="d-none"></canvas> -->
       </div>
+      <div
+        id="loading_spinner"
+        class="loading-spinner background-radial-gradient"
+      >
+        <div class="spinner"></div>
+      </div>
+
       <div class="message">
         Please turn your device to landscape orientation.
       </div>

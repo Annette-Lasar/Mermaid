@@ -1,0 +1,29 @@
+.loading-spinner {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 200px;
+  height: 200px;
+  background-image: url('../img/game_items/PNG/items/pearl.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

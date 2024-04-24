@@ -1,7 +1,10 @@
+/**
+ * This class manipulates yellow crabs.
+ */
 class yellowCrabFish extends Crab {
   constructor(imgPath, speed, id) {
-    const yellowCrabIndex = allImages.findIndex((item) => item.type === 'yellowCrabArrays');
-    const yellowCrabImages = allImages[yellowCrabIndex].images.move;
+    const yellowCrabIndex = allImageObjects.findIndex((item) => item.type === 'yellowCrabArrays');
+    const yellowCrabImages = allImageObjects[yellowCrabIndex].images.move;
     super(imgPath, speed, yellowCrabImages);
     this.id = id;
   }

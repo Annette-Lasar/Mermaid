@@ -52,16 +52,15 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: orchid 3px solid;
 }
 
 h1 {
-  font-family: 'Rubik Doodle Shadow';
-  font-size: 4.2rem;
+  font-family: 'Cartoon Shout';
+  font-size: 3rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 4px;
-  color: darkblue;
+  color: var(--background-color-darkblue);
 }
 
 header {
@@ -81,40 +80,33 @@ header {
 
 .h1-playing-area-story {
   font-family: 'Cartoon Shout';
-  font-size: 2.5rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.5rem);
 }
 
 .textarea-wrapper {
   height: calc(100% - 70px);
   margin: 0 auto;
-  aspect-ratio: 16 / 9;
   padding: 0.5em 1em;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../img/game_ui/PNG/registration/window_4.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  border: red 1px solid;
 }
 
-.mermaid-selection-wrapper {
+.mermaid-selection-wrapper,
+.game-result-wrapper {
   height: calc(100% - 70px);
   margin: 0 auto;
-  aspect-ratio: 16 / 9;
   padding: 0.5em 1em;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: red 1px solid;
+  justify-content: space-evenly;
 }
 
 .mermaid {
+  width: 25%;
   position: relative;
-  border: orchid 2px solid;
 }
 
 .mermaid-name {
@@ -131,21 +123,36 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: blue 2px solid;
+  font-family: 'Cartoon Shout';
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .textarea {
-  padding: 0.5em 0;
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 400px;
   height: 95%;
-  width: 100%;
-  overflow-y: auto;
+  margin: 0 auto;
+  padding: 0.5em 0;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: yellow 2px solid;
+  justify-content: center;
+  background-image: url('../img/game_ui/PNG/registration/window_4.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.text {
+  width: 100%;
+  height: 100%;
+  padding: 0 0 0.5em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
 }
 
 .story-text {
@@ -191,18 +198,6 @@ header {
   font-size: 64px;
 }
 
-/* .imprint {
-  font-family: 'Cartoon Shout';
-  text-align: center;
-  color: white;
-}
-
-.imprint-header-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-} */
-
 .back-button {
   height: 50px;
   background-color: transparent;
@@ -221,8 +216,7 @@ header {
 h2,
 h3,
 p,
-span,
-.mermaid-name {
+span {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -248,14 +242,13 @@ h3 {
   right: 12px;
   rotate: -6deg;
   font-family: 'Salsa';
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: var(--accent-color-red);
 }
 
 .start-screen-outer-wrapper {
   height: 100%;
   width: 100%;
-  border: greenyellow 2px solid;
 }
 
 .start-screen-inner-wrapper {
@@ -433,7 +426,7 @@ h3 {
 }
 
 .sound-button-wrapper {
-  width: 150px;
+  width: 180px;
   padding: 0.5em;
   position: absolute;
   bottom: 0;
@@ -490,37 +483,104 @@ canvas {
   background-color: royalblue;
 }
 
-/* .playing-area-wrapper img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border:red 2px solid;
-} */
-
 .content-wrapper {
   height: 100%;
   padding: 2em 2em;
   overflow-y: auto;
-  /* background-image: url('../img/game_ui/PNG/registration/window_2.png'); */
   background-image: url('../img/game_ui/PNG/settings/window_4.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left center;
-  /* background-attachment: fixed; */
-  /* border: red 1px solid; */
 }
 
-.content-wrapper::-webkit-scrollbar {
-  width: 16px;
+.jellyfish_01,
+.jellyfish_02,
+.crab_01,
+.crab_02,
+.clownfish,
+.lionfish {
+  position: absolute;
 }
 
-.content-wrapper::-webkit-scrollbar-track {
+.jellyfish_01 {
+  height: 96px;
+  top: 10%;
+  left: 0;
+}
+
+.crab_01 {
+  height: 48px;
+  top: 10%;
+  left: 0;
+}
+
+.crab_02 {
+  height: 64px;
+  bottom: 20%;
+  left: 30px;
+}
+
+.jellyfish_02 {
+  height: 64px;
+  bottom: 20%;
+  left: 20%;
+}
+
+.clownfish {
+  height: 40%;
+  right: -30px;
+}
+
+.lionfish {
+  height: 60%;
+  right: -60px;
+}
+
+.game-result {
+  height: 100%;
+  position: relative;
+  border: green 2px solid;
+}
+
+.game-result img {
+  max-height: 100%;
+}
+
+.star-results {
+  height: 128px;
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 15%;
+}
+
+.game-result-sign {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%) rotate(-4deg);
+  height: 20%;
+}
+
+.replay-button {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 20%;
+}
+
+.text::-webkit-scrollbar {
+  width: 12px;
+}
+
+.text::-webkit-scrollbar-track {
   background: #fcfcfc;
 }
 
-.content-wrapper::-webkit-scrollbar-thumb {
+.text::-webkit-scrollbar-thumb {
   background-color: grey;
   border: white 1.5px solid;
   border-radius: 8px;
@@ -532,77 +592,85 @@ canvas {
   left: 0;
 }
 
+.mobile-button-wrapper {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow-buttons {
+  width: 50%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    'left up right'
+    'left down right';
+}
+
+.left,
+.up,
+.down,
+.right {
+  height: 48px;
+  aspect-ratio: 1 / 1;
+  border: black 2px solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left {
+  grid-area: left;
+  align-self: center;
+  justify-self: center;
+  transform: rotate(-180deg);
+}
+
+.up {
+  grid-area: up;
+  align-self: center;
+  justify-self: center;
+  transform: rotate(-90deg);
+}
+
+.down {
+  grid-area: down;
+  align-self: center;
+  justify-self: center;
+  transform: rotate(90deg);
+}
+
+.right {
+  grid-area: right;
+  align-self: center;
+  justify-self: center;
+}
+
+.space-button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.space-button img {
+  height: 48px;
+  border-radius: 50%;
+  border: black 2px solid;
+}
+
+
+
 .bold {
   font-weight: 700;
 }
 
 .d-none {
   display: none;
-}
-
-@media (min-width: 853px) and (min-height: 560px) and (orientation: landscape) {
-  .playing-area-wrapper {
-    flex-direction: column;
-  }
-
-  .headline {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .start-screen-outer-wrapper {
-    height: calc(100% - 68px);
-  }
-}
-
-@media (min-width: 853px) and (height < 480px) and (orientation: landscape) {
-  .playing-area-wrapper {
-    max-height: 90vh;
-    max-height: 90dvh;
-  }
-}
-
-@media (min-width: 853px) and (height > 480px) and (orientation: landscape) {
-  .playing-area-wrapper {
-    width: 100%;
-    max-width: 853px;
-    height: 100%;
-    max-height: 560px;
-  }
-
-  canvas {
-    width: 853px;
-    /* width: 90vw; */
-    height: 480px;
-    /* height: calc(90vw * 480 / 720); */
-  }
-}
-
-@media (max-width: 853px) and (orientation: portrait) {
-  .page {
-    position: relative;
-  }
-
-  .playing-area-wrapper {
-    display: none;
-  }
-
-  canvas {
-    width: 100%;
-    height: calc(100vw * 480 / 853);
-  }
-  .message {
-    width: 100%;
-    padding: 20px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    text-align: center;
-    line-height: 1.3;
-    font-family: 'Salsa';
-    font-size: 24px;
-    color: var(--accent-color-white);
-  }
 }

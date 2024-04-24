@@ -1,3 +1,6 @@
+/**
+ * This class manipulates bubbles that are used as a weapon.
+ */
 class ThrowableObject extends MovableObject {
   world;
   constructor(id, imgPath, x, y) {
@@ -13,6 +16,9 @@ class ThrowableObject extends MovableObject {
     this.shoot();
   }
 
+  /**
+   * This function sets the speed for a bubble that is shot
+   */
   shoot() {
     setInterval(() => {
       this.speedX = 10;

@@ -1,3 +1,6 @@
+/**
+ * This class manipulates the background layers.
+ */
 class Background extends MovableObject {
   constructor(imgPath, x) {
     super();

@@ -1,6 +1,17 @@
+/**
+ * This class manipulates all decorative items on the canvas.
+ */
 class GameItem extends ImmobileItem {
   world;
-  constructor(name, id, x_axis, y_axis, imgPath, landscapeWidth, portraitWidth) {
+  constructor(
+    name,
+    id,
+    x_axis,
+    y_axis,
+    imgPath,
+    landscapeWidth,
+    portraitWidth
+  ) {
     super(imgPath);
     this.name = name;
     this.id = id;
@@ -14,19 +25,6 @@ class GameItem extends ImmobileItem {
           ? this.landscapeWidth
           : this.portraitWidth;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
-      /* this.rotateObject(); */
     };
-  }
-
-  rotateObject() {
-    if (this.world) {
-      this.world.ctx.save(); // Speichern des aktuellen Canvas-Kontexts
-      if (this.name === 'anchor') {
-        this.world.ctx.translate(this.x, this.y); // Position des Bildes festlegen
-        this.world.ctx.rotate((Math.PI / 180) * 90); // Rotation um 90 Grad im Bogenmaß
-        this.world.ctx.drawImage(this.img, 0, 0, this.width, this.height); // Zeichnen des Bildes
-      }
-      this.world.ctx.restore(); // Wiederherstellen des vorherigen Canvas-Kontexts
-    }
   }
 }

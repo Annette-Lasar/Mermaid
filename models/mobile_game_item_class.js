@@ -21,6 +21,10 @@ class MobileGameItem extends MovableObject {
     this.animateMove(this.array);
   }
 
+  /**
+   * This function animates decorative mobile items like chains and bombs.
+   * @param {Array} array 
+   */
   animateMove(array) {
     setInterval(() => {
       let currentWidth =

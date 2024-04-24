@@ -1,5 +1,8 @@
+/**
+ * This class manipulates blowfish enemies.
+ */
 class Blowfish extends Fish {
-  index = allImages.findIndex((item) => {
+  index = allImageObjects.findIndex((item) => {
     return item.type == 'blowfishArrays';
   });
   constructor(imgPath, speed, id) {
@@ -13,10 +16,14 @@ class Blowfish extends Fish {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-    this.loadImagesMoves(allImages[this.index].images.move);
-    this.animate(allImages[this.index].images.move);
+    this.loadImagesMoves(allImageObjects[this.index].images.move);
+    this.animate(allImageObjects[this.index].images.move);
   }
 
+  /**
+   * This function animates the blowfish on the canvas.
+   * @param {Array} array - This is an array with image paths to animate the fish.
+   */
   animate(array) {
     setInterval(() => {
       let currentWidth = this.img.width > this.img.height ? 100 : 80;

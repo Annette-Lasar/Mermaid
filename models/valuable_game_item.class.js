@@ -1,3 +1,6 @@
+/**
+ * This class manipulates valuable game items like key, starfish and pearls.
+ */
 class ValuableGameItem extends MovableObject {
   world;  
   constructor(
@@ -30,6 +33,9 @@ class ValuableGameItem extends MovableObject {
       this.moveUpAndDown();
     }
   
+    /**
+     * This function moves the items slightly up and down.
+     */
     moveUpAndDown() {
       const minY = this.currentY - 10;
       const maxY = this.currentY + 10;
@@ -42,6 +48,9 @@ class ValuableGameItem extends MovableObject {
       }
     }
   
+    /**
+     * This function sets the speed for the vertical movement.
+     */
     moveVertically() {
       this.y -= this.speed;
       setTimeout(() => {

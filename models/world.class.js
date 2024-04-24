@@ -1,35 +1,52 @@
+/**
+ * This class manipulates the general logic of the game.
+ */
 class World {
   canvas;
   ctx;
   level = level1;
   character;
+  stones;
   stoneSlabs = [];
   statusBarElements = [];
   bubbles = [];
   keyboard;
   alreadyShot = false;
   camera_x = 0;
+  gameWon = false;
+  collisionDetector;
 
   constructor(canvas, keyboard) {
-    if (music) {
-      this.playMusic();
-    }
+    this.checkForMusic();
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.keyboard.linkButtonsToPressEvents();
     this.character = createCharacter();
-    // this.bubbles;
     this.createStoneSlabs();
     this.createStatusBarElements();
     this.checkIncidents();
     this.draw();
-    setInterval(() => {
-      filterAndRemoveEnemies(this.level.crabEnemies);
-      filterAndRemoveEnemies(this.level.blowfishEnemies);
-    }, 3000);
+    this.removeCertainEnemies();
     this.setWorld();
+    this.collisionDetector = new CollisionDetector(this);
+    this.character.changeEnergyStatus();
+    this.character.changeAmmunitionStatus();
   }
 
+  /**
+   * This function checks whether the global variable music is true or false.
+   */
+  checkForMusic() {
+    if (music) {
+      this.playMusic();
+    }
+  }
+
+  /**
+   * This function establishes a link between different classes that are not
+   * in a hierarchical structure to one another.
+   */
   setWorld() {
     this.character.world = this;
     this.level.endboss.world = this;
@@ -50,21 +67,48 @@ class World {
     });
   }
 
+  /**
+   * This function removes enemies that have left the visible realm of the canvas.
+   */
+  removeCertainEnemies() {
+    setInterval(() => {
+      filterAndRemoveEnemies(this.level.crabEnemies);
+      filterAndRemoveEnemies(this.level.blowfishEnemies);
+    }, 3000);
+  }
+
+  /**
+   * This function creates stone slabs that mark the borders of the playing area.
+   */
   createStoneSlabs() {
+    let index = findStoneSlabArrayIndex();
+    let stoneSlabIndex1 = findStoneSlabIndex('stone_slab_1', index);
+    let stoneSlabIndex2 = findStoneSlabIndex('stone_slab_2', index);
     this.stoneSlabs.push(
-      createStoneSlab(-850, 'WESTERN END OF TERRITORY', 20, 'white')
+      createStoneSlab(
+        allImageObjects[index].object_information[stoneSlabIndex1].src,
+        allImageObjects[index].object_information[stoneSlabIndex1].x,
+        'WESTERN END OF TERRITORY'
+      )
     );
     this.stoneSlabs.push(
-      createStoneSlab(5500, 'EASTERN END OF TERRITORY', 20, 'white')
+      createStoneSlab(
+        allImageObjects[index].object_information[stoneSlabIndex2].src,
+        allImageObjects[index].object_information[stoneSlabIndex2].x,
+        'EASTERN END OF TERRITORY'
+      )
     );
   }
 
+  /**
+   * This function creates status bar elements.
+   */
   createStatusBarElements() {
-    const statusBarIndex = allImages.findIndex((item) => {
-      return item.type === 'statusbarComponents';
+    const statusBarIndex = allImageObjects.findIndex((item) => {
+      return item.type === 'statusBarComponentArrays';
     });
-
-    for (const component of allImages[statusBarIndex].items) {
+    for (const component of allImageObjects[statusBarIndex]
+      .object_information) {
       this.statusBarElements.push(
         createStatusBar(
           component.name,
@@ -78,6 +122,11 @@ class World {
     }
   }
 
+  /**
+   * This function checks if certain enemies have left the visible realm of the canvas.
+   * @param {Array} enemiesArray - This is an array of crabs or blowfish.
+   * @returns - It returns the enemies that have left the canvas.
+   */
   checkForCurrentEnemies(enemiesArray) {
     if (enemiesArray === this.level.crabEnemies) {
       let enemies = enemiesArray.filter((enemy) => enemy.y > CANVAS_HEIGHT);
@@ -88,11 +137,24 @@ class World {
     }
   }
 
+  /**
+   * This function plays music in a loop.
+   */
   playMusic() {
-    this.musicSound.play();
+    musicSound.play();
     setTimeout(this.playMusic.bind(this), 100);
   }
 
+  /**
+   * This function pauses the music.
+   */
+  pauseMusic() {
+    musicSound.pause();
+  }
+
+  /**
+   * This function calls other functions that check for collisions and keyboard events.
+   */
   checkIncidents() {
     setInterval(() => {
       this.checkCollisions();
@@ -101,20 +163,30 @@ class World {
     }, 50);
   }
 
+  /**
+   * This function calls other functions that check for collisions of the character with
+   * enemies or items.
+   */
   checkCollisions() {
-    this.isCollidingWithBlowfish();
-    this.isCollidingWithCrab();
-    this.isCollidingWithObjectMovingUpAndDown();
-    this.isCollidingWithLionfish();
-    this.isCollidingWithValualeItem();
-    this.isCollidingWithDecorativeMovingObject();
-    this.isCollidingWithEndboss();
-    this.isCollidingWithTreasureChest();
-    // console.log('Character-Energie:', this.character.energyCount);
+    // this.isCollidingWithBlowfish();
+    // this.isCollidingWithCrab();
+    // this.isCollidingWithObjectMovingUpAndDown();
+    // this.isCollidingWithLionfish();
+    // this.isCollidingWithValualeItem();
+    // this.isCollidingWithDecorativeMovingObject();
+    // this.isCollidingWithEndboss();
+    // this.isCollidingWithTreasureChest();
   }
 
+  /**
+   * This function checks if the player shoots bubbles.
+   */
   checkKeyboard() {
-    if (this.keyboard.SPACE && !this.alreadyShot) {
+    if (
+      this.keyboard.SPACE &&
+      !this.alreadyShot &&
+      this.character.ammunitionCount > 0
+    ) {
       this.alreadyShot = true;
       let bubble = createNewBubble(
         this.character.x + this.character.width,
@@ -124,16 +196,17 @@ class World {
       if (noise) {
         ploppSound.play();
       }
-      this.character.ammunitionCount -= 5;
+      this.character.ammunitionCount -= 10;
       setTimeout(() => {
         this.alreadyShot = false;
       }, 500);
-      // this.character.changeAmmunitionStatus();
+      this.character.changeAmmunitionStatus();
     }
   }
 
-  // && this.character.ammunitionCount > 0
-
+  /**
+   * This function checks if bubbles are colliding with enemies.
+   */
   checkBubbleCollisions() {
     this.bubbleIsCollidingWithFish(this.level.blowfishEnemies);
     this.bubbleIsCollidingWithFish(this.level.crabEnemies);
@@ -141,6 +214,9 @@ class World {
     this.bubbleIsCollidingWithEndboss();
   }
 
+  /**
+   * This function draws elements on the canvas.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -168,25 +244,34 @@ class World {
     });
   }
 
+  /**
+   * This function adds objects to the canvas.
+   * @param {Objects} objects - All objects that need to be drawn on the canvas.
+   */
   addObjectsToCanvas(objects) {
     objects.forEach((o) => {
       this.drawOnCanvas(o);
     });
   }
 
+  /**
+   * This function draws objects on the canvas.
+   * @param {Object} mo - All objects that need to be drawn on the canvas.
+   */
   drawOnCanvas(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
-
-    mo.drawFrame(this.ctx);
-
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
   }
 
+  /**
+   * This function flips images when the moving direction changes.
+   * @param {Object} mo - Any object that might change direction while moving.
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -194,11 +279,21 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * This function flips back when the moving direction changes back to original.
+   * @param {Object} mo - Any object that might change direction while moving.
+   */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
 
+  /**
+   * This function creates an array containing all arrays with objects
+   * that need to be drawn on the canvas.
+   * @param {Array} arrayType - All arrays with objects that need to be drawn on the canvas.
+   * @returns - It returns an array containing other arrays or containing objects.
+   */
   defineArrays(arrayType) {
     if (arrayType === 'nestedArrays') {
       const nestedArrays = [
@@ -221,14 +316,10 @@ class World {
     }
   }
 
-  isCollidingWithBlowfish() {
-    this.level.blowfishEnemies.forEach((blowfish) => {
-      if (this.character.isColliding(blowfish)) {
-        this.character.hit();
-      }
-    });
-  }
-
+  /**
+   * This function checks if a bubble is colliding with a fish, jellyfish or a crab.
+   * @param {Array} array - This is an array with fish objects.
+   */
   bubbleIsCollidingWithFish(array) {
     array.forEach((fish) => {
       this.bubbles.forEach((bubble) => {
@@ -241,13 +332,21 @@ class World {
     });
   }
 
+  /**
+   * This function removes a bubble and a fish after a collision.
+   * @param {Array} array
+   * @param {object} bubble
+   * @param {object} fish
+   */
   removeFishAndBubble(array, bubble, fish) {
     let fishIndex = array.findIndex((oneFish) => {
       return oneFish.id === fish.id;
     });
     if (fishIndex !== -1) {
       array.splice(fishIndex, 1);
-      squelchSound.play();
+      if (noise) {
+        squelchSound.play();
+      }
     }
     let bubbleIndex = this.bubbles.findIndex((oneBubble) => {
       return oneBubble.id === bubble.id;
@@ -257,178 +356,45 @@ class World {
     }
   }
 
+  /**
+   * This function removes a bubble after a certain time if no collision has occurred.
+   * @param {object} bubble
+   */
   removeBubbleAfterTimeout(bubble) {
-    let bubbleIndex = this.bubbles.findIndex((oneBubble) => {
-      return oneBubble.id === bubble.id;
-    });
-    if (bubbleIndex !== -1) {
-      setTimeout(() => {
-        this.bubbles.splice(bubbleIndex, 1);
-      }, 3000);
+    if (!this.isNotCollided) {
+      this.isNotCollided = true;
+      let bubbleIndex = this.bubbles.findIndex((oneBubble) => {
+        return oneBubble.id === bubble.id;
+      });
+      if (bubbleIndex !== -1) {
+        setTimeout(() => {
+          this.bubbles.splice(bubbleIndex, 1);
+        }, 2000);
+      }
     }
   }
 
+  /**
+   * This function checks if a bubble has collided with the endboss.
+   */
   bubbleIsCollidingWithEndboss() {
     this.bubbles.forEach((bubble) => {
       if (bubble.isColliding(this.level.endboss)) {
-        console.log('Getroffen!');
         this.level.endboss.endbossHitCounter++;
       }
     });
   }
 
-  isCollidingWithCrab() {
-    const currentTime = Date.now();
-    const timeSinceLastCollision = currentTime - this.lastCrabCollisionTime;
-    if (timeSinceLastCollision < 3000) {
-      return;
+  /**
+   * This function renders the winner screen.
+   */
+  renderWinnerScreenContent() {
+    if (noise) {
+      successSound.play();
     }
-    this.level.crabEnemies.forEach((crab) => {
-      if (this.character.isColliding(crab)) {
-        this.character.hit();
-        this.character.changeEnergyStatus();
-        this.lastCrabCollisionTime = currentTime;
-      }
-    });
-  }
-
-  isCollidingWithObjectMovingUpAndDown() {
-    const currentTime = Date.now();
-    const timeSinceLastCollision =
-      currentTime - this.lastJellyfishCollisionTime;
-    if (timeSinceLastCollision < 3000) {
-      return;
-    }
-    this.level.objectsMovingUpAndDown.forEach((objectMoving) => {
-      if (this.character.isColliding(objectMoving)) {
-        this.character.hit();
-        this.character.changeEnergyStatus();
-        this.lastJellyfishCollisionTime = currentTime;
-      }
-    });
-  }
-
-  isCollidingWithLionfish() {
-    const currentTime = Date.now();
-    const timeSinceLastCollision = currentTime - this.lastLionfishCollisionTime;
-    if (timeSinceLastCollision < 3000) {
-      return;
-    }
-    this.level.lionfishEnemies.forEach((lionfish) => {
-      if (this.character.isColliding(lionfish)) {
-        this.character.hit();
-        this.character.changeEnergyStatus();
-        this.lastLionfishCollisionTime = currentTime;
-      }
-    });
-  }
-
-  isCollidingWithValualeItem() {
-    this.level.valuableItems.forEach((valuableItem) => {
-      if (this.character.isColliding(valuableItem)) {
-        if (valuableItem.name === 'starfish') {
-          if (noise) {
-            starSound.play();
-          }
-          this.character.energyCount += 10;
-          this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
-          this.character.changeEnergyStatus();
-        }
-        if (valuableItem.name === 'pearl') {
-          if (noise) {
-            pearlSound.play();
-          }
-          this.character.ammunitionCount += 10;
-          this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
-          this.character.changeAmmunitionStatus();
-        }
-        if (valuableItem.name === 'key') {
-          if (noise) {
-            keySound.play();
-          }
-          this.character.keyFound = true;
-          this.removeItemFromCanvas(this.level.valuableItems, valuableItem);
-          this.changeKeyStatus();
-        }
-      }
-    });
-  }
-
-  isCollidingWithEndboss() {
-    const currentTime = Date.now();
-    const timeSinceLastCollision = currentTime - this.lastEndbossCollisionTime;
-    if (timeSinceLastCollision < 3000) {
-      return;
-    }
-    if (this.level.endboss.endbossHitCounter == 0) {
-      if (this.character.isColliding(this.level.endboss)) {
-        this.character.hit();
-        this.character.changeEnergyStatus();
-        this.lastEndbossCollisionTime = currentTime;
-      } else {
-        return;
-      }
-    }
-  }
-
-  isCollidingWithDecorativeMovingObject() {
-    this.level.decorativeMovingItems.forEach((movingItem) => {
-      if (this.character.isColliding(movingItem)) {
-        if (movingItem.name === 'bomb') {
-          if (noise) {
-            bombSound.play();
-          }
-          this.character.energyCount = 0;
-          this.removeItemFromCanvas(
-            this.level.decorativeMovingItems,
-            movingItem
-          );
-        }
-      }
-    });
-  }
-
-  isCollidingWithTreasureChest() {
-    this.level.gameItems.forEach((oneItem) => {
-      if (
-        this.character.keyFound === true &&
-        this.level.endboss.endbossHitCounter >= 3 &&
-        this.character.isColliding(oneItem)
-      ) {
-        let chestIndex = this.level.gameItems.findIndex((item) => {
-          return item.name === 'chest_closed';
-        });
-        let openChestIndex = allImages.findIndex((item) => {
-          return item.type === 'openTreasureChest';
-        });
-        this.level.gameItems[chestIndex].img.src =
-          allImages[openChestIndex].images.src;
-        successSound.play();
-        this.level.spawnClownfishVictims();
-      }
-    });
-  }
-
-  removeItemFromCanvas(array, object) {
-    let index = array.findIndex((item) => {
-      return item.id === object.id;
-    });
-    array.splice(index, 1);
-  }
-
-  changeKeyStatus() {
-    let index = allImages.findIndex((item) => {
-      return item.type === 'trueSign';
-    });
-    let imgPathTrueSign = allImages[index].images.src;
-    if (this.character.keyFound) {
-      const falseSignIndex = this.statusBarElements.findIndex(
-        (element) => element.name === 'false_sign'
-      );
-      if (falseSignIndex !== -1) {
-        this.statusBarElements[falseSignIndex].img.src = imgPathTrueSign;
-        this.addObjectsToCanvas(this.statusBarElements);
-      }
-    }
+    const outerStartScreen = document.getElementById(
+      'start_screen_outer_wrapper'
+    );
+    outerStartScreen.innerHTML = generateWinnerScreenContentHTML();
   }
 }

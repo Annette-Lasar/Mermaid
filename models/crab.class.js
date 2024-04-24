@@ -1,3 +1,6 @@
+/**
+ * This class manipulates crab enemies.
+ */
 class Crab extends MovableObject {
   constructor(imgPath, speed, array) {
     super();
@@ -14,6 +17,10 @@ class Crab extends MovableObject {
     this.moveDown();
   }
 
+  /**
+   * This function animates the crabs.
+   * @param {Array} array - This is an array with all the images to animate the crabs.
+   */
   animate(array) {
     setInterval(() => {
       let currentWidth = this.img.width > this.img.height ? 80 : 60;
@@ -22,6 +29,9 @@ class Crab extends MovableObject {
     }, 1000 / 10);
   }
 
+  /**
+   * This function moves the crabs down.
+   */
   moveDown() {
     setInterval(() => {
       this.y += this.speed;
