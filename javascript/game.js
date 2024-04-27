@@ -13,8 +13,6 @@ function init() {
   preloadImages(allCollectedImages).then(() => {
     showOrHideLoadingSpinner('hide');
     renderStartScreenContent();
-    setNoiseStatus();
-    setMusicStatus();
     showStartButton();
   });
 }
@@ -27,15 +25,15 @@ function renderStartScreenContent() {
     'start_screen_outer_wrapper'
   );
   outerStartScreen.innerHTML = generateStartScreenContentHTML();
-  setNoiseStatus();
-  setMusicStatus();
+  setNoiseStatus('noise_button', 'noise_text');
+  setMusicStatus('music_button', 'music_text');
 }
 
 /**
  * This function preloads all images before the game starts.
  * @param {array} imagePaths - This is the array that is created in the file
  * create_all_images_information.js
- * @returns - It returns an array with all image objects. 
+ * @returns - It returns an array with all image objects.
  */
 function preloadImages(imagePaths) {
   return new Promise((resolve) => {
@@ -67,8 +65,8 @@ function showStartButton() {
 }
 
 /**
- * This function shows a screen where the player can select a character just 
- * before the game starts. 
+ * This function shows a screen where the player can select a character just
+ * before the game starts.
  */
 function showMermaidSelection() {
   const outerStartScreen = document.getElementById(
@@ -77,7 +75,7 @@ function showMermaidSelection() {
   outerStartScreen.innerHTML = generateMermaidSelectionHTML();
 }
 
-/** This function brings the player back to the start screen after a 
+/** This function brings the player back to the start screen after a
  * game has been lost or won.
  */
 function backToStartScreen() {
@@ -86,7 +84,7 @@ function backToStartScreen() {
 }
 
 /**
- * 
+ *
  * @param {number} typeNumber - This is the number 1, 2 or 3 for each mermaid type.
  * The variable mermaidType is defined in the file data.js.
  */
@@ -99,13 +97,16 @@ function selectMermaidType(typeNumber) {
   startGame();
 }
 
-/** 
+/**
  * This function starts the game.
  * */
 function startGame() {
+  clearAllIntervals();
   initLevel();
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
+  setNoiseStatus('noise_icon');
+  setMusicStatus('music_icon');
 }
 
 /**
@@ -141,26 +142,42 @@ function openImprintInfo() {
 /**
  * This function toggles music on or off.
  */
-function toggleMusic() {
+function toggleMusic(buttonID, textID) {
   music = !music;
-  setMusicStatus();
+  setMusicStatus(buttonID, textID);
   saveMusicStatus();
 }
 
 /**
  * This function sets the music status on the start screen.
  */
-function setMusicStatus() {
-  let musicButton = document.getElementById('music_button');
-  let musicText = document.getElementById('music_text');
+function setMusicStatus(buttonID, textID) {
+  let musicButton = document.getElementById(buttonID);
+  let musicText = document.getElementById(textID);
   let imgPathOn = './img/game_ui/PNG/buttons/music_on.png';
   let imgPathOff = './img/game_ui/PNG/buttons/music_off.png';
+  updateMusicButtons(musicButton, musicText, imgPathOn, imgPathOff);
+}
+
+/**
+ * This function updates the buttons and text on the screen that show
+ * whether music is on or off
+ * @param {Object} musicButton - HTML element for the music button
+ * @param {Object} musicText  - HTML element for the description text
+ * @param {string} imgPathOn - image path for music on image
+ * @param {string} imgPathOff - image path for music off image
+ */
+function updateMusicButtons(musicButton, musicText, imgPathOn, imgPathOff) {
   if (music) {
     musicButton.src = imgPathOn;
-    musicText.innerHTML = 'MUSIC IS ON';
+    if (musicText !== null) {
+      musicText.innerHTML = 'MUSIC IS ON';
+    }
   } else {
     musicButton.src = imgPathOff;
-    musicText.innerHTML = 'MUSIC IS OFF';
+    if (musicText !== null) {
+      musicText.innerHTML = 'MUSIC IS OFF';
+    }
   }
 }
 
@@ -184,26 +201,42 @@ function loadMusicStatus() {
 /**
  * This function toggles noise on or off.
  */
-function toggleNoise() {
+function toggleNoise(buttonID, textID) {
   noise = !noise;
-  setNoiseStatus();
+  setNoiseStatus(buttonID, textID);
   saveNoiseStatus();
 }
 
 /**
  * This function sets the noise status on the start screen.
  */
-function setNoiseStatus() {
-  let noiseButton = document.getElementById('noise_button');
-  let noiseText = document.getElementById('noise_text');
+function setNoiseStatus(buttonID, textID) {
+  let noiseButton = document.getElementById(buttonID);
+  let noiseText = document.getElementById(textID);
   let imgPathOn = './img/game_ui/PNG/buttons/noise_on.png';
   let imgPathOff = './img/game_ui/PNG/buttons/noise_off.png';
+  updateNoiseButtons(noiseButton, noiseText, imgPathOn, imgPathOff);
+}
+
+/**
+ * This function updates the noise button and text according to
+ * the current noise status. 
+ * @param {object} noiseButton - HTML element with noise icon
+ * @param {object} noiseText  - HTML element with noise text
+ * @param {string} imgPathOn - image path with substitute noise icon
+ * @param {string} imgPathOff - image path with substitute noise icon
+ */
+function updateNoiseButtons(noiseButton, noiseText, imgPathOn, imgPathOff) {
   if (noise) {
     noiseButton.src = imgPathOn;
-    noiseText.innerHTML = 'NOISE IS ON';
+    if (noiseText !== null) {
+      noiseText.innerHTML = 'NOISE IS ON';
+    }
   } else {
     noiseButton.src = imgPathOff;
-    noiseText.innerHTML = 'NOISE IS OFF';
+    if (noiseText !== null) {
+      noiseText.innerHTML = 'NOISE IS OFF';
+    }
   }
 }
 
@@ -241,8 +274,8 @@ function showOrHideLoadingSpinner(action) {
  * This function reloads the start screen.
  */
 function replayGame() {
-  window.location.reload();
   renderStartScreenContent();
+  showStartButton();
 }
 
 /**
@@ -261,3 +294,13 @@ window.addEventListener('keydown', (event) => {
   keyboard.setKeyStatus(keyboardEvent, true);
 });
 
+/**
+ * This function clears allIntervals and all setTimeouts
+ * after a game.
+ */
+function clearAllIntervals() {
+  for (let i = 1; i < 9999999; i++) {
+    window.clearInterval(i);
+    clearTimeout(i);
+  }
+}

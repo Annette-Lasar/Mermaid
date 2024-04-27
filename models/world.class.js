@@ -17,7 +17,7 @@ class World {
   collisionDetector;
 
   constructor(canvas, keyboard) {
-    this.checkForMusic();
+    this.initializeMusic();
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -35,12 +35,55 @@ class World {
   }
 
   /**
-   * This function checks whether the global variable music is true or false.
+   * This function initializes the music.
+   */
+  initializeMusic() {
+    this.playMusic();
+    this.setupMusicInterval();
+  }
+
+  /**
+   * This function plays music in a loop.
+   */
+  playMusic() {
+    if (music) {
+      musicSound.play();
+      setTimeout(this.playMusic.bind(this), 100);
+    }
+  }
+
+  /**
+   * This function sets up an interval that regularly
+   * checks whether the music status is still true.
+   */
+  setupMusicInterval() {
+    this.checkForSoundInterval = setInterval(() => {
+      this.checkForMusic();
+    }, 500);
+  }
+
+  /**
+   * This function checks calls a stopMusic function if
+   * the global variable music is false.
    */
   checkForMusic() {
-    if (music) {
+    if (!music) {
+      this.stopMusic();
+    } else {
       this.playMusic();
+      if (!this.alreadyChecked) {
+        this.alreadyChecked = true;
+        this.setupMusicInterval();
+      }
     }
+  }
+
+  /**
+   * This function stops the music.
+   */
+  stopMusic() {
+    musicSound.pause();
+    clearInterval(this.checkForSoundInterval);
   }
 
   /**
@@ -76,6 +119,8 @@ class World {
       filterAndRemoveEnemies(this.level.blowfishEnemies);
     }, 3000);
   }
+
+
 
   /**
    * This function creates stone slabs that mark the borders of the playing area.
@@ -134,15 +179,10 @@ class World {
     } else if (enemiesArray === this.level.blowfishEnemies) {
       let enemies = enemiesArray.filter((enemy) => enemy.x < -1100);
       return enemies;
+    } else {
+      let enemies = [];
+      return enemies;
     }
-  }
-
-  /**
-   * This function plays music in a loop.
-   */
-  playMusic() {
-    musicSound.play();
-    setTimeout(this.playMusic.bind(this), 100);
   }
 
   /**
@@ -157,25 +197,9 @@ class World {
    */
   checkIncidents() {
     setInterval(() => {
-      this.checkCollisions();
       this.checkKeyboard();
       this.checkBubbleCollisions();
     }, 50);
-  }
-
-  /**
-   * This function calls other functions that check for collisions of the character with
-   * enemies or items.
-   */
-  checkCollisions() {
-    // this.isCollidingWithBlowfish();
-    // this.isCollidingWithCrab();
-    // this.isCollidingWithObjectMovingUpAndDown();
-    // this.isCollidingWithLionfish();
-    // this.isCollidingWithValualeItem();
-    // this.isCollidingWithDecorativeMovingObject();
-    // this.isCollidingWithEndboss();
-    // this.isCollidingWithTreasureChest();
   }
 
   /**

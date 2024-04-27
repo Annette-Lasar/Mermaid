@@ -1,5 +1,5 @@
 /**
- * This class is the highest in this game. It mainly provides functions 
+ * This class is the highest in this game. It mainly provides functions
  * that create images on the canvas.
  */
 class DrawableObject {
@@ -23,9 +23,9 @@ class DrawableObject {
 
   /**
    * This function sets an image's dimensions according to its aspect ratio.
-   * @param {number} width 
-   * @param {number} originalWidth 
-   * @param {number} originalHeight 
+   * @param {number} width
+   * @param {number} originalWidth
+   * @param {number} originalHeight
    */
   setDimensions(width, originalWidth, originalHeight) {
     this.width = width;
@@ -34,7 +34,7 @@ class DrawableObject {
 
   /**
    * This function creates an image object from an image path.
-   * @param {string} path 
+   * @param {string} path
    */
   loadImage(path) {
     this.img = new Image();
@@ -43,11 +43,11 @@ class DrawableObject {
 
   /**
    * This function draws images on the canvas.
-   * @param {context} ctx 
+   * @param {context} ctx
    */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-
+  
 }

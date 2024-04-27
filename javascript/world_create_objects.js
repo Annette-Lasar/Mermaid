@@ -41,7 +41,7 @@ function createCharacter() {
 }
 
 /**
- * This function creates an instance of the yellowCrabFish class. 
+ * This function creates an instance of the yellowCrabFish class.
  * @returns - It returns an instance of the yellowCrabFish class.
  */
 function createYellowCrab() {
@@ -65,7 +65,7 @@ function createYellowCrab() {
 }
 
 /**
- * This function creates an instance of the redCrabFish class. 
+ * This function creates an instance of the redCrabFish class.
  * @returns - It returns an instance of the redCrabFish class.
  */
 function createRedCrab() {
@@ -89,7 +89,7 @@ function createRedCrab() {
 }
 
 /**
- * This function creates an instance of the Blowfish class. 
+ * This function creates an instance of the Blowfish class.
  * @returns - It returns an instance of the Blowfish class.
  */
 function createBlowfishEnemies() {
@@ -113,7 +113,7 @@ function createBlowfishEnemies() {
 }
 
 /**
- * This function creates an instance of the Lionfish class. 
+ * This function creates an instance of the Lionfish class.
  * @returns - It returns an instance of the Lionfish class.
  */
 function createLionfishEnemies(y_axis) {
@@ -138,7 +138,7 @@ function createLionfishEnemies(y_axis) {
 }
 
 /**
- * This function creates an instance of the ObjectMovingUpAndDown class. In level 1 
+ * This function creates an instance of the ObjectMovingUpAndDown class. In level 1
  * these are blue jellyfish.
  * @returns - It returns an instance of the ObjectMovingUpAndDown class.
  */
@@ -157,7 +157,7 @@ function createObjectMovingUpAndDown(x_axis, y_axis, imgPath) {
  * This function creates an instance of the Endboss class. In level 1 this is a
  * lionfish.
  * @param {string} imgPath - This is the image path.
- * @returns - It returns an instance of the Endbosss class. 
+ * @returns - It returns an instance of the Endbosss class.
  */
 function createEndboss(imgPath) {
   let id = 'endboss' + objectIDCounter;
@@ -169,7 +169,7 @@ function createEndboss(imgPath) {
 
 /**
  * This function creates an instance of the GameItem class. It is a decorative element
- * to place on the canvas. The parameters are taken from the array 
+ * to place on the canvas. The parameters are taken from the array
  * in the file object_information.js
  * @param {string} name - This is the item's name.
  * @param {number} x_axis - This is the x value on the canvas for the corresponding item.
@@ -177,7 +177,7 @@ function createEndboss(imgPath) {
  * @param {string} imgPath - This is the image path for the corresponding item.
  * @param {number} landscapeWidth - This is the landscape width for the corresponding item.
  * @param {number} portraitWidth - This is the portrait width for the corresponding item.
- * @returns 
+ * @returns
  */
 function createGameItem(
   name,
@@ -203,17 +203,17 @@ function createGameItem(
 
 /**
  * This function creates an instance of the ValuableGameItem class. It is a valuable element
- * to place on the canvas like the golden key, starfish and pearls. These items provide a 
+ * to place on the canvas like the golden key, starfish and pearls. These items provide a
  * necessary item to open the treasure chest and items to gain energy and ammunition.
  * The parameters are taken from the array in the file object_information.js
  * @param {string} name - This ist the item's name.
- * @param {number} x_axis 
- * @param {number} y_axis 
- * @param {string} imgPath 
- * @param {number} landscapeWidth 
- * @param {number} portraitWidth 
- * @param {number} speed 
- * @returns 
+ * @param {number} x_axis
+ * @param {number} y_axis
+ * @param {string} imgPath
+ * @param {number} landscapeWidth
+ * @param {number} portraitWidth
+ * @param {number} speed
+ * @returns
  */
 function createValuableItem(
   name,
@@ -242,10 +242,10 @@ function createValuableItem(
 /**
  * This function creates an instance of the StonSlab class. These items are placed on either
  * side of the canvas to inform the player of the borders of the canvas.
- * @param {string} imgPath 
- * @param {number} x_axis 
+ * @param {string} imgPath
+ * @param {number} x_axis
  * @param {text} text - This is the text chiselled at a stone slab.
- * @returns 
+ * @returns
  */
 function createStoneSlab(imgPath, x_axis, text) {
   let textSize = 20;
@@ -257,16 +257,16 @@ function createStoneSlab(imgPath, x_axis, text) {
 /**
  * This function creates an instance of the MobileGameItem class. These are in level 1
  * the iron chains and the bombs.
- * @param {string} name 
- * @param {number} x_axis 
- * @param {number} y_axis 
- * @param {string} imgPath 
- * @param {number} landscapeWidth 
- * @param {number} portraitWidth 
+ * @param {string} name
+ * @param {number} x_axis
+ * @param {number} y_axis
+ * @param {string} imgPath
+ * @param {number} landscapeWidth
+ * @param {number} portraitWidth
  * @param {Array} array - This is the array with image paths necessary to move the items.
  * @param {number} timeout - This is the timeout value for the interval so that the items
  * can be animated with different speed.
- * @returns 
+ * @returns
  */
 function createDecorativeMovingItem(
   name,
@@ -297,13 +297,13 @@ function createDecorativeMovingItem(
 /**
  * This function creates an instance of the Statusbar class. Here the player finds information
  * about energy and ammunition stock and whether the golden key has been found yet.
- * @param {string} name 
- * @param {number} x_axis 
- * @param {number} y_axis 
- * @param {string} imgPath 
- * @param {number} width 
- * @param {number} height 
- * @returns 
+ * @param {string} name
+ * @param {number} x_axis
+ * @param {number} y_axis
+ * @param {string} imgPath
+ * @param {number} width
+ * @param {number} height
+ * @returns
  */
 function createStatusBar(name, x_axis, y_axis, imgPath, width, height) {
   const statusBarElement = new Statusbar(
@@ -319,25 +319,26 @@ function createStatusBar(name, x_axis, y_axis, imgPath, width, height) {
 
 /**
  * This function removes the blowfish and the crabs from their arrays as soon as they have
- * left the visible realm of the canvas. 
+ * left the visible realm of the canvas.
  * @param {Array} enemiesArray - This is an array with the created blowfish or crabs.
  */
 function filterAndRemoveEnemies(enemiesArray) {
   let filteredEnemies = world.checkForCurrentEnemies(enemiesArray);
-
-  filteredEnemies.forEach((filteredEnemy) => {
-    let enemyIndex = enemiesArray.findIndex(
-      (item) => item.id === filteredEnemy.id
-    );
-    enemiesArray.splice(enemyIndex, 1);
-  });
+  if (filteredEnemies.length !== 0) {
+    filteredEnemies.forEach((filteredEnemy) => {
+      let enemyIndex = enemiesArray.findIndex(
+        (item) => item.id === filteredEnemy.id
+      );
+      enemiesArray.splice(enemyIndex, 1);
+    });
+  }
 }
 
 /**
  * This function creates an instance of the ThrowableObject class. A throwable object is
  * a bubble that serves as ammunition for the character.
- * @param {number} x 
- * @param {number} y 
+ * @param {number} x
+ * @param {number} y
  * @returns - It returns an instance of the ThrowableObject class.
  */
 function createNewBubble(x, y) {
@@ -358,13 +359,13 @@ function createNewBubble(x, y) {
 }
 
 /**
- * This function creates an instance of the Clownfish class. In level 1 these are the 
+ * This function creates an instance of the Clownfish class. In level 1 these are the
  * victims kept prisoners in the treasure chest that need to be freed by the character.
- * @param {string} imgPath 
- * @param {number} x_axis 
- * @param {number} y_axis 
- * @param {number} speed 
- * @returns 
+ * @param {string} imgPath
+ * @param {number} x_axis
+ * @param {number} y_axis
+ * @param {number} speed
+ * @returns
  */
 function createClownFish(imgPath, x_axis, y_axis, speed) {
   let id = 'clownfish' + objectIDCounter;
@@ -374,7 +375,7 @@ function createClownFish(imgPath, x_axis, y_axis, speed) {
 }
 
 /**
- * This function searches for the index of the stone slabs in the array 
+ * This function searches for the index of the stone slabs in the array
  * allImageObjects in the file object_information.js.
  * @returns - It returns the index for the stone slabs.
  */
@@ -388,8 +389,8 @@ function findStoneSlabArrayIndex() {
 /**
  * This function searches for the index of an individual stone slab in the array
  * allImageObjects in the file object_information.js.
- * @param {string} stoneName 
- * @param {number} stoneIndex 
+ * @param {string} stoneName
+ * @param {number} stoneIndex
  * @returns - It returns an index number.
  */
 function findStoneSlabIndex(stoneName, stoneIndex) {
@@ -421,7 +422,7 @@ function findTreasureChestIndex(items) {
 /**
  * This function searches for the substituteItemArray in the array
  * allImageObjects in the file object_information.js.
- * @returns - It returns an index number. 
+ * @returns - It returns an index number.
  */
 function findIndexForSubstituteItems() {
   let index = allImageObjects.findIndex((item) => {
@@ -433,7 +434,7 @@ function findIndexForSubstituteItems() {
 /**
  * This function searches for the open chest item in the array
  * allImageObjects in the file object_information.js.
- * @param {number} substituteIndex 
+ * @param {number} substituteIndex
  * @returns - It returns an index number.
  */
 function findIndexForOpenChest(substituteIndex) {

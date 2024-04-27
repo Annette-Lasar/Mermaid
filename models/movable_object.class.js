@@ -28,14 +28,30 @@ class MovableObject extends DrawableObject {
 
   /**
    * This function checks if objects are colliding with one another.
-   * @param {object} mo - This is an instance of a movable object like 
-   * for instance the character.
+   * @param {object} mo - This is an instance of a movable object that 
+   * is the collision obstacle.
    * @returns - It returns true or false.
    */
   isColliding(mo) {
     return (
       this.x + this.width > mo.x &&
       this.y + this.height > mo.y &&
+      this.x < mo.x &&
+      this.y < mo.y + mo.height
+    );
+  }
+
+
+    /**
+   * This function checks if the character is colliding with an object.
+   * @param {object} mo - This is an instance of the object the 
+   * character is colliding with.
+   * @returns - It returns true or false.
+   */
+  characterCollision(mo) {
+    return (
+      this.x + this.width - 50 > mo.x &&
+      this.y + this.height - 50 > mo.y &&
       this.x < mo.x &&
       this.y < mo.y + mo.height
     );
@@ -82,10 +98,6 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
-  /**
-   * This function clears all intervals after a game has been won or lost.
-   */
-  clearAllIntervals() {
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
-  }
+
+  
 }

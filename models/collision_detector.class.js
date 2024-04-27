@@ -26,7 +26,7 @@ class CollisionDetector {
    */
   characterIsCollidingWithBlowfish() {
     this.level.blowfishEnemies.forEach((blowfish) => {
-      if (this.character.isColliding(blowfish) && !this.hasAlreadyCollided) {
+      if (this.character.characterCollision(blowfish) && !this.hasAlreadyCollided) {
         this.hasAlreadyCollided = true;
         this.character.hit();
         this.character.changeEnergyStatus();
@@ -48,7 +48,7 @@ class CollisionDetector {
       return;
     }
     this.level.crabEnemies.forEach((crab) => {
-      if (this.character.isColliding(crab)) {
+      if (this.character.characterCollision(crab)) {
         this.character.hit();
         this.character.changeEnergyStatus();
         this.lastCrabCollisionTime = currentTime;
@@ -68,7 +68,7 @@ class CollisionDetector {
       return;
     }
     this.level.objectsMovingUpAndDown.forEach((objectMoving) => {
-      if (this.character.isColliding(objectMoving)) {
+      if (this.character.characterCollision(objectMoving)) {
         this.character.hit();
         this.character.changeEnergyStatus();
         this.lastJellyfishCollisionTime = currentTime;
@@ -87,7 +87,7 @@ class CollisionDetector {
       return;
     }
     this.level.lionfishEnemies.forEach((lionfish) => {
-      if (this.character.isColliding(lionfish)) {
+      if (this.character.characterCollision(lionfish)) {
         this.character.hit();
         this.character.changeEnergyStatus();
         this.lastLionfishCollisionTime = currentTime;
@@ -100,7 +100,7 @@ class CollisionDetector {
    */
   characterIsCollidingWithValualeItem() {
     this.level.valuableItems.forEach((valuableItem) => {
-      if (this.character.isColliding(valuableItem)) {
+      if (this.character.characterCollision(valuableItem)) {
         if (valuableItem.name === 'starfish') {
           this.consequencesForCollisionWithValuableItem(valuableItem);
         }
@@ -147,7 +147,7 @@ class CollisionDetector {
    */
   characterIsCollidingWithDecorativeMovingObject() {
     this.level.decorativeMovingItems.forEach((movingItem) => {
-      if (this.character.isColliding(movingItem)) {
+      if (this.character.characterCollision(movingItem)) {
         if (movingItem.name === 'bomb') {
           if (noise) {
             bombSound.play();
@@ -173,7 +173,7 @@ class CollisionDetector {
       return;
     }
     if (this.level.endboss.endbossHitCounter == 0) {
-      if (this.character.isColliding(this.level.endboss)) {
+      if (this.character.characterCollision(this.level.endboss)) {
         this.character.hit();
         this.character.changeEnergyStatus();
         this.lastEndbossCollisionTime = currentTime;
@@ -191,7 +191,7 @@ class CollisionDetector {
       if (
         this.character.keyFound === true &&
         this.level.endboss.endbossHitCounter >= 3 &&
-        this.character.isColliding(oneItem)
+        this.character.characterCollision(oneItem)
       ) {
         let chestIndex = findTreasureChestIndex(this.level.gameItems);
         let substituteIndex = findIndexForSubstituteItems();
@@ -212,8 +212,6 @@ class CollisionDetector {
           this.level.spawnClownfishVictims();
           setTimeout(() => {
             this.world.renderWinnerScreenContent();
-            this.character.clearAllIntervals();
-            this.level.endboss.clearAllIntervals();
           }, 5000);
         }
       }

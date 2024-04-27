@@ -67,8 +67,8 @@ function generateStartScreenContentHTML() {
                 </div>
               </div>
               <div class="sound-button-wrapper">
-                <img id="music_button" onclick="toggleMusic()" src="./img/game_ui/PNG/buttons/music_on.png" alt="" class="music"/>
-                <img id="noise_button" onclick="toggleNoise()" src="./img/game_ui/PNG/buttons/noise_on.png" alt="" class="noise"/>
+                <img id="music_button" onclick="toggleMusic('music_button', 'music_text')" src="./img/game_ui/PNG/buttons/music_on.png" alt="" class="music"/>
+                <img id="noise_button" onclick="toggleNoise('noise_button', 'noise_text')" src="./img/game_ui/PNG/buttons/noise_on.png" alt="" class="noise"/>
                 <span id="music_text" class="music-text">Music off</span>
                 <span id="noise_text" class="noise-text">Noise off</span>
               </div>
@@ -119,7 +119,12 @@ function generateMermaidSelectionHTML() {
  */
 function generateCanvasHTML() {
   return /* html */ `
+  <div class="screen-inner-wrapper">
     <canvas id="canvas" width="853" height="480"></canvas>
+    <div class="audio-wrapper">
+      <img id="music_icon" src="./img/game_ui/PNG/buttons/music_off.png" onclick="toggleMusic('music_icon')">
+      <img id="noise_icon" src="./img/game_ui/PNG/buttons/noise_on.png" onclick="toggleNoise('noise_icon')">
+    </div>
     <div class="mobile-button-wrapper">
           <div class="arrow-buttons">
             <div id="btn_left" class="left">
@@ -137,6 +142,7 @@ function generateCanvasHTML() {
             <img src="./icons/space_bar_icon.png" alt="" class="space" />
           </div>
         </div>
+      </div>
   `;
 }
 
@@ -232,7 +238,7 @@ function generateGameRulesContentHTML() {
           the key touch it in order to collect it. 
         </p>
         <p class="story-text">
-          <img class="illustration-left" src="./img/game_ui/PNG/buttons/keyboard_keys.png" alt="">
+          <img class="illustration-left keyboard-keys" src="./img/game_ui/PNG/buttons/keyboard_keys.png" alt="">
           Use the arrow keys on your keyboard to move your character in all directions. 
           Use the space bar to shoot bubbles at your enemies. Bubbles that don&apos;t collide with
           an enemy will dissolve after a couple of seconds. <br>

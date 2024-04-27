@@ -9,11 +9,14 @@ class Character extends MovableObject {
   statusBarIndex = allImageObjects.findIndex((item) => {
     return item.type === 'statusBarComponentArrays';
   });
+
   keyFound = false;
   ammunitionCount = 0;
+  id;
 
   constructor(imgPath, speed) {
     super();
+    this.id = new Date().getTime();
     super.loadImage(imgPath);
     this.currentX = this.x;
     this.y = 200;
@@ -22,7 +25,6 @@ class Character extends MovableObject {
       let currentWidth = this.img.width > this.img.height ? 150 : 80;
       this.setDimensions(currentWidth, this.img.width, this.img.height);
     };
-
     this.loadImagesMoves(
       allImageObjects[this.mermaidIndex].images['idle_' + mermaidType]
     );
@@ -50,55 +52,80 @@ class Character extends MovableObject {
     setInterval(() => {
       swimmingSound.pause();
       if (this.isDead()) {
-        this.defineImageDimensions();
-        this.playAnimation(
-          allImageObjects[this.mermaidIndex].images['die_' + mermaidType]
-        );
-        if (!this.alreadyLost) {
-          this.alreadyLost = true;
-          if (noise) {
-            mermaidDyingSound.play();
-          }
-          setTimeout(() => {
-            if (noise) {
-              gameFailedSound.play();
-            }
-            this.clearAllIntervals();
-            this.world.level.endboss.clearAllIntervals();
-            this.renderLoserScreenContent();
-          }, 3000);
-        }
+        this.checkCharacterDeath();
       } else if (this.isHurt()) {
-        this.changeEnergyStatus();
-        this.defineImageDimensions();
-        this.playAnimation(
-          allImageObjects[this.mermaidIndex].images['hurt_' + mermaidType]
-        );
-        if (noise) {
-          mermaidHurtSound.play();
-        }
+        this.checkCharacterHurt();
       } else {
-        if (this.keyArrowRightIsPressed()) {
-          this.playAnimation(
-            allImageObjects[this.mermaidIndex].images['move_' + mermaidType]
-          );
-          this.moveRight();
-        } else if (this.keyArrowLeftIsPressed()) {
-          this.playAnimation(
-            allImageObjects[this.mermaidIndex].images['move_' + mermaidType]
-          );
-          this.moveLeft();
-        } else if (this.keyArrowUpIsPressed()) {
-          this.moveUp();
-        } else if (this.keyArrowDownIsPressed()) {
-          this.moveDown();
-        } else {
-          this.defineImageDimensions();
-          this.playAnimation(array);
-        }
+        this.manipulateCharacterMovement(array);
       }
       this.world.camera_x = -this.x + 200;
     }, 40);
+  }
+
+  /**
+   * This function sets the consequences for the character's death.
+   */
+  checkCharacterDeath() {
+    this.defineImageDimensions();
+    this.playAnimation(
+      allImageObjects[this.mermaidIndex].images['die_' + mermaidType]
+    );
+    if (!this.alreadyLost) {
+      this.characterDieAndLoseGame();
+    }
+  }
+
+  /**
+   * This function sets the consequences for the character being hurt.
+   */
+  checkCharacterHurt() {
+    this.changeEnergyStatus();
+    this.defineImageDimensions();
+    this.playAnimation(
+      allImageObjects[this.mermaidIndex].images['hurt_' + mermaidType]
+    );
+    if (noise) {
+      mermaidHurtSound.play();
+    }
+  }
+
+  /**
+   * This function enables the player to move the character in four directions
+   * @param {Array} array - This is an array with image objects to animate the character.
+   */
+  manipulateCharacterMovement(array) {
+    if (this.keyArrowRightIsPressed()) {
+      this.checkCharacterMoveRight();
+    } else if (this.keyArrowLeftIsPressed()) {
+      this.checkCharacterMoveLeft();
+    } else if (this.keyArrowUpIsPressed()) {
+      this.moveUp();
+    } else if (this.keyArrowDownIsPressed()) {
+      this.moveDown();
+    } else {
+      this.defineImageDimensions();
+      this.playAnimation(array);
+    }
+  }
+
+  /**
+   * This function enables the character to move right.
+   */
+  checkCharacterMoveRight() {
+    this.playAnimation(
+      allImageObjects[this.mermaidIndex].images['move_' + mermaidType]
+    );
+    this.moveRight();
+  }
+
+  /**
+   * This function enables the character to move left.
+   */
+  checkCharacterMoveLeft() {
+    this.playAnimation(
+      allImageObjects[this.mermaidIndex].images['move_' + mermaidType]
+    );
+    this.moveLeft();
   }
 
   /**
@@ -111,7 +138,7 @@ class Character extends MovableObject {
     );
   }
 
-    /**
+  /**
    * This function checks if the left arrow key is pressed.
    * @returns - It returns true or false.
    */
@@ -119,7 +146,7 @@ class Character extends MovableObject {
     return this.world.keyboard.ARROWLEFT && this.x > -853;
   }
 
-    /**
+  /**
    * This function checks if the up arrow key is pressed.
    * @returns - It returns true or false.
    */
@@ -127,7 +154,7 @@ class Character extends MovableObject {
     return this.world.keyboard.ARROWUP && this.y > 0;
   }
 
-    /**
+  /**
    * This function checks if the down arrow key is pressed.
    * @returns - It returns true or false.
    */
@@ -135,7 +162,7 @@ class Character extends MovableObject {
     return this.world.keyboard.ARROWDOWN && this.y < 375;
   }
 
-    /**
+  /**
    * This function checks if the space key is pressed.
    * @returns - It returns true or false.
    */
@@ -235,6 +262,23 @@ class Character extends MovableObject {
     if (fillingLevelIndex !== -1) {
       this.world.statusBarElements[fillingLevelIndex].width = currentPercentage;
     }
+  }
+
+  /**
+   * This function creates the consequences for the character's death and
+   * for losing the game.
+   */
+  characterDieAndLoseGame() {
+    this.alreadyLost = true;
+    if (noise) {
+      mermaidDyingSound.play();
+    }
+    setTimeout(() => {
+      if (noise) {
+        gameFailedSound.play();
+      }
+      this.renderLoserScreenContent();
+    }, 3000);
   }
 
   /**

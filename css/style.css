@@ -184,6 +184,10 @@ header {
   width: 40px;
 }
 
+.keyboard-keys {
+  width: 120px;
+}
+
 .mermaid-image {
   width: 60px;
 }
@@ -270,6 +274,7 @@ h3 {
 
 .screen-inner-wrapper {
   height: 100%;
+  position: relative;
   background-image: url('../img/game_ui/PNG/menu/screen_bg.png');
   background-size: cover;
   font-size: 1.2rem;
@@ -539,7 +544,6 @@ canvas {
 .game-result {
   height: 100%;
   position: relative;
-  border: green 2px solid;
 }
 
 .game-result img {
@@ -592,12 +596,24 @@ canvas {
   left: 0;
 }
 
+.audio-wrapper {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.audio-wrapper img {
+  width: 32px;
+  height: 32px;
+}
+
 .mobile-button-wrapper {
+  width: 100%;
+  height: 128px;
+  padding: 0 1em 0 0;
   position: absolute;
   bottom: 8px;
   left: 0;
-  width: 100%;
-  height: 128px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -664,8 +680,6 @@ canvas {
   border-radius: 50%;
   border: black 2px solid;
 }
-
-
 
 .bold {
   font-weight: 700;

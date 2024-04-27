@@ -846,12 +846,3 @@ const allImageObjects = [
     type: 'statusBarComponentArrays',
   },
 ];
-
-/* golden_key: {
-  name: 'key',
-  x: randomRangeX,
-  y: randomRangeY,
-  src: './img/game_items/PNG/items/key.png',
-  width: 20,
-  height: 50,
-} */
