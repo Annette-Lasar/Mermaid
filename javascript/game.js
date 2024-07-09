@@ -101,7 +101,6 @@ function selectMermaidType(typeNumber) {
  * This function starts the game.
  * */
 function startGame() {
-  clearAllIntervals();
   initLevel();
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);

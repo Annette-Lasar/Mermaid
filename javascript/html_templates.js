@@ -128,18 +128,18 @@ function generateCanvasHTML() {
     <div class="mobile-button-wrapper">
           <div class="arrow-buttons">
             <div id="btn_left" class="left">
-              <img src="./icons/arrow.svg" alt="" />
+              <img src="./symbols/arrow.svg" alt="" />
             </div>
             <div id="btn_up" class="up">
-              <img src="./icons/arrow.svg" alt="" />
+              <img src="./symbols/arrow.svg" alt="" />
             </div>
-            <div id="btn_down" class="down"><img src="./icons/arrow.svg" alt="" /></div>
+            <div id="btn_down" class="down"><img src="./symbols/arrow.svg" alt="" /></div>
             <div id="btn_right" class="right">
-              <img src="./icons/arrow.svg" alt="" />
+              <img src="./symbols/arrow.svg" alt="" />
             </div>
           </div>
           <div id="btn_space" class="space-button">
-            <img src="./icons/space_bar_icon.png" alt="" class="space" />
+            <img src="./symbols/space_bar_icon.png" alt="" class="space" />
           </div>
         </div>
       </div>

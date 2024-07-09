@@ -120,8 +120,6 @@ class World {
     }, 3000);
   }
 
-
-
   /**
    * This function creates stone slabs that mark the borders of the playing area.
    */
@@ -403,16 +401,47 @@ class World {
    */
   bubbleIsCollidingWithEndboss() {
     this.bubbles.forEach((bubble) => {
+      let bubbleIndex = this.bubbles.findIndex((oneBubble) => {
+        return oneBubble.id === bubble.id;
+      });
       if (bubble.isColliding(this.level.endboss)) {
         this.level.endboss.endbossHitCounter++;
+        if (bubbleIndex !== -1) {
+          this.bubbles.splice(bubbleIndex, 1);
+        }
+        this.changeIconIfEndbossIsHit();
       }
     });
+  }
+
+  /**
+   * This function changes the number icon in the status bar that
+   * counts the number of hits to the endboss.
+   */
+  changeIconIfEndbossIsHit() {
+    let counterIndex = this.statusBarElements.findIndex((element) => {
+      return element.name === 'endboss_hit_icon';
+    });
+    const imgPathOne = 'img/game_ui/PNG/number/number_01.png';
+    const imgPathTwo = 'img/game_ui/PNG/number/number_02.png';
+    const imgPathThree = 'img/game_ui/PNG/number/number_03.png';
+
+    if (this.level.endboss.endbossHitCounter === 1) {
+      this.statusBarElements[counterIndex].img.src = imgPathOne;
+    }
+    if (this.level.endboss.endbossHitCounter === 2) {
+      this.statusBarElements[counterIndex].img.src = imgPathTwo;
+    }
+    if (this.level.endboss.endbossHitCounter > 2) {
+      this.statusBarElements[counterIndex].img.src = imgPathThree;
+    }
   }
 
   /**
    * This function renders the winner screen.
    */
   renderWinnerScreenContent() {
+    clearAllIntervals();
     if (noise) {
       successSound.play();
     }

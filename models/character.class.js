@@ -214,27 +214,33 @@ class Character extends MovableObject {
    * This function updates the character's energy status in the status bar.
    */
   changeEnergyStatus() {
-    let backgroundBar1Index = allImageObjects[
-      this.statusBarIndex
-    ].object_information.findIndex((component) => {
-      return component.name === 'background_bar_1';
-    });
-    let statusWidth =
-      allImageObjects[this.statusBarIndex].object_information[
-        backgroundBar1Index
-      ].width;
+    let backgroundBar1Index = this.getBarIndex1();
+    let statusWidth = this.getStatusWidth(backgroundBar1Index);
+    let fillingLevelIndex = this.getFillingIndex1();
+    let fillingLevelIndex2 = this.getFillingIndex2();
     let currentPercentage = (statusWidth * this.energyCount) / 100;
-    if (currentPercentage > statusWidth) {
-      currentPercentage = statusWidth;
+    if (this.energyCount <= 100) {
+      this.removeGreenAndAdaptYellowEnergyBar(
+        fillingLevelIndex2,
+        fillingLevelIndex,
+        currentPercentage
+      );
+    } else {
+      this.addGreenEnergyBar(
+        fillingLevelIndex,
+        statusWidth,
+        fillingLevelIndex2
+      );
     }
-    let fillingLevelIndex = this.world.statusBarElements.findIndex(
-      (element) => {
-        return element.name === 'filling_level_1';
-      }
-    );
-    if (fillingLevelIndex !== -1) {
-      this.world.statusBarElements[fillingLevelIndex].width = currentPercentage;
-    }
+  }
+
+  /**
+   * This function calculates how much energy above 100% the character has.
+   * @returns - It returns a number which is the plus of energy over 100%.
+   */
+  calculateEnergyDifference() {
+    let difference = this.energyCount - 100;
+    return difference;
   }
 
   /**
@@ -265,6 +271,90 @@ class Character extends MovableObject {
   }
 
   /**
+   * This function gets the index of an object in the general array
+   * @returns - It returns an index number.
+   */
+  getBarIndex1() {
+    let index = allImageObjects[
+      this.statusBarIndex
+    ].object_information.findIndex((component) => {
+      return component.name === 'background_bar_1';
+    });
+    return index;
+  }
+
+   /**
+   * This function gets the index of an object in the general array
+   * @returns - It returns an index number.
+   */
+  getStatusWidth(backgroundBar1Index) {
+    let index =
+      allImageObjects[this.statusBarIndex].object_information[
+        backgroundBar1Index
+      ].width;
+    return index;
+  }
+
+   /**
+   * This function gets the index of an object in the general array
+   * @returns - It returns an index number.
+   */
+  getFillingIndex1() {
+    let index = this.world.statusBarElements.findIndex((element) => {
+      return element.name === 'filling_level_1';
+    });
+    return index;
+  }
+
+   /**
+   * This function gets the index of an object in the general array
+   * @returns - It returns an index number.
+   */
+  getFillingIndex2() {
+    let index = this.world.statusBarElements.findIndex((element) => {
+      return element.name === 'filling_level_3';
+    });
+    return index;
+  }
+
+  /**
+   * This function removes the green index bar if the energy level is lower than 100%.
+   * @param {number} fillingLevelIndex2 
+   * @param {number} fillingLevelIndex 
+   * @param {number} currentPercentage 
+   */
+  removeGreenAndAdaptYellowEnergyBar(
+    fillingLevelIndex2,
+    fillingLevelIndex,
+    currentPercentage
+  ) {
+    if (fillingLevelIndex2 !== -1) {
+      this.world.statusBarElements[fillingLevelIndex2].width = 0;
+    }
+    if (fillingLevelIndex !== -1) {
+      this.world.statusBarElements[fillingLevelIndex].width = currentPercentage;
+    }
+  }
+
+  /**
+   * This function adds a green energy bar on top of the yellow one if the
+   * energy level is above 100%.
+   * @param {number} fillingLevelIndex 
+   * @param {number} statusWidth 
+   * @param {number} fillingLevelIndex2 
+   */
+  addGreenEnergyBar(fillingLevelIndex, statusWidth, fillingLevelIndex2) {
+    if (fillingLevelIndex !== -1) {
+      this.world.statusBarElements[fillingLevelIndex].width = statusWidth;
+    }
+    let energyDifference = this.calculateEnergyDifference();
+    let percentagePlus = (statusWidth * energyDifference) / 100;
+    if (fillingLevelIndex2 !== -1) {
+      this.world.statusBarElements[fillingLevelIndex2].width = percentagePlus;
+    }
+  }
+
+  /**
    * This function creates the consequences for the character's death and
    * for losing the game.
    */
@@ -285,6 +375,7 @@ class Character extends MovableObject {
    * This function renders the loser screen.
    */
   renderLoserScreenContent() {
+    clearAllIntervals();
     const outerStartScreen = document.getElementById(
       'start_screen_outer_wrapper'
     );

@@ -482,8 +482,8 @@ function createStartScreenImagePaths() {
     './img/game_ui/PNG/you_win/header.png',
     './img/game_ui/PNG/you_win/restart.png',
     './img/game_ui/PNG/you_lose/star.png',
-    './icons/arrow.svg',
-    './icons/space_bar_icon.png',
+    './symbols/arrow.svg',
+    './symbols/space_bar_icon.png',
   ]);
   allPictures.push(startScreenComponentArrays);
 }

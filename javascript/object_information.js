@@ -269,7 +269,7 @@ const allImageObjects = [
         name: 'clownfish',
         x: 0,
         y: 0,
-        src: '/img/fish/PNG/clownfish/move_000.png',
+        src: './img/fish/PNG/clownfish/move_000.png',
         width: 231,
         height: 135,
         landscapeWidth: '',
@@ -754,6 +754,7 @@ const allImageObjects = [
       false_sign: ['./img/game_ui/PNG/settings/false.png'],
       filling_level_1: ['./img/game_ui/PNG/settings/btn_1.png'],
       filling_level_2: ['./img/game_ui/PNG/settings/btn_3.png'],
+      filling_level_3: ['./img/game_ui/PNG/settings/btn_4.png'],
       key_icon: ['./img/game_items/PNG/items/key.png'],
       pearl_icon: ['./img/game_items/PNG/items/pearl.png'],
       star_icon: ['./img/game_items/PNG/items/starfish.png'],
@@ -801,6 +802,17 @@ const allImageObjects = [
       },
 
       {
+        name: 'filling_level_3',
+        x: 40,
+        y: 25,
+        src: './img/game_ui/PNG/settings/btn_4.png',
+        width: 0,
+        height: 15,
+        landscapeWidth: '',
+        portraitWidth: '',
+      },
+
+      {
         name: 'star_icon',
         x: 10,
         y: 17,
@@ -838,6 +850,28 @@ const allImageObjects = [
         src: './img/game_ui/PNG/settings/false.png',
         width: 20,
         height: 20,
+        landscapeWidth: '',
+        portraitWidth: '',
+      },
+
+      {
+        name: 'endboss_icon',
+        x: 640,
+        y: 15,
+        src: './img/fish/PNG/lionfish/move_000.png',
+        width: 48,
+        height: 32,
+        landscapeWidth: '',
+        portraitWidth: '',
+      },
+
+      {
+        name: 'endboss_hit_icon',
+        x: 695,
+        y: 14,
+        src: './img/game_ui/PNG/number/number_00.png',
+        width: 32,
+        height: 32,
         landscapeWidth: '',
         portraitWidth: '',
       },
